@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import TiltPanel from "@/components/TiltPanel";
 import TimeDisplay from "@/components/TimeDisplay";
 import Experience from "@/components/Experience";
@@ -13,7 +13,7 @@ import LanguageToggle from "@/components/LanguageToggle";
 
 type ViewState = "hero" | "experience" | "skills" | "projects" | "results";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -24,7 +24,7 @@ const containerVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 10, filter: "blur(4px)" },
   visible: {
     opacity: 1,
