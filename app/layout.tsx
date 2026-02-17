@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import LiquidBackground from "@/components/LiquidBackground";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,12 +28,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} font-sans`}>
-        <div className="liquid-environment">
-          <div className="blob blob-1"></div>
-          <div className="blob blob-2"></div>
-          <div className="blob blob-3"></div>
-          <div className="blob blob-4"></div>
-        </div>
+        <LiquidBackground />
         <div className="prism-mesh"></div>
         {children}
       </body>

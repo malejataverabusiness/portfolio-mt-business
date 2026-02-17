@@ -3,26 +3,37 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 
-interface ExperienceItem {
+export interface ExperienceItem {
     id: string;
     role: string;
+    roleEs?: string;
     company: string;
     period: string;
+    periodEs?: string;
     description: string[];
+    descriptionEs?: string[];
 }
 
-const experiences: ExperienceItem[] = [
+export const experiences: ExperienceItem[] = [
     {
         id: "1",
         role: "UI/UX Designer, Frontend Developer & Graphic Designer - Leader",
+        roleEs: "Diseñadora UI/UX, Desarrolladora Frontend y Diseñadora Gráfica - Líder",
         company: "TIENDAPP SAS",
         period: "October 2022 – Currently",
+        periodEs: "Octubre 2022 – Actualidad",
         description: [
             "Directed the UI/UX strategy, conducting exhaustive research and analysis to inform design decisions, increasing customer satisfaction levels.",
             "Drastically optimized web load times and improved App performance with React Native and reusable components, elevating code maintainability.",
             "Established and assisted in creating corporate UX/UI guides, fostering cohesion and a high standard of experience across products.",
             "Facilitated alignment between business goals and engineering objectives, technically leading all phases of the product life cycle.",
         ],
+        descriptionEs: [
+            "Dirigí la estrategia UI/UX, realizando investigaciones exhaustivas para informar decisiones de diseño, aumentando la satisfacción del cliente.",
+            "Optimicé drásticamente los tiempos de carga web y mejoré el rendimiento de la App con React Native y componentes reutilizables.",
+            "Establecí y ayudé a crear guías corporativas de UX/UI, fomentando la cohesión y un alto estándar de experiencia en todos los productos.",
+            "Facilité la alineación entre los objetivos comerciales y de ingeniería, liderando técnicamente todas las fases del ciclo de vida del producto.",
+        ]
     },
     {
         id: "2",
@@ -127,7 +138,7 @@ const education = [
     },
 ];
 
-export default function Experience({ onBack }: { onBack: () => void }) {
+export default function Experience({ onBack, language = 'en' }: { onBack: () => void, language: 'en' | 'es' }) {
     const scrollRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -136,64 +147,91 @@ export default function Experience({ onBack }: { onBack: () => void }) {
         }
     }, []);
 
+    const t = {
+        title: language === 'en' ? 'Experience' : 'Experiencia',
+        back: language === 'en' ? 'Back' : 'Volver',
+        education: language === 'en' ? 'Education' : 'Educación',
+        edu1_deg: language === 'en' ? 'Digital Marketing' : 'Marketing Digital',
+        edu1_inst: language === 'en' ? 'EAFIT University / Diploma' : 'Universidad EAFIT / Diplomado',
+        edu2_deg: language === 'en' ? 'Advertising' : 'Publicidad',
+        edu2_inst: language === 'en' ? 'Universidad Católica Luis Amigó / Bachelor' : 'Universidad Católica Luis Amigó / Profesional',
+        edu3_deg: language === 'en' ? 'Multimedia Production' : 'Producción Multimedia',
+        edu3_inst: language === 'en' ? 'SENA / Bachelor' : 'SENA / Tecnólogo',
+    };
+
     return (
         <div className="w-full max-w-4xl mx-auto h-full flex flex-col">
             <div className="flex-none flex items-center justify-between mb-8 relative z-10">
-                <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Experience</h2>
+                <h2 className="text-3xl font-bold text-slate-900 tracking-tight">{t.title}</h2>
                 <button
                     onClick={onBack}
                     className="bg-white/10 hover:bg-white/20 text-slate-900 transition-all rounded-full p-2 flex items-center gap-2 px-4 shadow-sm border border-white/20 backdrop-blur-md"
                 >
                     <span className="material-symbols-outlined text-lg">arrow_back</span>
-                    <span className="text-sm font-medium">Back</span>
+                    <span className="text-sm font-medium">{t.back}</span>
                 </button>
             </div>
 
             <div ref={scrollRef} className="flex-1 overflow-y-auto pr-4 pb-4 custom-scrollbar space-y-12">
                 <section>
                     <div className="space-y-8">
-                        {experiences.map((exp, index) => (
-                            <motion.div
-                                key={exp.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                className="relative pl-8 border-l border-slate-300/50"
-                            >
-                                <div className="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full bg-petite-orchid shadow-[0_0_10px_rgba(219,165,221,0.6)]" />
-                                <div className="mb-1 text-sm font-bold tracking-wider text-petite-orchid uppercase">
-                                    {exp.period}
-                                </div>
-                                <h3 className="text-xl font-bold text-slate-900 leading-tight mb-1">
-                                    {exp.role}
-                                </h3>
-                                <div className="text-lg text-slate-700 font-medium mb-4">{exp.company}</div>
-                                <ul className="space-y-2">
-                                    {exp.description.map((item, i) => (
-                                        <li key={i} className="text-slate-600 leading-relaxed text-sm flex gap-2">
-                                            <span className="text-slate-400 mt-1.5 min-w-[4px] h-[4px] bg-slate-400 rounded-full block"></span>
-                                            {item}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </motion.div>
-                        ))}
+                        {experiences.map((exp, index) => {
+                            const role = language === 'en' ? exp.role : (exp.roleEs || exp.role);
+                            const period = language === 'en' ? exp.period : (exp.periodEs || exp.period);
+                            const description = language === 'en' ? exp.description : (exp.descriptionEs || exp.description);
+
+                            return (
+                                <motion.div
+                                    key={exp.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: index * 0.1 }}
+                                    className="relative pl-8 border-l border-slate-300/50"
+                                >
+                                    <div className="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full bg-petite-orchid shadow-[0_0_10px_rgba(219,165,221,0.6)]" />
+                                    <div className="mb-1 text-sm font-bold tracking-wider text-petite-orchid uppercase">
+                                        {period}
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-900 leading-tight mb-1">
+                                        {role}
+                                    </h3>
+                                    <div className="text-lg text-slate-700 font-medium mb-4">{exp.company}</div>
+                                    <ul className="space-y-2">
+                                        {description.map((item, i) => (
+                                            <li key={i} className="text-slate-600 leading-relaxed text-sm flex gap-2">
+                                                <span className="text-slate-400 mt-1.5 min-w-[4px] h-[4px] bg-slate-400 rounded-full block"></span>
+                                                {item}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </section>
 
                 <section>
-                    <h3 className="text-2xl font-bold text-slate-900 mb-6 tracking-tight sticky top-[-10px] py-2">Education</h3>
+                    <h3 className="text-2xl font-bold text-slate-900 mb-6 tracking-tight sticky top-[-10px] py-2">{t.education}</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {education.map((edu, idx) => (
-                            <div key={edu.id} className="p-4 rounded-glass-sm glass-panel bg-white/5 border border-white/20 shadow-sm relative overflow-hidden group hover:bg-white/10 transition-colors">
-                                <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
-                                    <span className="material-symbols-outlined text-4xl text-slate-900">school</span>
+                        {education.map((edu, idx) => {
+                            let degree = edu.degree;
+                            let inst = edu.institution;
+                            // Simple localized mapping for static education data
+                            if (edu.id === 'edu1') { degree = t.edu1_deg; inst = t.edu1_inst; }
+                            if (edu.id === 'edu2') { degree = t.edu2_deg; inst = t.edu2_inst; }
+                            if (edu.id === 'edu3') { degree = t.edu3_deg; inst = t.edu3_inst; }
+
+                            return (
+                                <div key={edu.id} className="p-4 rounded-glass-sm glass-panel bg-white/5 border border-white/20 shadow-sm relative overflow-hidden group hover:bg-white/10 transition-colors">
+                                    <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                                        <span className="material-symbols-outlined text-4xl text-slate-900">school</span>
+                                    </div>
+                                    <div className="text-xs font-bold text-slate-500 mb-1">{edu.year}</div>
+                                    <h4 className="font-bold text-slate-900">{degree}</h4>
+                                    <div className="text-sm text-slate-600">{inst}</div>
                                 </div>
-                                <div className="text-xs font-bold text-slate-500 mb-1">{edu.year}</div>
-                                <h4 className="font-bold text-slate-900">{edu.degree}</h4>
-                                <div className="text-sm text-slate-600">{edu.institution}</div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </section>
             </div>

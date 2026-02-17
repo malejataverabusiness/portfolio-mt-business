@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 
-const projects = [
+export const projects = [
     {
         id: 1,
         title: "Cabaña Alpina",
@@ -254,7 +254,7 @@ const projects = [
     }
 ];
 
-export default function Projects({ onBack }: { onBack: () => void }) {
+export default function Projects({ onBack, language = 'en' }: { onBack: () => void, language: 'en' | 'es' }) {
     const scrollRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -263,16 +263,22 @@ export default function Projects({ onBack }: { onBack: () => void }) {
         }
     }, []);
 
+    const t = {
+        title: language === 'en' ? 'Recent Projects' : 'Proyectos Recientes',
+        back: language === 'en' ? 'Back' : 'Volver',
+        view: language === 'en' ? 'View Project' : 'Ver Proyecto',
+    };
+
     return (
         <div className="w-full max-w-4xl mx-auto h-full flex flex-col">
             <div className="flex-none flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Recent Projects</h2>
+                <h2 className="text-3xl font-bold text-slate-900 tracking-tight">{t.title}</h2>
                 <button
                     onClick={onBack}
                     className="bg-white/10 hover:bg-white/20 text-slate-900 transition-all rounded-full p-2 flex items-center gap-2 px-4 shadow-sm border border-white/20 backdrop-blur-md"
                 >
                     <span className="material-symbols-outlined text-lg">arrow_back</span>
-                    <span className="text-sm font-medium">Back</span>
+                    <span className="text-sm font-medium">{t.back}</span>
                 </button>
             </div>
 
@@ -310,7 +316,7 @@ export default function Projects({ onBack }: { onBack: () => void }) {
                                     {project.description}
                                 </p>
                                 <div className="flex items-center text-sm font-bold text-slate-800">
-                                    View Project
+                                    {t.view}
                                     <span className="material-symbols-outlined ml-2 text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
                                 </div>
                             </div>
