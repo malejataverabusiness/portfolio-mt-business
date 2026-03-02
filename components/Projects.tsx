@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 export const projects = [
     {
@@ -297,10 +298,11 @@ export default function Projects({ onBack, language = 'en' }: { onBack: () => vo
                         >
                             <div className="h-48 overflow-hidden relative">
                                 <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-all z-10" />
-                                <img
+                                <Image
                                     src={project.image}
                                     alt={project.title}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                    fill
+                                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                                 />
                                 <div className="absolute top-4 left-4 z-20">
                                     <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-white/90 text-slate-900 rounded-full shadow-sm">

@@ -5,6 +5,7 @@ import { skillCategories } from "./Skills";
 import { projects } from "./Projects";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface SearchResultsProps {
     query: string;
@@ -217,10 +218,11 @@ export default function SearchResults({ query, onBack, language = 'en' }: Search
                                 >
                                     <div className="h-40 overflow-hidden relative">
                                         <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-all z-10" />
-                                        <img
+                                        <Image
                                             src={project.image}
                                             alt={project.title}
-                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                            fill
+                                            className="object-cover transition-transform duration-500 group-hover:scale-110"
                                         />
                                         <div className="absolute top-2 left-2 z-20">
                                             <span className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/90 text-slate-900 rounded-full shadow-sm">
