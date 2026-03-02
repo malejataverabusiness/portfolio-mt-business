@@ -16,12 +16,42 @@ export interface ExperienceItem {
 
 export const experiences: ExperienceItem[] = [
     {
+        id: "0",
+        role: "Frontend Developer & UI Designer",
+        roleEs: "Desarrollador de front-end y Diseñadora UI",
+        company: "Devbloom",
+        period: "Sept 2025 – Present · 6 months",
+        periodEs: "sept. 2025 - actualidad · 6 meses",
+        description: [
+            "Designed and developed front-end web experiences, creating interfaces optimized for conversion, usability, and performance within digital and e-commerce environments.",
+            "Implemented and managed CMS platforms, specifically WordPress, developing landing pages, websites, and custom components using visual builders and front-end tweaks.",
+            "Integrated within corporate digital ecosystems, connecting logic between CMS, CRM, and ERP to ensure coherence among content, user data, and business processes.",
+            "Applied artificial intelligence practically in digital workflows, using AI tools for content optimization, task automation, and improving personalized web experiences.",
+            "Designed and explored AI agents focused on automation, digital assistance, and process optimization within websites and digital products.",
+            "Optimized websites technically, including performance, responsive design, information architecture, basic technical SEO, and metrics-oriented improvements.",
+            "Developed web solutions oriented towards User Experience (UX/UI), combining visual design, interaction logic, and modern front-end development best practices.",
+            "Managed the digital content lifecycle, from technical structuring to publication, maintenance, and continuous improvement based on user behavior.",
+            "Skills: E-commerce · Web User Interface · Web Design · Front-end Design · Artificial Intelligence · Front-end Engineering"
+        ],
+        descriptionEs: [
+            "Diseño y desarrollo front-end de experiencias web, creando interfaces optimizadas para conversión, usabilidad y rendimiento dentro de entornos digitales y e-commerce.",
+            "Implementación y gestión de CMS, especialmente WordPress, desarrollando landing pages, sitios web y componentes personalizados mediante constructores visuales y ajustes front-end.",
+            "Comprensión e integración dentro de ecosistemas digitales empresariales, conectando la lógica entre CMS, CRM y ERP para asegurar coherencia entre contenido, datos de usuarios y procesos comerciales.",
+            "Aplicación práctica de inteligencia artificial en flujos digitales, utilizando herramientas de IA para optimización de contenido, automatización de tareas y mejora de experiencias web personalizadas.",
+            "Diseño y exploración de agentes de IA enfocados en automatización, asistencia digital y optimización de procesos dentro de sitios web y productos digitales.",
+            "Optimización técnica de sitios web, incluyendo performance, responsive design, arquitectura de información, SEO técnico básico y mejoras orientadas a métricas digitales.",
+            "Desarrollo web orientado a experiencia de usuario (UX/UI), combinando diseño visual, lógica de interacción y buenas prácticas modernas de desarrollo front-end.",
+            "Gestión del ciclo de vida del contenido digital, desde la estructuración técnica hasta su publicación, mantenimiento y mejora continua basada en comportamiento del usuario.",
+            "Aptitudes: Comercio electrónico · Interfaz de Usuario Web · Diseño Web · Diseño de front-end · Inteligencia artificial · Ingeniería de Front-end"
+        ]
+    },
+    {
         id: "1",
         role: "UI/UX Designer, Frontend Developer & Graphic Designer - Leader",
         roleEs: "Diseñadora UI/UX, Desarrolladora Frontend y Diseñadora Gráfica - Líder",
         company: "TIENDAPP SAS",
-        period: "October 2022 – Currently",
-        periodEs: "Octubre 2022 – Actualidad",
+        period: "October 2022 – September 2025",
+        periodEs: "Octubre 2022 – Septiembre 2025",
         description: [
             "Directed the UI/UX strategy, conducting exhaustive research and analysis to inform design decisions, increasing customer satisfaction levels.",
             "Drastically optimized web load times and improved App performance with React Native and reusable components, elevating code maintainability.",
@@ -186,7 +216,7 @@ export default function Experience({ onBack, language = 'en' }: { onBack: () => 
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="relative pl-8 border-l border-slate-300/50"
+                                    className="relative pl-4 md:pl-8 border-l border-slate-300/50"
                                 >
                                     <div className="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full bg-petite-orchid shadow-[0_0_10px_rgba(219,165,221,0.6)]" />
                                     <div className="mb-1 text-sm font-bold tracking-wider text-petite-orchid uppercase">

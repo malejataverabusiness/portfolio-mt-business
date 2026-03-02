@@ -20,7 +20,7 @@
 }
 
 body {
-  @apply text-slate-900 antialiased min-h-screen overflow-x-hidden p-8 flex flex-col items-center;
+  @apply text-slate-900 antialiased min-h-screen overflow-x-hidden flex flex-col items-center;
   background: var(--background);
 }
 
@@ -140,17 +140,60 @@ body {
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.5);
+}
+
+.map-pattern {
+  background-image: radial-gradient(circle at 2px 2px, rgba(15, 23, 42, 0.5) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 400s linear infinite;
+  }
+
+  .animate-marquee2 {
+    animation: marquee2 400s linear infinite;
+  }
+
+  .animate-marquee-fast {
+    animation: marquee 300s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes marquee2 {
+    0% {
+      transform: translateX(100%);
+    }
+
+    100% {
+      transform: translateX(0%);
+    }
+  }
 }
