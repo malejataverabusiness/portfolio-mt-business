@@ -479,10 +479,13 @@ export default function Landing({ onEnter, language }: LandingProps) {
                                     mt-developerdesigner@gmail.com
                                 </a>
                                 <div className="flex items-center gap-4 mt-6">
-                                    <a href="https://www.linkedin.com/in/maleja-tavera/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-white/40 transition-all text-slate-700 hover:text-petite-orchid shadow-sm hover:scale-110">
+                                    <button onClick={onEnter} className="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-white/40 transition-all text-slate-700 hover:text-slate-900 shadow-sm hover:scale-110" title="Portfolio">
+                                        <span className="material-symbols-outlined text-lg">person</span>
+                                    </button>
+                                    <a href="https://www.linkedin.com/in/maleja-tavera/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-white/40 transition-all text-slate-700 hover:text-petite-orchid shadow-sm hover:scale-110" title="LinkedIn">
                                         <span className="material-symbols-outlined text-lg">work</span>
                                     </a>
-                                    <a href="https://www.behance.net/mt-business" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-white/40 transition-all text-slate-700 hover:text-cold-purple shadow-sm hover:scale-110">
+                                    <a href="https://www.behance.net/mt-business" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-white/40 transition-all text-slate-700 hover:text-cold-purple shadow-sm hover:scale-110" title="Behance">
                                         <span className="material-symbols-outlined text-lg">palette</span>
                                     </a>
                                 </div>

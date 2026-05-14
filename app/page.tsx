@@ -11,8 +11,11 @@ import SearchResults from "@/components/SearchResults";
 import Landing from "@/components/Landing";
 import clsx from "clsx";
 import LanguageToggle from "@/components/LanguageToggle";
+import VisualFeed from "@/components/VisualFeed";
+import About from "@/components/About";
+import QuickView from "@/components/QuickView";
 
-type ViewState = "landing" | "hero" | "experience" | "skills" | "projects" | "results";
+type ViewState = "landing" | "hero" | "experience" | "skills" | "projects" | "results" | "visual-feed" | "about" | "quick-view";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -36,7 +39,7 @@ const itemVariants: Variants = {
 };
 
 export default function Home() {
-  const [currentView, setCurrentView] = useState<ViewState>("landing");
+  const [currentView, setCurrentView] = useState<ViewState>("hero");
   const [searchQuery, setSearchQuery] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [language, setLanguage] = useState<'en' | 'es'>('en');
@@ -187,6 +190,10 @@ export default function Home() {
     skillsDesc: language === 'en' ? "Technical & UI/UX Mastery" : "Maestría Técnica y UI/UX",
     projTitle: language === 'en' ? "Projects" : "Proyectos",
     projDesc: language === 'en' ? "High-Performance Portfolio" : "Portafolio de Alto Nivel",
+    feedTitle: language === 'en' ? "Visual Feed" : "Feed Visual",
+    feedDesc: language === 'en' ? "Inspiration & Extras" : "Inspiración",
+    aboutTitle: language === 'en' ? "About Me" : "Sobre Mí",
+    aboutDesc: language === 'en' ? "Bio & Services" : "Bio y Servicios",
     remote: language === 'en' ? "Remote • Worldwide" : "Remoto • Global"
   };
 
@@ -294,6 +301,24 @@ export default function Home() {
                     </button>
                   </motion.div>
 
+                  <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 max-w-2xl gap-4 md:gap-8 w-full relative z-20 mt-4 md:mt-8">
+                    <button onClick={() => setCurrentView("visual-feed")} className="nav-tile rounded-glass-md p-6 md:p-10 group flex flex-col items-center text-center block w-full hover:bg-white/20 transition-all cursor-pointer">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-glass-sm glass-panel inner-glow flex items-center justify-center mb-4 md:mb-6 transition-all group-hover:scale-105 group-hover:border-blue-400/60">
+                        <span className="material-symbols-outlined text-2xl md:text-3xl text-blue-400">photo_library</span>
+                      </div>
+                      <h3 className="text-base md:text-lg font-bold mb-2 tracking-tight text-slate-900">{t.feedTitle}</h3>
+                      <p className="text-xs md:text-sm text-slate-700 font-medium leading-relaxed">{t.feedDesc}</p>
+                    </button>
+
+                    <button onClick={() => setCurrentView("about")} className="nav-tile rounded-glass-md p-6 md:p-10 group flex flex-col items-center text-center block w-full hover:bg-white/20 transition-all cursor-pointer">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-glass-sm glass-panel inner-glow flex items-center justify-center mb-4 md:mb-6 transition-all group-hover:scale-105 group-hover:border-orange-400/60">
+                        <span className="material-symbols-outlined text-2xl md:text-3xl text-orange-400">person</span>
+                      </div>
+                      <h3 className="text-base md:text-lg font-bold mb-2 tracking-tight text-slate-900">{t.aboutTitle}</h3>
+                      <p className="text-xs md:text-sm text-slate-700 font-medium leading-relaxed">{t.aboutDesc}</p>
+                    </button>
+                  </motion.div>
+
                 </motion.div>
               </TiltPanel>
             </motion.div>
@@ -313,6 +338,8 @@ export default function Home() {
                     {currentView === 'skills' && 'SKL'}
                     {currentView === 'projects' && 'PRJ'}
                     {currentView === 'results' && 'SRC'}
+                    {currentView === 'visual-feed' && 'VIS'}
+                    {currentView === 'about' && 'ABT'}
                   </span>
                 </div>
 
@@ -320,33 +347,48 @@ export default function Home() {
                 {currentView === "skills" && <Skills onBack={handleBack} language={language} />}
                 {currentView === "projects" && <Projects onBack={handleBack} language={language} />}
                 {currentView === "results" && <SearchResults query={searchQuery} onBack={handleBack} language={language} />}
+                {currentView === "visual-feed" && <VisualFeed onBack={handleBack} language={language} />}
+                {currentView === "about" && <About onBack={handleBack} language={language} />}
               </div>
             </motion.div>
           )}
+          {currentView === "quick-view" && <QuickView onBack={handleBack} language={language} />}
         </AnimatePresence>
 
         <footer className={clsx("mt-auto mb-4 z-50 flex justify-center w-full transition-all duration-500", (currentView !== 'hero' && currentView !== 'landing') && "opacity-0 pointer-events-none absolute bottom-0", currentView === 'landing' && "opacity-0 pointer-events-none absolute bottom-0")}>
-          <div className="glass-panel px-6 py-3 md:px-10 md:py-4 rounded-glass-md flex flex-col md:flex-row items-center gap-4 md:gap-10">
-            <div className="flex items-center gap-3">
-              <span className="material-symbols-outlined text-slate-600 text-lg">schedule</span>
-              <TimeDisplay />
+          <div className="glass-panel px-4 py-3 md:px-8 md:py-4 rounded-glass-md flex flex-col md:flex-row items-center gap-3 md:gap-8 shadow-md">
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-slate-600 text-base">schedule</span>
+                <TimeDisplay />
+              </div>
+              <div className="hidden md:block h-4 w-[1px] bg-white/30"></div>
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-slate-600 text-base">travel_explore</span>
+                <span className="text-[10px] font-bold tracking-widest text-slate-900 uppercase">{t.remote}</span>
+              </div>
             </div>
-            <div className="hidden md:block h-5 w-[1px] bg-white/30"></div>
-            <div className="flex items-center gap-3">
-              <span className="material-symbols-outlined text-slate-600 text-lg">travel_explore</span>
-              <span className="text-[10px] font-bold tracking-widest text-slate-900 uppercase">{t.remote}</span>
-            </div>
-            <div className="hidden md:block h-5 w-[1px] bg-white/30"></div>
-            <div className="flex items-center gap-6">
-              <button onClick={() => setCurrentView('landing')} className="text-slate-700 hover:text-slate-900 transition-all cursor-pointer" title="Agency Landing">
-                <span className="material-symbols-outlined text-lg">domain</span>
+            <div className="h-[1px] w-full md:h-4 md:w-[1px] bg-white/30 my-2 md:my-0"></div>
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+              <div className="flex items-center gap-4">
+                <button onClick={() => setCurrentView('landing')} className="text-slate-700 hover:text-slate-900 transition-all cursor-pointer hover:scale-110" title="Agency Landing">
+                  <span className="material-symbols-outlined text-lg">domain</span>
+                </button>
+                <a className="text-slate-700 hover:text-slate-900 transition-all hover:scale-110" href="https://www.linkedin.com/in/maleja-tavera/" target="_blank" title="LinkedIn">
+                  <span className="material-symbols-outlined text-lg">work</span>
+                </a>
+                <a className="text-slate-700 hover:text-slate-900 transition-all hover:scale-110" href="https://www.behance.net/mt-business" target="_blank" title="Behance">
+                  <span className="material-symbols-outlined text-lg">palette</span>
+                </a>
+              </div>
+              <div className="hidden md:block h-4 w-[1px] bg-white/30"></div>
+              <button 
+                onClick={() => setCurrentView('quick-view')} 
+                className="bg-white/40 hover:bg-white/60 text-slate-900 text-xs font-black tracking-widest uppercase px-4 py-2 rounded-full transition-all flex items-center gap-2 border border-white/40 shadow-sm hover:shadow-md hover:scale-105"
+              >
+                <span className="material-symbols-outlined text-sm">visibility</span>
+                {language === 'en' ? 'Quick View' : 'Vista Rápida'}
               </button>
-              <a className="text-slate-700 hover:text-slate-900 transition-all" href="https://www.linkedin.com/in/maleja-tavera/" target="_blank">
-                <span className="material-symbols-outlined text-lg">work</span>
-              </a>
-              <a className="text-slate-700 hover:text-slate-900 transition-all" href="https://www.behance.net/mt-business" target="_blank">
-                <span className="material-symbols-outlined text-lg">palette</span>
-              </a>
             </div>
           </div>
         </footer>
