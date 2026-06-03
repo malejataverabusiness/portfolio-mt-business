@@ -2,7 +2,7 @@
 
 import { experiences, ExperienceItem } from "./Experience";
 import { skillCategories } from "./Skills";
-import { projects } from "@/data/projectsData";
+import { projects, getProjects } from "@/data/projectsData";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -59,11 +59,8 @@ export default function SearchResults({ query, onBack, language = 'en' }: Search
         setMatchedSkills(skillMatches);
 
         // Match Projects
-        const projectMatches = projects.filter((proj) => {
-            // Projects don't have ES fields yet in this context unless updated in Projects.tsx, 
-            // but we can search common fields. 
-            // Assuming we added descriptionEs in thought process (but I didn't actually add the data to the large file in the previous step because it was 60 items).
-            // I will search standard fields.
+        const localizedProjects = getProjects(language);
+        const projectMatches = localizedProjects.filter((proj) => {
             const text = `${proj.title} ${proj.category} ${proj.description}`.toLowerCase();
             return queryWords.some(word => text.includes(word)) || text.includes(lowerQuery);
         });

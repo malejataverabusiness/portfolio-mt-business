@@ -859,3 +859,289 @@ export function getProjectBySlug(slug: string): ProjectDetail | null {
 export function getAllProjectSlugs(): string[] {
     return Object.keys(projectDetails);
 }
+
+export const projectTranslations: Record<string, {
+    title: { en: string; es: string };
+    category: { en: string; es: string };
+    description: { en: string; es: string };
+}> = {
+    "tiendapp": {
+        title: { en: "TiendApp", es: "TiendApp" },
+        category: { en: "Web Design, UI/UX, SaaS Platform", es: "Diseño Web, UI/UX, Plataforma SaaS" },
+        description: {
+            en: "Omnichannel commercial automation platform with A.I. — Website design and 4 digital products.",
+            es: "Plataforma omnicanal de automatización comercial con I.A. — Diseño del sitio web y 4 productos digitales."
+        }
+    },
+    "santuario": {
+        title: { en: "Santuario App", es: "Santuario App" },
+        category: { en: "UI/UX Design, Front-end Development", es: "Diseño UI/UX, Desarrollo Front-end" },
+        description: {
+            en: "Mobile emotional regulation and mental well-being app — Your space to breathe.",
+            es: "Aplicación móvil de regulación emocional y bienestar mental — Tu espacio para respirar."
+        }
+    },
+    "cabana-alpina": {
+        title: { en: "Cabaña Alpina", es: "Cabaña Alpina" },
+        category: { en: "Graphic Design", es: "Diseño Gráfico" },
+        description: {
+            en: "Digital experience design for Cabaña Alpina.",
+            es: "Diseño de experiencia digital para Cabaña Alpina."
+        }
+    },
+    "upcard": {
+        title: { en: "Landing UpCard", es: "Landing UpCard" },
+        category: { en: "Graphic Design", es: "Diseño Gráfico" },
+        description: {
+            en: "Landing page design for UpCard fintech solution.",
+            es: "Diseño de landing page para la solución fintech UpCard."
+        }
+    },
+    "piezas-graficas-nova": {
+        title: { en: "Digital Graphic Assets - Nova", es: "Piezas Gráficas Digitales - Nova" },
+        category: { en: "Web Design, Branding, Fashion", es: "Diseño Web, Branding, Moda" },
+        description: {
+            en: "Digital graphic assets and branding for Nova.",
+            es: "Activos gráficos digitales y branding para Nova."
+        }
+    },
+    "sitio-web-ecommerce": {
+        title: { en: "E-commerce Website", es: "Sitio web E-commerce" },
+        category: { en: "Graphic Design, Advertising, Product Design", es: "Diseño Gráfico, Publicidad, Diseño de Producto" },
+        description: {
+            en: "Comprehensive e-commerce website design.",
+            es: "Diseño de sitio web para comercio electrónico."
+        }
+    },
+    "mascothings-pet-furniture-store": {
+        title: { en: "Mascothings - Pet Furniture Store", es: "Mascothings - Pet Furniture Store" },
+        category: { en: "Graphic Design, Illustration, Advertising", es: "Diseño Gráfico, Ilustración, Publicidad" },
+        description: {
+            en: "Pet furniture store branding and web design.",
+            es: "Diseño web y branding para tienda de muebles de mascotas."
+        }
+    },
+    "sitio-web-rethinking-agency": {
+        title: { en: "Rethinking Agency Website", es: "Sitio web Rethinking Agency" },
+        category: { en: "Graphic Design, Web Design, UI/UX", es: "Diseño Gráfico, Diseño Web, UI/UX" },
+        description: {
+            en: "Agency website redesign focusing on modern aesthetics.",
+            es: "Rediseño del sitio web de la agencia enfocado en una estética moderna."
+        }
+    },
+    "eleden-candles-home-wellness": {
+        title: { en: "Eleden - Candles & Home Wellness", es: "Eleden - Candles & Home wellness" },
+        category: { en: "Graphic Design, Photography, Advertising", es: "Diseño Gráfico, Fotografía, Publicidad" },
+        description: {
+            en: "Branding and web design for Eleden home wellness.",
+            es: "Diseño web y branding para Eleden Home Wellness."
+        }
+    },
+    "sitio-web-corez-inmobiliaria": {
+        title: { en: "Corez Real Estate Website", es: "Sitio Web Corez Inmobiliaria" },
+        category: { en: "Graphic Design, Photography, Advertising", es: "Diseño Gráfico, Fotografía, Publicidad" },
+        description: {
+            en: "Real estate website design for Corez Inmobiliaria.",
+            es: "Diseño de sitio web inmobiliario para Corez Inmobiliaria."
+        }
+    },
+    "sitio-web-juan-pablo-gomez": {
+        title: { en: "Juan Pablo Gómez Website", es: "Sitio Web Juan Pablo Gómez" },
+        category: { en: "Photography, Graphic Design, Advertising", es: "Fotografía, Diseño Gráfico, Publicidad" },
+        description: {
+            en: "Personal portfolio website design.",
+            es: "Diseño de portafolio web personal."
+        }
+    },
+    "signature-brand": {
+        title: { en: "Signature Brand", es: "Signature Brand" },
+        category: { en: "Photography, Graphic Design, Product Design", es: "Fotografía, Diseño Gráfico, Diseño de Producto" },
+        description: {
+            en: "Brand identity design.",
+            es: "Diseño de identidad de marca."
+        }
+    },
+    "posts-evento-the-carfest": {
+        title: { en: "The Carfest Event Posts", es: "Posts - Evento The Carfest (Fiestas Sabaneta - Ant.)" },
+        category: { en: "Graphic Design, Illustration, Photography", es: "Diseño Gráfico, Ilustración, Fotografía" },
+        description: {
+            en: "Social media posts for The Carfest event.",
+            es: "Publicaciones en redes sociales para el evento The Carfest."
+        }
+    },
+    "hotel-parnassus": {
+        title: { en: "Hotel Parnassus", es: "Hotel Parnassus" },
+        category: { en: "Web Design, UI/UX, Graphic Design", es: "Diseño Web, UI/UX, Diseño Gráfico" },
+        description: {
+            en: "Hotel branding and website concept.",
+            es: "Branding y concepto web para hotel."
+        }
+    },
+    "social-media-design": {
+        title: { en: "Social Media Design", es: "Social Media Design" },
+        category: { en: "Graphic Design", es: "Diseño Gráfico" },
+        description: {
+            en: "Creative social media design compilation.",
+            es: "Recopilación de diseño creativo para redes sociales."
+        }
+    },
+    "rebranding-bbr": {
+        title: { en: "Rebranding BBR", es: "Rebranding BBR" },
+        category: { en: "Illustration, Graphic Design, Advertising", es: "Ilustración, Diseño Gráfico, Publicidad" },
+        description: {
+            en: "Rebranding project for BBR.",
+            es: "Proyecto de rebranding para BBR."
+        }
+    },
+    "diseno-seccion-perfil": {
+        title: { en: "Profile Section Design", es: "Diseño Sección Perfil" },
+        category: { en: "Graphic Design, Interaction Design", es: "Diseño Gráfico, Diseño de Interacción" },
+        description: {
+            en: "User profile section UI design.",
+            es: "Diseño de interfaz para sección de perfil de usuario."
+        }
+    },
+    "diseno-interna-recetas": {
+        title: { en: "Recipe Page Design", es: "Diseño Interna Recetas" },
+        category: { en: "Graphic Design, Interaction Design", es: "Diseño Gráfico, Diseño de Interacción" },
+        description: {
+            en: "Recipe inner page UI design.",
+            es: "Diseño de interfaz para página de recetas."
+        }
+    },
+    "email-marketing": {
+        title: { en: "Email Marketing", es: "Email Marketing" },
+        category: { en: "Graphic Design, Interaction Design, Advertising", es: "Diseño Gráfico, Diseño de Interacción, Publicidad" },
+        description: {
+            en: "Email marketing campaign designs.",
+            es: "Diseños de campañas de email marketing."
+        }
+    },
+    "copper-home-store-branding": {
+        title: { en: "Copper Home Store - Branding", es: "Copper Home Store - Branding" },
+        category: { en: "Graphic Design, Photography, Product Design", es: "Diseño Gráfico, Fotografía, Diseño de Producto" },
+        description: {
+            en: "Branding for Copper Home Store.",
+            es: "Branding para Copper Home Store."
+        }
+    },
+    "diseno-e-implementacion-de-landing-page": {
+        title: { en: "Landing Page Design & Implementation", es: "Diseño e Implementación de Landing Page" },
+        category: { en: "Painting, Digital Painting, Programming", es: "Pintura, Pintura Digital, Programación" },
+        description: {
+            en: "Landing page design and implementation.",
+            es: "Diseño e implementación de landing page."
+        }
+    },
+    "diseno-teatro-virtual-fundacion-prolirica-de-antioquia": {
+        title: { en: "Virtual Theater Design - Prolírica Foundation", es: "Diseño Teatro Virtual Fundación Prolírica de Antioquia" },
+        category: { en: "Graphic Design, Programming, Interaction Design", es: "Diseño Gráfico, Programación, Diseño de Interacción" },
+        description: {
+            en: "Virtual theater design for Prolírica Foundation.",
+            es: "Diseño de teatro virtual para la Fundación Prolírica."
+        }
+    },
+    "diseno-sitio-web-kaskey": {
+        title: { en: "Kaskey Website Design", es: "Diseño Sitio Web Kaskey" },
+        category: { en: "Graphic Design, Interaction Design, Architecture", es: "Diseño Gráfico, Diseño de Interacción, Arquitectura" },
+        description: {
+            en: "Website design for Kaskey.",
+            es: "Diseño de sitio web para Kaskey."
+        }
+    },
+    "diseno-editorial-para-proyecto-de-bien-social-ceff": {
+        title: { en: "Editorial Design for Social Good Project - CEFF", es: "Diseño Editorial para Proyecto de Bien Social - CEFF" },
+        category: { en: "Photography, Graphic Design, Illustration", es: "Fotografía, Diseño Gráfico, Ilustración" },
+        description: {
+            en: "Editorial design for social good project CEFF.",
+            es: "Diseño editorial para el proyecto de bien social CEFF."
+        }
+    },
+    "gran-fondo-quindio-strongman": {
+        title: { en: "Gran Fondo Quindío - Strongman", es: "Gran Fondo Quindío - Strongman" },
+        category: { en: "Illustration, Branding, Motion Graphics", es: "Ilustración, Branding, Motion Graphics" },
+        description: {
+            en: "Branding for Gran Fondo Quindío event.",
+            es: "Branding para el evento Gran Fondo Quindío."
+        }
+    },
+    "cueros-velez-home": {
+        title: { en: "Cueros Vélez - Home", es: "Cueros Vélez - Home" },
+        category: { en: "Web Design, Branding, Fashion", es: "Diseño Web, Branding, Moda" },
+        description: {
+            en: "Home page design for Cueros Vélez.",
+            es: "Diseño de página de inicio para Cueros Vélez."
+        }
+    },
+    "esensi": {
+        title: { en: "Esensi", es: "Esensi" },
+        category: { en: "Graphic Design, Web Design, UI/UX", es: "Diseño Gráfico, Diseño Web, UI/UX" },
+        description: {
+            en: "Design project for Esensi.",
+            es: "Proyecto de diseño para Esensi."
+        }
+    },
+    "kotas": {
+        title: { en: "+Kotas", es: "+KOTAS" },
+        category: { en: "Web Design, Graphic Design", es: "Diseño Web, Diseño Gráfico" },
+        description: {
+            en: "Branding and design for +KOTAS.",
+            es: "Branding y diseño para +KOTAS."
+        }
+    },
+    "grafty": {
+        title: { en: "Grafty", es: "Grafty" },
+        category: { en: "UI/UX, Web Design, Programming", es: "UI/UX, Diseño Web, Programación" },
+        description: {
+            en: "Design project for Grafty.",
+            es: "Proyecto de diseño para Grafty."
+        }
+    },
+    "fundacion-oyeme": {
+        title: { en: "Óyeme Foundation", es: "Fundación Óyeme" },
+        category: { en: "Graphic Design, Web Design, UI/UX", es: "Diseño Gráfico, Diseño Web, UI/UX" },
+        description: {
+            en: "Design for Óyeme Foundation.",
+            es: "Diseño para la Fundación Óyeme."
+        }
+    },
+    "boamar-swimwear": {
+        title: { en: "Boamar Swimwear", es: "Boamar Swimwear" },
+        category: { en: "UI/UX, Web Design, Graphic Design", es: "UI/UX, Diseño Web, Diseño Gráfico" },
+        description: {
+            en: "Design work for Boamar Swimwear.",
+            es: "Trabajo de diseño para Boamar Swimwear."
+        }
+    },
+    "la-bottega-verde": {
+        title: { en: "La Bottega Verde", es: "La Bottega Verde" },
+        category: { en: "Web Design, UI/UX, Graphic Design", es: "Diseño Web, UI/UX, Diseño Gráfico" },
+        description: {
+            en: "Branding for La Bottega Verde.",
+            es: "Branding para La Bottega Verde."
+        }
+    },
+    "vista-global": {
+        title: { en: "Vista Global", es: "Vista Global" },
+        category: { en: "Web Design, UI/UX, Programming", es: "Diseño Web, UI/UX, Programación" },
+        description: {
+            en: "Design project for Vista Global.",
+            es: "Proyecto de diseño para Vista Global."
+        }
+    }
+};
+
+export function getProjects(language: 'en' | 'es') {
+    return projects.map(p => {
+        const trans = projectTranslations[p.slug];
+        if (trans) {
+            return {
+                ...p,
+                title: trans.title[language] || p.title,
+                category: trans.category[language] || p.category,
+                description: trans.description[language] || p.description
+            };
+        }
+        return p;
+    });
+}

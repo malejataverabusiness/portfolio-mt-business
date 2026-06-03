@@ -175,6 +175,12 @@ export default function Experience({ onBack, language = 'en' }: { onBack: () => 
         if (scrollRef.current) {
             scrollRef.current.scrollTop = 0;
         }
+        const timer = setTimeout(() => {
+            if (scrollRef.current) {
+                scrollRef.current.scrollTop = 0;
+            }
+        }, 100);
+        return () => clearTimeout(timer);
     }, []);
 
     const t = {

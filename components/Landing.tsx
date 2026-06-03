@@ -1,6 +1,6 @@
 import { motion, Variants, useMotionValue, animate } from "framer-motion";
 import clsx from "clsx";
-import { projects } from "@/data/projectsData";
+import { getProjects } from "@/data/projectsData";
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 
@@ -115,7 +115,7 @@ export default function Landing({ onEnter, language }: LandingProps) {
     };
 
     // Taking first 8 images for the gallery marquee
-    const galleryImages = projects.slice(0, 8);
+    const galleryImages = getProjects(language).slice(0, 8);
 
     const [width, setWidth] = useState(0);
     const carouselRef = useRef<HTMLDivElement>(null);

@@ -56,6 +56,12 @@ export default function Skills({ onBack, language = 'en' }: { onBack: () => void
         if (scrollRef.current) {
             scrollRef.current.scrollTop = 0;
         }
+        const timer = setTimeout(() => {
+            if (scrollRef.current) {
+                scrollRef.current.scrollTop = 0;
+            }
+        }, 100);
+        return () => clearTimeout(timer);
     }, []);
 
     const t = {

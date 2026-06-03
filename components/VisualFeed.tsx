@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { projects } from "@/data/projectsData";
+import { getProjects } from "@/data/projectsData";
 
 export default function VisualFeed({ onBack, language = 'en' }: { onBack: () => void, language: 'en' | 'es' }) {
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -14,6 +14,12 @@ export default function VisualFeed({ onBack, language = 'en' }: { onBack: () => 
         if (scrollRef.current) {
             scrollRef.current.scrollTop = 0;
         }
+        const timer = setTimeout(() => {
+            if (scrollRef.current) {
+                scrollRef.current.scrollTop = 0;
+            }
+        }, 100);
+        return () => clearTimeout(timer);
     }, []);
 
     const t = {
@@ -44,7 +50,7 @@ export default function VisualFeed({ onBack, language = 'en' }: { onBack: () => 
 
             <div ref={scrollRef} className="flex-1 overflow-y-auto pb-4 custom-scrollbar pr-2">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {projects.map((project, index) => (
+                    {getProjects(language).map((project, index) => (
                         <motion.div
                             key={project.id}
                             initial={{ opacity: 0, y: 20 }}

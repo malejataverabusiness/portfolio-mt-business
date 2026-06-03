@@ -204,10 +204,6 @@ export default function Home() {
             "fixed inset-0 overflow-hidden p-4 md:p-8"
       )}>
 
-        <div className="absolute top-4 right-4 md:top-8 md:right-0 z-50">
-          <LanguageToggle language={language} setLanguage={setLanguage} />
-        </div>
-
         <AnimatePresence mode="wait">
           {currentView === "landing" ? (
             <motion.div
@@ -328,9 +324,9 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 100 }}
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
-              className="w-full flex justify-center h-full"
+              className="w-full flex justify-center flex-1 min-h-0 mb-4"
             >
-              <div className="w-full max-w-6xl glass-panel rounded-glass-lg p-6 md:p-12 relative overflow-hidden flex flex-col h-full">
+              <div className="w-full max-w-6xl glass-panel rounded-glass-lg p-6 md:p-12 relative overflow-hidden flex flex-col flex-1 min-h-0">
                 <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
                   <span className="text-[6rem] md:text-[12rem] font-black leading-none tracking-tighter mix-blend-overlay">
                     {currentView === 'experience' && 'EXP'}
@@ -353,7 +349,7 @@ export default function Home() {
           )}
         </AnimatePresence>
 
-        <footer className={clsx("mt-auto mb-4 z-50 flex justify-center w-full transition-all duration-500", (currentView !== 'hero' && currentView !== 'landing') && "opacity-0 pointer-events-none absolute bottom-0", currentView === 'landing' && "opacity-0 pointer-events-none absolute bottom-0")}>
+        <footer className={clsx("mt-auto mb-4 z-50 flex justify-center w-full transition-all duration-500", currentView === 'landing' && "opacity-0 pointer-events-none absolute bottom-0")}>
           <div className="glass-panel px-4 py-3 md:px-8 md:py-4 rounded-glass-md flex flex-col md:flex-row items-center gap-3 md:gap-8 shadow-md">
             <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
               <div className="flex items-center gap-2">
@@ -379,6 +375,8 @@ export default function Home() {
                   <span className="material-symbols-outlined text-lg">palette</span>
                 </a>
               </div>
+              <div className="hidden md:block h-4 w-[1px] bg-white/30"></div>
+              <LanguageToggle language={language} setLanguage={setLanguage} />
             </div>
           </div>
         </footer>
