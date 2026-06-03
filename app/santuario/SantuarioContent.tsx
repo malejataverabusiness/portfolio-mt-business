@@ -409,6 +409,85 @@ export default function SantuarioContent() {
                     </div>
                 </div>
                 </div>
+            {/* Proceso de Creación — External Links */}
+            <div className="max-w-6xl mx-auto px-4 pb-20">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                >
+                    <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3 tracking-tight">
+                        Proceso de Creación
+                    </h2>
+                    <p className="text-slate-500 text-sm mb-10 max-w-2xl leading-relaxed">
+                        Explora la documentación completa del proceso: desde el caso de estudio hasta la arquitectura de flujos y la gestión del proyecto.
+                    </p>
+                </motion.div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    {[
+                        {
+                            title: "Case Study",
+                            description: "Análisis completo del diseño, investigación de usuario y decisiones estratégicas del proyecto.",
+                            icon: "auto_stories",
+                            href: "https://walk-stylus-54756902.figma.site/",
+                            gradient: "from-violet-500/10 to-purple-500/5",
+                            borderColor: "border-violet-200/60",
+                            iconBg: "bg-violet-50",
+                            iconColor: "text-violet-500",
+                            hoverShadow: "hover:shadow-violet-200/40",
+                        },
+                        {
+                            title: "Flowchart",
+                            description: "Mapa de navegación y flujos de usuario de toda la aplicación en FigJam.",
+                            icon: "account_tree",
+                            href: "https://www.figma.com/board/cHZunQ0l7yRnqA525olxgq/Santuario-App-Flow-Chart?node-id=1-2&t=NhunHbWnCj9Xnp1c-1",
+                            gradient: "from-sky-500/10 to-cyan-500/5",
+                            borderColor: "border-sky-200/60",
+                            iconBg: "bg-sky-50",
+                            iconColor: "text-sky-500",
+                            hoverShadow: "hover:shadow-sky-200/40",
+                        },
+                        {
+                            title: "Notion",
+                            description: "Documentación del proyecto, gestión de tareas y seguimiento del desarrollo.",
+                            icon: "description",
+                            href: "https://app.notion.com/p/App-Santuario-36d95f9151c8803cbf4ee00eb854c5b7",
+                            gradient: "from-stone-500/10 to-neutral-500/5",
+                            borderColor: "border-stone-200/60",
+                            iconBg: "bg-stone-50",
+                            iconColor: "text-stone-600",
+                            hoverShadow: "hover:shadow-stone-200/40",
+                        },
+                    ].map((link, idx) => (
+                        <motion.a
+                            key={idx}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 + idx * 0.1 }}
+                            className={`group rounded-2xl bg-gradient-to-br ${link.gradient} border ${link.borderColor} p-6 md:p-8 transition-all duration-300 hover:shadow-xl ${link.hoverShadow} hover:-translate-y-1`}
+                        >
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className={`w-11 h-11 rounded-xl ${link.iconBg} flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}>
+                                    <span className={`material-symbols-outlined text-xl ${link.iconColor}`}>{link.icon}</span>
+                                </div>
+                            </div>
+                            <h3 className="text-base font-bold text-slate-900 mb-2 tracking-tight">
+                                {link.title}
+                            </h3>
+                            <p className="text-slate-500 text-sm leading-relaxed mb-4">
+                                {link.description}
+                            </p>
+                            <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 group-hover:text-slate-600 transition-colors duration-300">
+                                <span>Ver documento</span>
+                                <span className="material-symbols-outlined text-sm transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+                            </div>
+                        </motion.a>
+                    ))}
+                </div>
             </div>
         </ProjectPage>
     );
