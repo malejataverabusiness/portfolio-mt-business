@@ -1,6 +1,6 @@
 import { motion, Variants, useMotionValue, animate } from "framer-motion";
 import clsx from "clsx";
-import { projects } from "./Projects";
+import { projects } from "@/data/projectsData";
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 
@@ -11,88 +11,88 @@ interface LandingProps {
 
 export default function Landing({ onEnter, language }: LandingProps) {
     const t = {
-        agencyTitle: "MT BUSINESS",
-        heroSubtitle: language === 'en' ? "Digital Advertising Agency" : "Agencia de Publicidad Digital",
+        agencyTitle: "MARÍA TAVERA",
+        heroSubtitle: language === 'en' ? "UI/UX Developer & Design Lead" : "Desarrolladora UI/UX y Líder de Diseño",
         heroDesc: language === 'en'
-            ? "We craft immersive digital experiences, pushing the boundaries of technology, design, and marketing to elevate your brand to the next level."
-            : "Creamos experiencias digitales inmersivas, superando los límites de la tecnología, el diseño y el marketing para elevar tu marca al siguiente nivel.",
+            ? "I craft immersive digital experiences, bridging the gap between complex engineering, design systems, and business goals to build next-level products."
+            : "Creo experiencias digitales inmersivas, uniendo la brecha entre la ingeniería compleja, los sistemas de diseño y los objetivos de negocio para crear productos de alto nivel.",
 
         // Logos
-        trustedBy: language === 'en' ? "Trusted By Industry Leaders" : "Empresas que Confían en Nosotros",
-        clients: ["Cabaña Alpina", "UpCard", "Nova", "Corez Inmobiliaria", "Cueros Vélez", "Prolírica", "Hotel Parnassus", "Kaskey"],
+        trustedBy: language === 'en' ? "Companies I've Worked With" : "Empresas con las que he Trabajado",
+        clients: ["TiendApp SAS", "Alpina", "SproutLoud", "Samsung", "Ita Latam", "El Colombiano", "Grupo Éxito", "Yuxi Global"],
 
         // Gallery
         galleryTitle: language === 'en' ? "Selected Works" : "Obras Destacadas",
-        galleryDesc: language === 'en' ? "A glimpse into our visual universe." : "Un vistazo a nuestro universo visual.",
+        galleryDesc: language === 'en' ? "A glimpse into my professional work." : "Un vistazo a mi trabajo profesional.",
 
         // Services
-        servicesTitle: language === 'en' ? "Our Expertise" : "Nuestra Experiencia",
+        servicesTitle: language === 'en' ? "My Expertise" : "Mi Especialidad",
         services: [
             {
                 icon: "campaign",
-                title: language === 'en' ? "Digital Marketing" : "Marketing Digital",
-                desc: language === 'en' ? "Data-driven campaigns that convert audiences into loyal customers through targeted strategies." : "Campañas basadas en datos que convierten audiencias en clientes leales mediante estrategias dirigidas."
+                title: language === 'en' ? "Product Strategy" : "Estrategia de Producto",
+                desc: language === 'en' ? "Aligning user needs and business metrics to define product roadmaps and feature scoping." : "Alineación de las necesidades del usuario y las métricas comerciales para definir la hoja de ruta del producto."
             },
             {
                 icon: "branding_watermark",
-                title: language === 'en' ? "Brand Identity" : "Identidad de Marca",
-                desc: language === 'en' ? "Crafting memorable brands with unique visual languages and strong, recognizable presences." : "Creación de marcas memorables con lenguajes visuales únicos y presencias sólidas y reconocibles."
+                title: language === 'en' ? "UI/UX & Design Systems" : "Diseño UI/UX y Sistemas de Diseño",
+                desc: language === 'en' ? "Creating scalable components, clear typography systems, and intuitive user flows for SaaS and mobile apps." : "Creación de componentes escalables, sistemas tipográficos claros y flujos intuitivos para plataformas SaaS y apps móviles."
             },
             {
                 icon: "code",
-                title: language === 'en' ? "Web & App Dev" : "Desarrollo Web y App",
-                desc: language === 'en' ? "High-performance, scalable, and visually stunning digital products tailored to your needs." : "Productos digitales de alto rendimiento, escalables y visualmente impactantes adaptados a tus necesidades."
+                title: language === 'en' ? "Frontend Development" : "Desarrollo Frontend",
+                desc: language === 'en' ? "Developing high-performance, clean, and scalable web apps using React, Next.js, and modern styling architectures." : "Desarrollo de aplicaciones web de alto rendimiento, código limpio y escalable con React, Next.js y CSS moderno."
             },
             {
                 icon: "share",
-                title: language === 'en' ? "Social Media" : "Redes Sociales",
-                desc: language === 'en' ? "Engaging content strategies that amplify your voice and build community across platforms." : "Estrategias de contenido atractivas que amplifican tu voz y construyen comunidad en todas las plataformas."
+                title: language === 'en' ? "Mobile Apps (React Native)" : "Aplicaciones Móviles",
+                desc: language === 'en' ? "Building cross-platform mobile apps with responsive layouts, native animations, and smooth transitions." : "Desarrollo de aplicaciones móviles multiplataforma con layouts responsivos, animaciones nativas y transiciones fluidas."
             },
             {
                 icon: "troubleshoot",
-                title: language === 'en' ? "SEO & Analytics" : "SEO y Analítica",
-                desc: language === 'en' ? "Optimizing visibility and tracking key metrics to guarantee continuous and sustainable growth." : "Optimización de visibilidad y seguimiento de métricas clave para garantizar un crecimiento continuo y sostenible."
+                title: language === 'en' ? "SEO & Performance" : "SEO y Rendimiento",
+                desc: language === 'en' ? "Optimizing load times, Web Vitals, and technical structure to guarantee maximum search engine visibility." : "Optimización de tiempos de carga, Web Vitals y estructura técnica para garantizar la máxima visibilidad en motores de búsqueda."
             },
             {
                 icon: "movie_creation",
-                title: language === 'en' ? "Content Creation" : "Creación de Contenido",
-                desc: language === 'en' ? "Producing high-quality video, imagery, and copywriting that effectively tells your story." : "Producción de video, imágenes y copywriting de alta calidad que cuentan tu historia de manera efectiva."
+                title: language === 'en' ? "UX Copywriting & Content" : "Copywriting de UX y Contenido",
+                desc: language === 'en' ? "Writing clear, user-centric microcopy and structuring multimedia assets for digital products." : "Redacción de microcopy claro y centrado en el usuario y estructuración de contenido multimedia para productos digitales."
             }
         ],
 
         // Testimonials
-        testimonialsTitle: language === 'en' ? "What Our Clients Say" : "Lo Que Dicen Nuestros Clientes",
+        testimonialsTitle: language === 'en' ? "Professional Recommendations" : "Recomendaciones Profesionales",
         testimonials: [
             {
-                quote: language === 'en' ? "MT Business transformed our digital presence completely. The attention to detail and modern aesthetic brought our brand into 2026 seamlessly." : "MT Business transformó nuestra presencia digital por completo. La atención al detalle y la estética moderna llevaron nuestra marca al 2026 sin problemas.",
+                quote: language === 'en' ? "María transformed our product's digital experience completely. Her attention to detail and modern design systems brought our platform to the next level." : "María transformó la experiencia digital de nuestro producto por completo. Su atención al detalle y sistemas de diseño modernos llevaron nuestra plataforma al siguiente nivel.",
                 name: "Carlos Restrepo",
-                role: language === 'en' ? "CEO, Corez Inmobiliaria" : "CEO, Corez Inmobiliaria"
+                role: language === 'en' ? "CEO, Corez" : "CEO, Corez"
             },
             {
-                quote: language === 'en' ? "The creative direction for our social media campaigns skyrocketed our engagement. Pure design brilliance." : "La dirección creativa de nuestras campañas en redes sociales disparó nuestro engagement. Pura brillantez en diseño.",
+                quote: language === 'en' ? "Her creative direction and user-centered solutions significantly improved our user engagement and interface consistency. Pure design brilliance." : "Su dirección creativa y soluciones centradas en el usuario mejoraron significativamente la interacción y consistencia de la interfaz. Pura brillantez en diseño.",
                 name: "Valeria Gómez",
                 role: language === 'en' ? "Marketing Director, Nova" : "Directora de Marketing, Nova"
             },
             {
-                quote: language === 'en' ? "Unparalleled frontend development and UX. Our e-commerce conversion rates doubled after the redesign." : "Desarrollo frontend y UX inigualables. Nuestras tasas de conversión en e-commerce se duplicaron tras el rediseño.",
+                quote: language === 'en' ? "Unparalleled frontend engineering and UX design. Our conversion rates doubled after her comprehensive redesign of the interface." : "Ingeniería frontend y diseño UX inigualables. Nuestras tasas de conversión se duplicaron tras su rediseño integral de la interfaz.",
                 name: "Santiago López",
                 role: language === 'en' ? "Founder, UpCard" : "Fundador, UpCard"
             }
         ],
 
         // About
-        aboutTitle: language === 'en' ? "Why MT Business?" : "¿Por qué MT Business?",
+        aboutTitle: language === 'en' ? "Why Work With Me?" : "¿Por qué trabajar conmigo?",
         aboutDesc: language === 'en'
-            ? "In a digital-first world, simply existing isn't enough. You need to stand out. Our multidisciplinary approach seamlessly blends aesthetic design, robust engineering, and strategic marketing to ensure your brand doesn't just compete—it leads."
-            : "En un mundo digital, simplemente existir no es suficiente. Necesitas destacar. Nuestro enfoque multidisciplinario combina a la perfección el diseño estético, la ingeniería robusta y el marketing estratégico para asegurar que tu marca no solo compita, sino que lidere el mercado.",
+            ? "In a digital-first world, building intuitive products is key. My multidisciplinary approach seamlessly blends user-centered design, clean frontend engineering, and product strategy to ensure applications aren't just built—they are crafted to deliver outstanding user and business outcomes."
+            : "En un mundo digital, construir productos intuitivos es clave. Mi enfoque multidisciplinario combina a la perfección el diseño centrado en el usuario, la ingeniería frontend limpia y la estrategia de producto para asegurar que las aplicaciones no solo se programen, sino que se diseñen para ofrecer excelentes resultados de usuario y negocio.",
 
         // Location
         locationTitle: language === 'en' ? "Global Reach, Local Touch" : "Alcance Global, Toque Local",
-        locationDesc: language === 'en' ? "Based in Medellín, Colombia, working with visionary brands worldwide." : "Con sede en Medellín, Colombia, trabajando con marcas visionarias en todo el mundo.",
+        locationDesc: language === 'en' ? "Based in Medellín, Colombia, working with engineering and design teams worldwide." : "Con sede en Medellín, Colombia, trabajando con equipos de ingeniería y diseño en todo el mundo.",
 
         // CTA
-        ctaTitle: language === 'en' ? "Meet the Creative Mind" : "Conoce a la Mente Creativa",
-        ctaDesc: language === 'en' ? "Behind every great agency is a visionary. Step inside to see the portfolio of our founder, María Tavera." : "Detrás de toda gran agencia hay una visionaria. Entra para ver el portafolio de nuestra fundadora, María Tavera.",
+        ctaTitle: language === 'en' ? "Explore My Professional Portfolio" : "Explora Mi Portafolio Profesional",
+        ctaDesc: language === 'en' ? "Step inside to see my detailed work, key projects, and technical skills as a UI/UX Developer & Design Lead." : "Entra para conocer en detalle mis proyectos, habilidades técnicas y experiencia como desarrolladora UI/UX y líder de diseño.",
         button: language === 'en' ? "Enter Portfolio" : "Entrar al Portafolio",
 
         // Footer
@@ -172,7 +172,7 @@ export default function Landing({ onEnter, language }: LandingProps) {
                 </motion.div>
 
                 <motion.h1 variants={fadeUpVariant} className="text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black tracking-tighter text-high-contrast drop-shadow-lg mb-8 uppercase leading-none">
-                    MT <span className="text-transparent bg-clip-text bg-gradient-to-r from-petite-orchid to-cold-purple">Business</span>
+                    MARÍA <span className="text-transparent bg-clip-text bg-gradient-to-r from-petite-orchid to-cold-purple">TAVERA</span>
                 </motion.h1>
 
                 <motion.p variants={fadeUpVariant} className="text-lg md:text-2xl text-slate-700 max-w-3xl leading-relaxed font-light mb-16">
@@ -453,7 +453,7 @@ export default function Landing({ onEnter, language }: LandingProps) {
                         {/* Brand Column */}
                         <div className="flex flex-col gap-4">
                             <h3 className="text-3xl font-black tracking-tighter uppercase mb-4">
-                                MT <span className="text-transparent bg-clip-text bg-gradient-to-r from-petite-orchid to-cold-purple">Business</span>
+                                MARÍA <span className="text-transparent bg-clip-text bg-gradient-to-r from-petite-orchid to-cold-purple">TAVERA</span>
                             </h3>
                             <p className="text-slate-600 text-sm leading-relaxed max-w-sm">
                                 {t.heroDesc}
@@ -464,8 +464,8 @@ export default function Landing({ onEnter, language }: LandingProps) {
                         <div className="flex flex-col gap-4">
                             <h4 className="font-bold text-slate-900 mb-4 tracking-widest uppercase text-xs">{t.footerLinks}</h4>
                             <div className="flex flex-col gap-3 text-sm">
-                                <a href="#services" className="text-slate-600 hover:text-petite-orchid transition-colors w-fit font-medium">Services</a>
-                                <a href="#clients" className="text-slate-600 hover:text-petite-orchid transition-colors w-fit font-medium">Clients</a>
+                                <a href="#services" className="text-slate-600 hover:text-petite-orchid transition-colors w-fit font-medium">{language === 'en' ? 'Expertise' : 'Especialidades'}</a>
+                                <a href="#clients" className="text-slate-600 hover:text-petite-orchid transition-colors w-fit font-medium">{language === 'en' ? 'Companies' : 'Empresas'}</a>
                                 <button onClick={onEnter} className="text-slate-600 hover:text-petite-orchid transition-colors w-fit font-medium text-left">Portfolio</button>
                             </div>
                         </div>

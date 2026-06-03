@@ -2,10 +2,11 @@
 
 import { experiences, ExperienceItem } from "./Experience";
 import { skillCategories } from "./Skills";
-import { projects } from "./Projects";
+import { projects } from "@/data/projectsData";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 interface SearchResultsProps {
     query: string;
@@ -206,35 +207,37 @@ export default function SearchResults({ query, onBack, language = 'en' }: Search
                         </h4>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {matchedProjects.map((project, idx) => (
-                                <motion.a
+                                <Link
                                     key={project.id}
-                                    href={project.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: 0.3 + (idx * 0.1) }}
+                                    href={project.internalLink || project.link}
                                     className="group rounded-glass-sm overflow-hidden glass-panel border border-white/30 shadow-sm hover:shadow-md transition-all cursor-pointer block bg-white/5"
                                 >
-                                    <div className="h-40 overflow-hidden relative">
-                                        <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-all z-10" />
-                                        <Image
-                                            src={project.image}
-                                            alt={project.title}
-                                            fill
-                                            className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                        />
-                                        <div className="absolute top-2 left-2 z-20">
-                                            <span className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/90 text-slate-900 rounded-full shadow-sm">
-                                                {project.category.split(',')[0]}
-                                            </span>
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: 0.3 + (idx * 0.1) }}
+                                    >
+                                        <div className="h-40 overflow-hidden relative">
+                                            <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-all z-10" />
+                                            <Image
+                                                src={project.image}
+                                                alt={project.title}
+                                                fill
+                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                                unoptimized
+                                            />
+                                            <div className="absolute top-2 left-2 z-20">
+                                                <span className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/90 text-slate-900 rounded-full shadow-sm">
+                                                    {project.category.split(',')[0]}
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="p-4">
-                                        <h5 className="text-sm font-bold text-slate-900 mb-1 line-clamp-1">{project.title}</h5>
-                                        <p className="text-slate-600 text-xs line-clamp-2">{project.description}</p>
-                                    </div>
-                                </motion.a>
+                                        <div className="p-4">
+                                            <h5 className="text-sm font-bold text-slate-900 mb-1 line-clamp-1">{project.title}</h5>
+                                            <p className="text-slate-600 text-xs line-clamp-2">{project.description}</p>
+                                        </div>
+                                    </motion.div>
+                                </Link>
                             ))}
                         </div>
                     </section>

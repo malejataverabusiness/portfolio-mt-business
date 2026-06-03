@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useRef, useEffect } from "react";
+import Image from "next/image";
 
 export default function About({ onBack, language = 'en' }: { onBack: () => void, language: 'en' | 'es' }) {
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -16,13 +17,13 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
         title: language === 'en' ? 'About Me' : 'Sobre Mí',
         back: language === 'en' ? 'Back' : 'Volver',
         greeting: language === 'en' ? 'Hi there.' : 'Hola.',
-        bio1: language === 'en' ? 'I specialise in partnering with founders and companies to build impactful brands that seek to challenge complex issues and create meaningful digital experiences.' : 'Me especializo en asociarme con fundadores y empresas para construir marcas impactantes que buscan desafiar problemas complejos y crear experiencias digitales significativas.',
-        bio2: language === 'en' ? 'With over 14 years of experience crafting visual worlds and front-end architectures, my passion is to develop rich and memorable experiences that create impact whilst bringing a sense of joy through design and storytelling.' : 'Con más de 14 años de experiencia creando mundos visuales y arquitecturas front-end, mi pasión es desarrollar experiencias ricas y memorables que generen impacto y al mismo tiempo brinden alegría a través del diseño y la narración.',
-        servicesTitle: language === 'en' ? 'Services' : 'Servicios',
-        services: language === 'en' ? ['Art Direction', 'Brand Identity', 'UI/UX Design', 'Front-end Development', 'Illustration'] : ['Dirección de Arte', 'Identidad de Marca', 'Diseño UI/UX', 'Desarrollo Front-end', 'Ilustración'],
-        clientsTitle: language === 'en' ? 'Selected Clients' : 'Clientes Seleccionados',
-        contactTitle: language === 'en' ? 'Interested in collaborating on something?' : '¿Interesado en colaborar en algo?',
-        contactBtn: language === 'en' ? 'GET IN TOUCH' : 'CONTÁCTAME'
+        bio1: language === 'en' ? 'I specialize in collaborating with product teams and engineering groups to build high-quality web products, design systems, and intuitive user experiences.' : 'Me especializo en colaborar con equipos de producto y desarrollo para construir productos web de alta calidad, sistemas de diseño y experiencias de usuario intuitivas.',
+        bio2: language === 'en' ? 'With over 14 years of experience bridging the gap between visual design and front-end development, I enjoy creating accessible, polished, and high-performance interfaces that solve real-world problems.' : 'Con más de 14 años de experiencia uniendo el diseño visual y el desarrollo front-end, me apasiona crear interfaces accesibles, pulidas y de alto rendimiento que resuelvan problemas reales.',
+        servicesTitle: language === 'en' ? 'Expertise' : 'Especialidades',
+        services: language === 'en' ? ['UI/UX Design', 'Front-end Development', 'Design Systems', 'Brand Identity', 'Product Strategy'] : ['Diseño UI/UX', 'Desarrollo Front-end', 'Sistemas de Diseño', 'Identidad de Marca', 'Estrategia de Producto'],
+        clientsTitle: language === 'en' ? "Companies I've Worked With" : 'Empresas con las que he Trabajado',
+        contactTitle: language === 'en' ? 'Interested in discussing a role or project?' : '¿Interesado en conversar sobre alguna vacante o proyecto?',
+        contactBtn: language === 'en' ? 'CONNECT ON LINKEDIN' : 'CONECTAR EN LINKEDIN'
     };
 
     return (
@@ -41,16 +42,22 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
             <div ref={scrollRef} className="flex-1 overflow-y-auto pb-4 custom-scrollbar pr-4">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
                     
-                    {/* Graphical Element Section */}
+                    {/* Profile Image Section */}
                     <motion.div 
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         className="md:col-span-4 lg:col-span-5"
                     >
                         <div className="rounded-glass-lg overflow-hidden glass-panel border border-white/30 p-2 shadow-sm w-full aspect-[4/5] relative">
-                            <div className="absolute inset-2 rounded-glass-md bg-gradient-to-br from-petite-orchid/20 to-cold-purple/20 flex flex-col items-center justify-center relative overflow-hidden">
-                                <span className="material-symbols-outlined text-9xl text-slate-800/40 absolute">person</span>
-                                <div className="absolute inset-0 bg-white/10 backdrop-blur-sm -z-10"></div>
+                            <div className="absolute inset-2 rounded-glass-md bg-gradient-to-br from-petite-orchid/20 to-cold-purple/20 relative overflow-hidden">
+                                <Image 
+                                    src="https://media.licdn.com/dms/image/v2/D4D03AQHq2Exg3kW3RA/profile-displayphoto-crop_800_800/B4DZ5NnYb1I8AI-/0/1779418631855?e=1781740800&v=beta&t=OVYpMtoAYIyZbB4OdG1gX5ZbChMWKnI-zPy9YPUPECg"
+                                    alt="María Alejandra Tavera"
+                                    fill
+                                    className="object-cover"
+                                    priority
+                                    unoptimized
+                                />
                             </div>
                         </div>
                     </motion.div>
@@ -84,7 +91,7 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
                             <div>
                                 <h4 className="text-sm font-bold uppercase tracking-widest text-slate-900 mb-4">{t.clientsTitle}</h4>
                                 <ul className="flex flex-wrap gap-2 text-slate-600">
-                                    {['Cabaña Alpina', 'UpCard', 'Nova', 'Mascothings', 'Rethinking', 'Corez'].map((client, idx) => (
+                                    {['TiendApp SAS', 'Alpina', 'SproutLoud', 'Samsung', 'El Colombiano', 'Grupo Éxito', 'Yuxi Global', 'Linkapedia'].map((client, idx) => (
                                         <li key={idx} className="glass-panel px-3 py-1 rounded-full text-xs font-medium border border-white/40">
                                             {client}
                                         </li>

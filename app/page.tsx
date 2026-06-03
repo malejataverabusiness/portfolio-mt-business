@@ -13,9 +13,8 @@ import clsx from "clsx";
 import LanguageToggle from "@/components/LanguageToggle";
 import VisualFeed from "@/components/VisualFeed";
 import About from "@/components/About";
-import QuickView from "@/components/QuickView";
 
-type ViewState = "landing" | "hero" | "experience" | "skills" | "projects" | "results" | "visual-feed" | "about" | "quick-view";
+type ViewState = "landing" | "hero" | "experience" | "skills" | "projects" | "results" | "visual-feed" | "about";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -193,7 +192,7 @@ export default function Home() {
     feedTitle: language === 'en' ? "Visual Feed" : "Feed Visual",
     feedDesc: language === 'en' ? "Inspiration & Extras" : "Inspiración",
     aboutTitle: language === 'en' ? "About Me" : "Sobre Mí",
-    aboutDesc: language === 'en' ? "Bio & Services" : "Bio y Servicios",
+    aboutDesc: language === 'en' ? "Bio & Background" : "Trayectoria y Bio",
     remote: language === 'en' ? "Remote • Worldwide" : "Remoto • Global"
   };
 
@@ -352,7 +351,6 @@ export default function Home() {
               </div>
             </motion.div>
           )}
-          {currentView === "quick-view" && <QuickView onBack={handleBack} language={language} />}
         </AnimatePresence>
 
         <footer className={clsx("mt-auto mb-4 z-50 flex justify-center w-full transition-all duration-500", (currentView !== 'hero' && currentView !== 'landing') && "opacity-0 pointer-events-none absolute bottom-0", currentView === 'landing' && "opacity-0 pointer-events-none absolute bottom-0")}>
@@ -371,7 +369,7 @@ export default function Home() {
             <div className="h-[1px] w-full md:h-4 md:w-[1px] bg-white/30 my-2 md:my-0"></div>
             <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
               <div className="flex items-center gap-4">
-                <button onClick={() => setCurrentView('landing')} className="text-slate-700 hover:text-slate-900 transition-all cursor-pointer hover:scale-110" title="Agency Landing">
+                <button onClick={() => setCurrentView('landing')} className="text-slate-700 hover:text-slate-900 transition-all cursor-pointer hover:scale-110" title={language === 'en' ? "Professional Overview" : "Resumen Profesional"}>
                   <span className="material-symbols-outlined text-lg">domain</span>
                 </button>
                 <a className="text-slate-700 hover:text-slate-900 transition-all hover:scale-110" href="https://www.linkedin.com/in/maleja-tavera/" target="_blank" title="LinkedIn">
@@ -381,14 +379,6 @@ export default function Home() {
                   <span className="material-symbols-outlined text-lg">palette</span>
                 </a>
               </div>
-              <div className="hidden md:block h-4 w-[1px] bg-white/30"></div>
-              <button 
-                onClick={() => setCurrentView('quick-view')} 
-                className="bg-white/40 hover:bg-white/60 text-slate-900 text-xs font-black tracking-widest uppercase px-4 py-2 rounded-full transition-all flex items-center gap-2 border border-white/40 shadow-sm hover:shadow-md hover:scale-105"
-              >
-                <span className="material-symbols-outlined text-sm">visibility</span>
-                {language === 'en' ? 'Quick View' : 'Vista Rápida'}
-              </button>
             </div>
           </div>
         </footer>

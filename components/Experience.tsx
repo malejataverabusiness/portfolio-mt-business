@@ -20,8 +20,8 @@ export const experiences: ExperienceItem[] = [
         role: "Frontend Developer & UI Designer",
         roleEs: "Desarrollador de front-end y Diseñadora UI",
         company: "Devbloom",
-        period: "Sept 2025 – Present · 6 months",
-        periodEs: "sept. 2025 - actualidad · 6 meses",
+        period: "Sept 2025 – Present",
+        periodEs: "sept. 2025 - actualidad",
         description: [
             "Designed and developed front-end web experiences, creating interfaces optimized for conversion, usability, and performance within digital and e-commerce environments.",
             "Implemented and managed CMS platforms, specifically WordPress, developing landing pages, websites, and custom components using visual builders and front-end tweaks.",

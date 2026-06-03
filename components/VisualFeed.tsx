@@ -1,19 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
-
-export const visuals = [
-    { id: 1, image: "https://mir-s3-cdn-cf.behance.net/projects/404/10a7c3241831361.Y3JvcCwxNjI3LDEyNzIsMCwxNTQy.png", caption: "Playing around with shapes and colors" },
-    { id: 2, image: "https://mir-s3-cdn-cf.behance.net/projects/404/2b234f241829125.Y3JvcCw0MzIwLDMzNzksMCww.jpg", caption: "Early sketches for UpCard branding" },
-    { id: 3, image: "https://mir-s3-cdn-cf.behance.net/projects/404/e01900239353155.Y3JvcCwxMDgwLDg0NCwwLDIzMg.png", caption: "Digital textures and assets" },
-    { id: 4, image: "https://mir-s3-cdn-cf.behance.net/projects/404/298ccc196617331.Y3JvcCwyODc4LDIyNTEsMCw1MzY0.png", caption: "Behind the scenes: E-commerce wireframes" },
-    { id: 5, image: "https://mir-s3-cdn-cf.behance.net/projects/404/5aecf0185922065.Y3JvcCw0MjYxLDMzMzMsNTM3LDA.png", caption: "Color palette exploration for Mascothings" },
-    { id: 6, image: "https://mir-s3-cdn-cf.behance.net/projects/404/28f2ce175337617.Y3JvcCwyMDE1LDE1NzYsMCww.png", caption: "Rethinking web aesthetics" }
-];
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { projects } from "@/data/projectsData";
 
 export default function VisualFeed({ onBack, language = 'en' }: { onBack: () => void, language: 'en' | 'es' }) {
     const scrollRef = useRef<HTMLDivElement>(null);
+    const [selectedProject, setSelectedProject] = useState<any | null>(null);
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -23,16 +18,20 @@ export default function VisualFeed({ onBack, language = 'en' }: { onBack: () => 
 
     const t = {
         title: language === 'en' ? 'Visual Feed' : 'Feed Visual',
-        subtitle: language === 'en' ? 'Work I\'ve created and things that inspire me.' : 'Trabajo que he creado y cosas que me inspiran.',
+        subtitle: language === 'en' 
+            ? 'A visual curation of my digital designs, UI/UX solutions, and front-end development projects. Here you can explore summaries of my work, interactive experiences, and the creative details behind each interface. Click on any card to learn more.' 
+            : 'Una curaduría visual de mis diseños digitales, soluciones de interfaz (UI/UX) y proyectos de desarrollo front-end. Explora resúmenes de mi trabajo, experiencias interactivas y los detalles creativos detrás de cada pantalla. Haz clic en cualquier tarjeta para ver más.',
         back: language === 'en' ? 'Back' : 'Volver',
+        viewMore: language === 'en' ? 'View Project' : 'Ver Proyecto',
+        close: language === 'en' ? 'Close' : 'Cerrar',
     };
 
     return (
-        <div className="w-full max-w-5xl mx-auto h-full flex flex-col">
-            <div className="flex-none flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
-                <div>
+        <div className="w-full max-w-5xl mx-auto h-full flex flex-col relative">
+            <div className="flex-none flex flex-col md:flex-row md:items-start justify-between mb-8 gap-4">
+                <div className="max-w-2xl">
                     <h2 className="text-3xl font-bold text-slate-900 tracking-tight">{t.title}</h2>
-                    <p className="text-slate-600 mt-2">{t.subtitle}</p>
+                    <p className="text-slate-600 text-sm leading-relaxed mt-2">{t.subtitle}</p>
                 </div>
                 <button
                     onClick={onBack}
@@ -44,27 +43,108 @@ export default function VisualFeed({ onBack, language = 'en' }: { onBack: () => 
             </div>
 
             <div ref={scrollRef} className="flex-1 overflow-y-auto pb-4 custom-scrollbar pr-2">
-                <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-                    {visuals.map((visual, index) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {projects.map((project, index) => (
                         <motion.div
-                            key={visual.id}
+                            key={project.id}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                            className="break-inside-avoid group rounded-glass-md overflow-hidden glass-panel border border-white/30 shadow-sm transition-all"
+                            transition={{ delay: index * 0.05 }}
+                            className="group rounded-glass-md overflow-hidden glass-panel border border-white/30 shadow-sm transition-all cursor-pointer hover:shadow-md"
+                            onClick={() => setSelectedProject(project)}
                         >
-                            <div className="relative w-full">
-                                <img src={visual.image} alt={visual.caption} className="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-105" />
-                                {visual.caption && (
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                                        <p className="text-white text-sm font-medium">{visual.caption}</p>
-                                    </div>
-                                )}
+                            <div className="relative aspect-square w-full overflow-hidden bg-slate-50">
+                                <img
+                                    src={project.image}
+                                    alt={project.title}
+                                    className="absolute inset-0 w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                                    <span className="text-[9px] font-bold tracking-wider text-petite-orchid bg-petite-orchid/15 border border-petite-orchid/20 px-2 py-0.5 rounded-full uppercase self-start mb-2">
+                                        {project.category}
+                                    </span>
+                                    <h4 className="text-white text-base font-bold mb-1">{project.title}</h4>
+                                    <p className="text-white/70 text-xs line-clamp-2">{project.description}</p>
+                                </div>
                             </div>
                         </motion.div>
                     ))}
                 </div>
             </div>
+
+            {/* Lightbox Modal */}
+            <AnimatePresence>
+                {selectedProject && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                        {/* Backdrop */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setSelectedProject(null)}
+                            className="absolute inset-0 bg-slate-900/60 backdrop-blur-md"
+                        />
+
+                        {/* Content Card */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            className="relative w-full max-w-2xl bg-white/85 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl overflow-hidden z-10 flex flex-col md:flex-row"
+                        >
+                            {/* Close Button */}
+                            <button
+                                onClick={() => setSelectedProject(null)}
+                                className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-slate-900/10 hover:bg-slate-900/25 flex items-center justify-center text-slate-800 transition-colors"
+                            >
+                                <span className="material-symbols-outlined text-lg">close</span>
+                            </button>
+
+                            {/* Image Part */}
+                            <div className="relative w-full md:w-1/2 min-h-[200px] md:h-[400px] overflow-hidden bg-slate-100 flex-shrink-0">
+                                <Image
+                                    src={selectedProject.image}
+                                    alt={selectedProject.title}
+                                    fill
+                                    className="object-cover"
+                                    unoptimized
+                                />
+                            </div>
+
+                            {/* Info Part */}
+                            <div className="p-6 md:p-8 flex flex-col justify-between flex-1">
+                                <div>
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-600 bg-slate-900/5 px-3 py-1 rounded-full border border-slate-900/10">
+                                        {selectedProject.category}
+                                    </span>
+                                    <h3 className="text-2xl font-black text-slate-900 mt-4 mb-3 tracking-tight">
+                                        {selectedProject.title}
+                                    </h3>
+                                    <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                                        {selectedProject.description}
+                                    </p>
+                                </div>
+                                <div className="flex gap-3">
+                                    <Link
+                                        href={selectedProject.internalLink}
+                                        className="flex-1 px-6 py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm text-center tracking-wide transition-all shadow-md hover:shadow-lg hover:scale-102 flex items-center justify-center gap-2 group"
+                                    >
+                                        {t.viewMore}
+                                        <span className="material-symbols-outlined text-lg group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+                                    </Link>
+                                    <button
+                                        onClick={() => setSelectedProject(null)}
+                                        className="px-6 py-3 rounded-full bg-slate-900/5 hover:bg-slate-900/10 text-slate-900 font-bold text-sm tracking-wide transition-all"
+                                    >
+                                        {t.close}
+                                    </button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }
