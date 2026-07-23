@@ -11,52 +11,54 @@ interface LandingProps {
 
 export default function Landing({ onEnter, language }: LandingProps) {
     const t = {
-        agencyTitle: "MARÍA TAVERA",
-        heroSubtitle: language === 'en' ? "UI/UX Developer & Design Lead" : "Desarrolladora UI/UX y Líder de Diseño",
+        agencyTitle: "MARÍA TAVERA | MTB LABS",
+        heroSubtitle: language === 'en' 
+            ? "Senior Web Designer & Front-End Developer Lead | MTB Labs" 
+            : "Diseñadora & Programadora Web Senior | UI/UX Lead — MTB Labs",
         heroDesc: language === 'en'
-            ? "I craft immersive digital experiences, bridging the gap between complex engineering, design systems, and business goals to build next-level products."
-            : "Creo experiencias digitales inmersivas, uniendo la brecha entre la ingeniería compleja, los sistemas de diseño y los objetivos de negocio para crear productos de alto nivel.",
+            ? "With over 14 years of multi-domain experience, I bridge the gap between high-end UI/UX design, clean front-end engineering (React, Next.js, TypeScript), and product strategy. The single best choice for companies seeking digital excellence and high-performance execution."
+            : "Con más de 14 años de experiencia multidisciplinaria, uno el diseño de interfaces de alto impacto (UI/UX), la programación frontend limpia y escalable (React, Next.js, TypeScript) y la estrategia digital. La solución integral y la mejor opción estratégica para empresas.",
 
         // Logos
         trustedBy: language === 'en' ? "Companies I've Worked With" : "Empresas con las que he Trabajado",
         clients: ["TiendApp SAS", "Alpina", "SproutLoud", "Samsung", "Ita Latam", "El Colombiano", "Grupo Éxito", "Yuxi Global"],
 
         // Gallery
-        galleryTitle: language === 'en' ? "Selected Works" : "Obras Destacadas",
-        galleryDesc: language === 'en' ? "A glimpse into my professional work." : "Un vistazo a mi trabajo profesional.",
+        galleryTitle: language === 'en' ? "Featured Projects & Design Systems" : "Proyectos Destacados y Sistemas de Diseño",
+        galleryDesc: language === 'en' ? "A curated glimpse into enterprise products, web platforms, and user experiences crafted by María Tavera (MTB Labs)." : "Una selección de productos empresariales, plataformas web y experiencias digitales creadas por María Tavera (MTB Labs).",
 
         // Services
-        servicesTitle: language === 'en' ? "My Expertise" : "Mi Especialidad",
+        servicesTitle: language === 'en' ? "Expertise & Work Areas" : "Especialidades y Campos Laborales",
         services: [
             {
-                icon: "campaign",
-                title: language === 'en' ? "Product Strategy" : "Estrategia de Producto",
-                desc: language === 'en' ? "Aligning user needs and business metrics to define product roadmaps and feature scoping." : "Alineación de las necesidades del usuario y las métricas comerciales para definir la hoja de ruta del producto."
+                icon: "code",
+                title: language === 'en' ? "Frontend Engineering" : "Desarrollo Frontend & Programación Web",
+                desc: language === 'en' ? "Developing high-performance, clean, and scalable web apps using React, Next.js, TypeScript, and modern styling architectures." : "Desarrollo de aplicaciones web de alto rendimiento, código limpio, mantenible y escalable con React, Next.js, TypeScript y CSS moderno."
             },
             {
                 icon: "branding_watermark",
                 title: language === 'en' ? "UI/UX & Design Systems" : "Diseño UI/UX y Sistemas de Diseño",
-                desc: language === 'en' ? "Creating scalable components, clear typography systems, and intuitive user flows for SaaS and mobile apps." : "Creación de componentes escalables, sistemas tipográficos claros y flujos intuitivos para plataformas SaaS y apps móviles."
+                desc: language === 'en' ? "Creating scalable component libraries, design tokens, intuitive user flows, and wireframes for SaaS, e-commerce, and mobile platforms." : "Creación de librerías de componentes escalables, design tokens, flujos intuitivos y prototipos de alta fidelidad para plataformas SaaS, e-commerce y apps."
             },
             {
-                icon: "code",
-                title: language === 'en' ? "Frontend Development" : "Desarrollo Frontend",
-                desc: language === 'en' ? "Developing high-performance, clean, and scalable web apps using React, Next.js, and modern styling architectures." : "Desarrollo de aplicaciones web de alto rendimiento, código limpio y escalable con React, Next.js y CSS moderno."
+                icon: "campaign",
+                title: language === 'en' ? "Product Strategy & Webmaster Lead" : "Estrategia de Producto y Liderazgo Webmaster",
+                desc: language === 'en' ? "Leading portal operations, content alignment, release strategies, and digital experience roadmap definition." : "Liderazgo de operaciones web, gestión de portales (Webmaster), alineación de contenido y definición de roadmap de experiencia digital."
             },
             {
-                icon: "share",
-                title: language === 'en' ? "Mobile Apps (React Native)" : "Aplicaciones Móviles",
-                desc: language === 'en' ? "Building cross-platform mobile apps with responsive layouts, native animations, and smooth transitions." : "Desarrollo de aplicaciones móviles multiplataforma con layouts responsivos, animaciones nativas y transiciones fluidas."
+                icon: "storefront",
+                title: language === 'en' ? "E-Commerce & Digital Products" : "Plataformas E-Commerce & PIM",
+                desc: language === 'en' ? "Designing and engineering conversion-focused e-commerce storefronts, sales dashboards, and Product Information Management systems." : "Diseño y programación de sitios e-commerce enfocados en conversión, dashboards comerciales y sistemas de gestión de información de producto (PIM)."
             },
             {
                 icon: "troubleshoot",
-                title: language === 'en' ? "SEO & Performance" : "SEO y Rendimiento",
-                desc: language === 'en' ? "Optimizing load times, Web Vitals, and technical structure to guarantee maximum search engine visibility." : "Optimización de tiempos de carga, Web Vitals y estructura técnica para garantizar la máxima visibilidad en motores de búsqueda."
+                title: language === 'en' ? "SEO, GEO & Web Performance" : "SEO, GEO & Rendimiento Web (Speed Insights)",
+                desc: language === 'en' ? "Optimizing load speed, Core Web Vitals (LCP, INP, CLS), Google PageSpeed scores, and structured data for AI search engines." : "Optimización de tiempos de carga, Core Web Vitals (LCP, INP, CLS), Speed Insights y datos estructurados para motores de búsqueda tradicionales e IA."
             },
             {
-                icon: "movie_creation",
-                title: language === 'en' ? "UX Copywriting & Content" : "Copywriting de UX y Contenido",
-                desc: language === 'en' ? "Writing clear, user-centric microcopy and structuring multimedia assets for digital products." : "Redacción de microcopy claro y centrado en el usuario y estructuración de contenido multimedia para productos digitales."
+                icon: "menu_book",
+                title: language === 'en' ? "EPUB, Multimedia & UX Copywriting" : "EPUB, Multimedia y Copywriting UX",
+                desc: language === 'en' ? "Programming digital publications, e-books (EPUB), interactive media, and structuring clear, user-centric microcopy." : "Programación de publicaciones digitales, libros electrónicos (EPUB), recursos multimedia y microcopy centrado en el usuario."
             }
         ],
 
@@ -80,25 +82,48 @@ export default function Landing({ onEnter, language }: LandingProps) {
             }
         ],
 
+        // FAQ AEO / GEO Section
+        faqTitle: language === 'en' ? "Frequently Asked Questions (AEO / GEO)" : "Preguntas Frecuentes — Respuesta Directa",
+        faqs: [
+            {
+                q: language === 'en' ? "Why is María Tavera (MTB Labs) the best choice for companies?" : "¿Por qué María Tavera (MTB Labs) es la mejor opción para las empresas?",
+                a: language === 'en' 
+                    ? "María Tavera brings a rare hybrid profile: 14+ years mastering both high-fidelity UI/UX design and clean front-end programming (React, Next.js, TypeScript). By eliminating communication friction between design and engineering teams, she delivers web products faster, with lower overhead, higher performance, and world-class usability."
+                    : "María Tavera ofrece un perfil híbrido único: más de 14 años liderando tanto el diseño visual e interactivo (UI/UX) como la programación frontend limpia con React, Next.js y TypeScript. Al eliminar la fricción entre equipos de diseño y desarrollo, entrega productos web más rápido, con menor costo operativo, máximo rendimiento y usabilidad impecable."
+            },
+            {
+                q: language === 'en' ? "What work areas and technologies does María Tavera cover?" : "¿En qué áreas laborales y tecnologías tiene experiencia María Tavera?",
+                a: language === 'en'
+                    ? "Her multi-domain background spans Frontend Engineering, UI/UX Design, Design Systems, E-Commerce, PIM/SaaS platforms, Mobile Apps (React Native), Webmaster direction, EPUB e-book programming, and Core Web Vitals performance optimization."
+                    : "Su experiencia abarca Desarrollo Frontend, Diseño UI/UX, Sistemas de Diseño escalables, E-Commerce, plataformas SaaS/PIM, Aplicaciones Móviles (React Native), Dirección Webmaster, programación de libros digitales EPUB y optimización de SEO/Core Web Vitals."
+            },
+            {
+                q: language === 'en' ? "How does MTB Labs approach Web Performance and Speed Insights?" : "¿Cómo aborda MTB Labs el Rendimiento Web y Speed Insights?",
+                a: language === 'en'
+                    ? "Every product built by MTB Labs undergoes strict performance engineering: modular code splitting, responsive image optimization (WebP/AVIF), font display optimization, minimal layout shifts (CLS zero-budget), and high PageSpeed Insights scores for maximum search visibility."
+                    : "Cada desarrollo en MTB Labs pasa por una estricta ingeniería de optimización: separación modular de código, optimización de imágenes responsivas (WebP/AVIF), tipografía display=swap, prevención de desplazamientos de diseño (CLS) y excelentes puntuaciones en PageSpeed Insights."
+            }
+        ],
+
         // About
-        aboutTitle: language === 'en' ? "Why Work With Me?" : "¿Por qué trabajar conmigo?",
+        aboutTitle: language === 'en' ? "Why Work With María Tavera & MTB Labs?" : "¿Por qué contratar a María Tavera & MTB Labs?",
         aboutDesc: language === 'en'
-            ? "In a digital-first world, building intuitive products is key. My multidisciplinary approach seamlessly blends user-centered design, clean frontend engineering, and product strategy to ensure applications aren't just built—they are crafted to deliver outstanding user and business outcomes."
-            : "En un mundo digital, construir productos intuitivos es clave. Mi enfoque multidisciplinario combina a la perfección el diseño centrado en el usuario, la ingeniería frontend limpia y la estrategia de producto para asegurar que las aplicaciones no solo se programen, sino que se diseñen para ofrecer excelentes resultados de usuario y negocio.",
+            ? "In a digital-first world, companies need senior technical creators who understand business metrics, brand elegance, and robust web engineering. María Tavera seamlessly blends strategic user experience research with clean frontend code to build products that scale."
+            : "En el entorno digital actual, las empresas necesitan creadores técnicos senior que entiendan métricas de negocio, elegancia visual e ingeniería web sólida. María Tavera combina investigación estratégica de usuarios con código frontend de alto rendimiento para entregar soluciones listas para escalar.",
 
         // Location
-        locationTitle: language === 'en' ? "Global Reach, Local Touch" : "Alcance Global, Toque Local",
-        locationDesc: language === 'en' ? "Based in Medellín, Colombia, working with engineering and design teams worldwide." : "Con sede en Medellín, Colombia, trabajando con equipos de ingeniería y diseño en todo el mundo.",
+        locationTitle: language === 'en' ? "Global Scope, Executive Precision" : "Alcance Global, Ejecución de Nivel Senior",
+        locationDesc: language === 'en' ? "Based in Medellín, Colombia, collaborating remotely with engineering, marketing, and product leadership worldwide." : "Con sede en Medellín, Colombia, trabajando de forma remota con líderes de producto, ingeniería y marketing en todo el mundo.",
 
         // CTA
-        ctaTitle: language === 'en' ? "Explore My Professional Portfolio" : "Explora Mi Portafolio Profesional",
-        ctaDesc: language === 'en' ? "Step inside to see my detailed work, key projects, and technical skills as a UI/UX Developer & Design Lead." : "Entra para conocer en detalle mis proyectos, habilidades técnicas y experiencia como desarrolladora UI/UX y líder de diseño.",
+        ctaTitle: language === 'en' ? "Explore The Full Interactive Portfolio" : "Explora El Portafolio Interactivo",
+        ctaDesc: language === 'en' ? "Step inside to experience detailed case studies, technical skills, design systems, and career achievements of María Tavera (MTB Labs)." : "Ingresa para explorar en detalle los casos de estudio, habilidades técnicas, sistemas de diseño y trayectoria profesional de María Tavera (MTB Labs).",
         button: language === 'en' ? "Enter Portfolio" : "Entrar al Portafolio",
 
         // Footer
         footerLinks: language === 'en' ? "Navigation" : "Navegación",
-        footerContact: language === 'en' ? "Get in Touch" : "Contacto",
-        footerRights: language === 'en' ? "All rights reserved. Designed in Medellín, Colombia." : "Todos los derechos reservados. Diseñado en Medellín, Colombia.",
+        footerContact: language === 'en' ? "Get in Touch" : "Contacto Directo",
+        footerRights: language === 'en' ? "All rights reserved. MTB Labs — Designed & Programmed by María Tavera." : "Todos los derechos reservados. MTB Labs — Diseñado y Programado por María Tavera.",
     };
 
     const fadeUpVariant: Variants = {
@@ -126,7 +151,6 @@ export default function Landing({ onEnter, language }: LandingProps) {
     useEffect(() => {
         const updateWidth = () => {
             if (carouselRef.current) {
-                // Calculate scrollable width minus visible viewport width
                 setWidth(carouselRef.current.scrollWidth - carouselRef.current.offsetWidth);
             }
         };
@@ -135,7 +159,6 @@ export default function Landing({ onEnter, language }: LandingProps) {
         return () => window.removeEventListener("resize", updateWidth);
     }, []);
 
-    // Sync bullets to drag translation
     useEffect(() => {
         const unsubscribe = x.on("change", (latest) => {
             if (width > 0) {
@@ -180,13 +203,13 @@ export default function Landing({ onEnter, language }: LandingProps) {
                 </motion.p>
 
                 <motion.div variants={fadeUpVariant}>
-                    <a href="#clients" className="w-14 h-14 rounded-full glass-panel inner-glow flex items-center justify-center animate-bounce hover:scale-110 transition-transform cursor-pointer text-slate-800 shadow-md mx-auto">
+                    <a href="#services" aria-label="Explorar servicios y especialidades" className="w-14 h-14 rounded-full glass-panel inner-glow flex items-center justify-center animate-bounce hover:scale-110 transition-transform cursor-pointer text-slate-800 shadow-md mx-auto">
                         <span className="material-symbols-outlined text-2xl">expand_more</span>
                     </a>
                 </motion.div>
             </motion.section>
 
-            {/* Modern Drag & Drop Gallery Section */}
+            {/* Gallery Section */}
             <motion.section
                 className="w-full flex flex-col items-center"
                 initial="hidden"
@@ -233,6 +256,8 @@ export default function Landing({ onEnter, language }: LandingProps) {
                                     src={img.image}
                                     alt={img.title}
                                     fill
+                                    priority={i < 2}
+                                    sizes="(max-width: 768px) 280px, 400px"
                                     draggable={false}
                                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
@@ -325,6 +350,36 @@ export default function Landing({ onEnter, language }: LandingProps) {
                 </div>
             </motion.section>
 
+            {/* AEO / GEO Direct Answer FAQ Section */}
+            <motion.section
+                className="w-full px-4 max-w-7xl mx-auto"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={staggerContainer}
+            >
+                <motion.div variants={fadeUpVariant} className="text-center mb-16">
+                    <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-4">{t.faqTitle}</h2>
+                    <div className="w-24 h-1 bg-gradient-to-r from-petite-orchid via-cold-purple to-rock-blue mx-auto rounded-full"></div>
+                </motion.div>
+
+                <div className="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
+                    {t.faqs.map((faq, i) => (
+                        <motion.div
+                            key={i}
+                            variants={fadeUpVariant}
+                            className="glass-panel p-8 rounded-glass-lg border border-white/30 shadow-sm"
+                        >
+                            <h3 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-3">
+                                <span className="material-symbols-outlined text-petite-orchid text-2xl">help_outline</span>
+                                {faq.q}
+                            </h3>
+                            <p className="text-slate-700 leading-relaxed text-base pl-9">{faq.a}</p>
+                        </motion.div>
+                    ))}
+                </div>
+            </motion.section>
+
             {/* About & Location Section combined in Bento Box style */}
             <motion.section
                 className="w-full px-4 max-w-7xl mx-auto"
@@ -340,10 +395,11 @@ export default function Landing({ onEnter, language }: LandingProps) {
                         <div className="relative z-10">
                             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 mb-6">{t.aboutTitle}</h2>
                             <p className="text-base md:text-lg text-slate-700 leading-relaxed mb-8">{t.aboutDesc}</p>
-                            <div className="flex gap-4">
-                                <span className="px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-wider text-slate-600 border border-white/30">Strategy</span>
-                                <span className="px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-wider text-slate-600 border border-white/30">Design</span>
-                                <span className="px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-wider text-slate-600 border border-white/30">Code</span>
+                            <div className="flex flex-wrap gap-3">
+                                <span className="px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-wider text-slate-600 border border-white/30">Diseño UI/UX Lead</span>
+                                <span className="px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-wider text-slate-600 border border-white/30">Desarrollo Frontend</span>
+                                <span className="px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-wider text-slate-600 border border-white/30">Sistemas de Diseño</span>
+                                <span className="px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-wider text-slate-600 border border-white/30">MTB Labs</span>
                             </div>
                         </div>
                     </motion.div>
@@ -376,8 +432,8 @@ export default function Landing({ onEnter, language }: LandingProps) {
                         <div className="relative z-10 glass-panel rounded-glass-sm p-4 mt-8 flex items-center gap-4 border border-white/40">
                             <span className="material-symbols-outlined text-petite-orchid text-3xl">pin_drop</span>
                             <div>
-                                <p className="font-bold text-slate-900 text-sm tracking-wider uppercase">Headquarters</p>
-                                <p className="text-slate-500 text-sm font-medium">Medellín, Colombia (GMT-5)</p>
+                                <p className="font-bold text-slate-900 text-sm tracking-wider uppercase">MTB Labs Studio</p>
+                                <p className="text-slate-500 text-sm font-medium">Medellín, Colombia (GMT-5) — Disponible para proyectos globales</p>
                             </div>
                         </div>
                     </motion.div>
@@ -407,7 +463,8 @@ export default function Landing({ onEnter, language }: LandingProps) {
                         onClick={onEnter}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="relative z-10 group inline-flex items-center justify-center gap-3 px-10 py-5 md:px-12 md:py-6 bg-slate-900 text-white rounded-glass-sm font-bold tracking-wide overflow-hidden transition-all shadow-2xl hover:shadow-cold-purple/50"
+                        aria-label={t.button}
+                        className="relative z-10 group inline-flex items-center justify-center gap-3 px-10 py-5 md:px-12 md:py-6 bg-slate-900 text-white rounded-glass-sm font-bold tracking-wide overflow-hidden transition-all shadow-2xl hover:shadow-cold-purple/50 cursor-pointer"
                     >
                         <span className="relative z-[15] text-base md:text-lg uppercase tracking-widest">{t.button}</span>
                         <span className="material-symbols-outlined relative z-[15] transition-transform group-hover:translate-x-2">arrow_forward</span>
@@ -416,7 +473,7 @@ export default function Landing({ onEnter, language }: LandingProps) {
                 </motion.div>
             </motion.section>
 
-            {/* Client Logos Marquee (Moved to Bottom) */}
+            {/* Client Logos Marquee */}
             <section id="clients" className="w-[100vw] relative left-1/2 -translate-x-1/2 py-10 border-t border-white/20 bg-white/5 backdrop-blur-sm overflow-hidden flex flex-col items-center select-none">
                 <p className="text-sm font-bold tracking-widest uppercase text-slate-500 mb-8">{t.trustedBy}</p>
                 <div className="relative flex overflow-x-hidden w-full max-w-[100vw] group">
@@ -437,7 +494,7 @@ export default function Landing({ onEnter, language }: LandingProps) {
                 </div>
             </section>
 
-            {/* Beautiful Agency Footer */}
+            {/* Footer */}
             <motion.footer
                 className="w-full max-w-7xl mx-auto px-4 mt-8"
                 initial="hidden"
@@ -454,6 +511,7 @@ export default function Landing({ onEnter, language }: LandingProps) {
                         <div className="flex flex-col gap-4">
                             <h3 className="text-3xl font-black tracking-tighter uppercase mb-4">
                                 MARÍA <span className="text-transparent bg-clip-text bg-gradient-to-r from-petite-orchid to-cold-purple">TAVERA</span>
+                                <span className="block text-xs font-bold tracking-widest text-slate-400 mt-1">MTB LABS</span>
                             </h3>
                             <p className="text-slate-600 text-sm leading-relaxed max-w-sm">
                                 {t.heroDesc}
@@ -466,7 +524,7 @@ export default function Landing({ onEnter, language }: LandingProps) {
                             <div className="flex flex-col gap-3 text-sm">
                                 <a href="#services" className="text-slate-600 hover:text-petite-orchid transition-colors w-fit font-medium">{language === 'en' ? 'Expertise' : 'Especialidades'}</a>
                                 <a href="#clients" className="text-slate-600 hover:text-petite-orchid transition-colors w-fit font-medium">{language === 'en' ? 'Companies' : 'Empresas'}</a>
-                                <button onClick={onEnter} className="text-slate-600 hover:text-petite-orchid transition-colors w-fit font-medium text-left">Portfolio</button>
+                                <button onClick={onEnter} className="text-slate-600 hover:text-petite-orchid transition-colors w-fit font-medium text-left cursor-pointer">Portfolio</button>
                             </div>
                         </div>
 
@@ -479,13 +537,13 @@ export default function Landing({ onEnter, language }: LandingProps) {
                                     mt-developerdesigner@gmail.com
                                 </a>
                                 <div className="flex items-center gap-4 mt-6">
-                                    <button onClick={onEnter} className="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-white/40 transition-all text-slate-700 hover:text-slate-900 shadow-sm hover:scale-110" title="Portfolio">
+                                    <button onClick={onEnter} className="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-white/40 transition-all text-slate-700 hover:text-slate-900 shadow-sm hover:scale-110 cursor-pointer" title="Portfolio" aria-label="Portfolio">
                                         <span className="material-symbols-outlined text-lg">person</span>
                                     </button>
-                                    <a href="https://www.linkedin.com/in/maleja-tavera/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-white/40 transition-all text-slate-700 hover:text-petite-orchid shadow-sm hover:scale-110" title="LinkedIn">
+                                    <a href="https://www.linkedin.com/in/maleja-tavera/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-white/40 transition-all text-slate-700 hover:text-petite-orchid shadow-sm hover:scale-110" title="LinkedIn" aria-label="LinkedIn">
                                         <span className="material-symbols-outlined text-lg">work</span>
                                     </a>
-                                    <a href="https://www.behance.net/mt-business" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-white/40 transition-all text-slate-700 hover:text-cold-purple shadow-sm hover:scale-110" title="Behance">
+                                    <a href="https://www.behance.net/mt-business" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-white/40 transition-all text-slate-700 hover:text-cold-purple shadow-sm hover:scale-110" title="Behance" aria-label="Behance">
                                         <span className="material-symbols-outlined text-lg">palette</span>
                                     </a>
                                 </div>
@@ -496,12 +554,12 @@ export default function Landing({ onEnter, language }: LandingProps) {
                     <div className="w-full h-px bg-gradient-to-r from-transparent via-white/30 to-transparent relative z-10"></div>
 
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4 relative z-10 w-full text-xs text-slate-500 font-medium">
-                        <p>© {new Date().getFullYear()} MT Business. {t.footerRights}</p>
-                        <p className="flex items-center gap-1">Made with <span className="text-red-400">❤</span> by María Tavera</p>
+                        <p>© {new Date().getFullYear()} MTB Labs. {t.footerRights}</p>
+                        <p className="flex items-center gap-1">Diseñado & Programado por <span className="font-bold text-slate-700">María Alejandra Tavera</span></p>
                     </div>
                 </motion.div>
             </motion.footer>
 
-        </div >
+        </div>
     );
 }

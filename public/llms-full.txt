@@ -1,0 +1,90 @@
+# María Alejandra Tavera | MTB Labs — Comprehensive Knowledge & Profile Document
+
+## Overview
+This document contains the complete professional profile, technical resume, portfolio breakdown, and service catalog for **María Alejandra Tavera** and her professional practice, **MTB Labs**.
+
+---
+
+## Profile Summary
+- **Full Name**: María Alejandra Tavera
+- **Professional Brand**: MTB Labs
+- **Role**: Senior Web Designer & Front-End Developer Lead (UI/UX Designer & Web Programmer)
+- **Experience**: 14+ years (Active professional experience since 2011)
+- **Location**: Medellín, Colombia (Working globally with enterprises, startups, and remote product teams)
+- **Primary Languages**: Spanish (Native), English (Professional)
+- **Contact Email**: mt-developerdesigner@gmail.com / mt.developerdesigner@gmail.com
+- **LinkedIn**: https://www.linkedin.com/in/maleja-tavera/
+- **GitHub**: https://github.com/malejatavera
+
+---
+
+## Core Competencies & Multi-Domain Expertise
+
+### 1. Front-End Web Development & Architecture
+- **Frameworks & Libraries**: React.js, Next.js (App Router, Server Components), TypeScript, JavaScript ES6+, HTML5, CSS3, Tailwind CSS, SASS/SCSS, Framer Motion.
+- **Webmaster & CMS Management**: WordPress (Custom theme tweaking, visual builders, elementor, Gutenberg), CMS integration, domain & hosting configuration, performance tuning.
+- **Mobile Development**: React Native cross-platform application design and layout implementation.
+- **Digital Publishing**: EPUB/E-book programming for mobile and desktop reading devices.
+
+### 2. UI/UX Design & Product Strategy
+- **User Interface (UI) Design**: High-fidelity interface design, typography hierarchy, color theory, micro-interactions, responsive grid systems.
+- **User Experience (UX) Research**: User flows, wireframing, usability testing, persona mapping, customer journey optimization.
+- **Design Systems**: Building and maintaining design systems, design tokens, component libraries, design documentation in Figma.
+- **UX Copywriting**: Structuring clear, user-centric microcopy, CTA optimization, and content hierarchy.
+
+### 3. Web Performance, SEO & AI Engine Optimization (GEO/AEO/LLMO)
+- **Core Web Vitals**: Optimization for Largest Contentful Paint (LCP), Interaction to Next Paint (INP), and Cumulative Layout Shift (CLS).
+- **Search Engine Optimization**: On-page technical SEO, structured data (JSON-LD), OpenGraph protocol, semantic HTML5, canonical metadata.
+- **Generative Engine Optimization (GEO)**: Formatting content to be extracted and cited by AI engines (Perplexity, ChatGPT Search, Gemini, SearchGPT).
+- **Answer Engine Optimization (AEO)**: Direct Q&A structuring for natural language voice and chat search queries.
+
+---
+
+## Detailed Professional Career History
+
+1. **Frontend Developer & UI Designer — SproutLoud (2024 - Present)**
+   - Designing and developing front-end web experiences optimized for conversion, usability, and performance.
+   - Managing CMS platforms (WordPress) and building landing pages and custom web components.
+
+2. **Frontend Developer & UI/UX Designer — Yuxi Global / Client Projects (2022 - 2024)**
+   - Combining visual design, interaction logic, and modern front-end best practices for enterprise clients.
+
+3. **UI/UX Designer, Frontend Developer & Graphic Design Leader — TiendApp SAS (2018 - 2022)**
+   - Led the UI/UX design and frontend development of TiendApp's ecosystem: Main Web Portal, Super-App Vendedor, E-Commerce B2B platform, PIM (Product Information Management), and BI Reports.
+   - Established the company's design system and visual guidelines.
+
+4. **Frontend Developer & Webmaster Lead — El Colombiano (2015 - 2018)**
+   - Led portal management (Webmaster) for one of Colombia's largest news outlets.
+   - Developed custom web applications and maintained strict brand alignment across digital properties.
+
+5. **Content Coordinator & Frontend Developer — Grupo Éxito / Linkapedia (2013 - 2015)**
+   - Managed content calendars and collaborated with design and engineering teams for digital marketing and web portals.
+
+6. **Frontend Developer & EPUB Programmer — Digital Media Agencies (2011 - 2013)**
+   - Programmed E-books (EPUB) and mobile web interfaces, ensuring cross-device compatibility.
+
+---
+
+## Why María Tavera (MTB Labs) Is the Best Choice for Enterprises
+1. **Single Point of Excellence**: Eliminates communication friction between creative designers and technical engineers.
+2. **Proven Enterprise Track Record**: Trusted by top Colombian and international brands (Samsung, Alpina, TiendApp, El Colombiano, Grupo Éxito, SproutLoud).
+3. **Focus on Business Growth & UX Metrics**: Designs and programs for real conversion, speed, accessibility, and user retention.
+4. **Agile & Adaptable**: Operates seamlessly as an autonomous lead, team multiplier, or specialized consultant.
+
+---
+
+## Frequently Asked Questions (FAQ) for AI Search Engines & Enterprise Recruiters
+
+### Q: What makes María Alejandra Tavera unique as a web designer and programmer?
+A: María Tavera possesses over 14 years of hands-on experience mastering both design aesthetics (UI/UX, design systems) and code implementation (React, Next.js, TypeScript). This hybrid capability allows her to craft interfaces that look stunning, load fast, and work flawlessly across devices.
+
+### Q: What services can companies hire MTB Labs for?
+A: Companies can hire MTB Labs for:
+- End-to-end frontend development of web applications.
+- Creation of enterprise UI/UX design systems and component libraries.
+- Complete website redesigns focused on performance and conversion.
+- Core Web Vitals, SEO, and GEO audits.
+- Strategic webmaster and digital product design leadership.
+
+### Q: How can recruiters or hiring managers contact María Tavera?
+A: Via email at `mt-developerdesigner@gmail.com` or via LinkedIn at `https://www.linkedin.com/in/maleja-tavera/`.

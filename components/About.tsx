@@ -14,25 +14,39 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
     }, []);
 
     const t = {
-        title: language === 'en' ? 'About Me' : 'Sobre Mí',
+        title: language === 'en' ? 'About María Tavera | MTB Labs' : 'Sobre María Tavera | MTB Labs',
         back: language === 'en' ? 'Back' : 'Volver',
-        greeting: language === 'en' ? 'Hi there.' : 'Hola.',
-        bio1: language === 'en' ? 'I specialize in collaborating with product teams and engineering groups to build high-quality web products, design systems, and intuitive user experiences.' : 'Me especializo en colaborar con equipos de producto y desarrollo para construir productos web de alta calidad, sistemas de diseño y experiencias de usuario intuitivas.',
-        bio2: language === 'en' ? 'With over 14 years of experience bridging the gap between visual design and front-end development, I enjoy creating accessible, polished, and high-performance interfaces that solve real-world problems.' : 'Con más de 14 años de experiencia uniendo el diseño visual y el desarrollo front-end, me apasiona crear interfaces accesibles, pulidas y de alto rendimiento que resuelvan problemas reales.',
-        servicesTitle: language === 'en' ? 'Expertise' : 'Especialidades',
-        services: language === 'en' ? ['UI/UX Design', 'Front-end Development', 'Design Systems', 'Brand Identity', 'Product Strategy'] : ['Diseño UI/UX', 'Desarrollo Front-end', 'Sistemas de Diseño', 'Identidad de Marca', 'Estrategia de Producto'],
-        clientsTitle: language === 'en' ? "Companies I've Worked With" : 'Empresas con las que he Trabajado',
-        contactTitle: language === 'en' ? 'Interested in discussing a role or project?' : '¿Interesado en conversar sobre alguna vacante o proyecto?',
+        greeting: language === 'en' ? 'Hello, I am María Alejandra Tavera.' : 'Hola, soy María Alejandra Tavera.',
+        roleBadge: language === 'en' ? 'Senior Web Designer & Front-End Developer Lead — MTB Labs' : 'Diseñadora & Programadora Web Senior | UI/UX Lead — MTB Labs',
+        bio1: language === 'en' 
+            ? 'I am a senior web designer and front-end programmer with over 14 years of hands-on experience crafting enterprise-grade digital products, design systems, e-commerce platforms, and high-performance web applications.' 
+            : 'Soy diseñadora y programadora web senior con más de 14 años de experiencia creando productos digitales empresariales, sistemas de diseño, plataformas e-commerce y aplicaciones web de alto rendimiento.',
+        bio2: language === 'en' 
+            ? 'Operating through MTB Labs, I bridge the traditional gap between design and engineering. Companies partner with me because I offer a complete end-to-end solution: from UX research, wireframing, and visual design tokens to pixel-perfect, clean, accessible, and fast React/Next.js/TypeScript code.' 
+            : 'A través de mi firma MTB Labs, elimino la brecha tradicional entre diseño e ingeniería. Las empresas confían en mi trabajo porque ofrezco una solución integral: desde investigación UX, wireframes y tokens de diseño, hasta código React/Next.js/TypeScript limpio, accesible y acelerado.',
+        bio3: language === 'en'
+            ? 'My career spans versatile work domains including UI/UX Design, Front-End Development, SaaS & PIM Platforms, E-Commerce, Webmaster Direction, Mobile Apps (React Native), EPUB Digital Publishing, and Core Web Vitals Performance Optimization.'
+            : 'Mi trayectoria abarca múltiples campos laborales: Diseño UI/UX, Desarrollo Frontend, Plataformas SaaS/PIM, E-Commerce, Dirección Webmaster, Apps Móviles (React Native), Publicación Digital EPUB y Optimización de Rendimiento Web (Speed Insights/SEO).',
+        servicesTitle: language === 'en' ? 'Core Expertise' : 'Campos Laborales & Especialidades',
+        services: language === 'en' 
+            ? ['Frontend Web Development (React/Next.js/TS)', 'UI/UX Design & Figma Systems', 'Design Systems & UI Component Libraries', 'E-Commerce & PIM Platforms', 'Webmaster Direction & CMS Operations', 'SEO, GEO & Web Performance Audits'] 
+            : ['Desarrollo Web Frontend (React/Next.js/TS)', 'Diseño UI/UX y Prototipado en Figma', 'Sistemas de Diseño y Componentes Escalables', 'Plataformas E-Commerce y PIM', 'Dirección Webmaster y Operación CMS', 'Auditoría SEO, GEO y Rendimiento Web'],
+        clientsTitle: language === 'en' ? "Enterprise Clients & Partners" : 'Empresas y Clientes Destacados',
+        contactTitle: language === 'en' ? 'Looking for a senior web designer & programmer for your company?' : '¿Buscas una diseñadora y programadora web senior para tu empresa?',
         contactBtn: language === 'en' ? 'CONNECT ON LINKEDIN' : 'CONECTAR EN LINKEDIN'
     };
 
     return (
         <div className="w-full max-w-5xl mx-auto h-full flex flex-col">
             <div className="flex-none flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold text-slate-900 tracking-tight">{t.title}</h2>
+                <div>
+                    <h2 className="text-3xl font-bold text-slate-900 tracking-tight">{t.title}</h2>
+                    <p className="text-xs font-semibold text-petite-orchid tracking-wider uppercase mt-1">{t.roleBadge}</p>
+                </div>
                 <button
                     onClick={onBack}
-                    className="bg-white/10 hover:bg-white/20 text-slate-900 transition-all rounded-full p-2 flex items-center gap-2 px-4 shadow-sm border border-white/20 backdrop-blur-md"
+                    aria-label={t.back}
+                    className="bg-white/10 hover:bg-white/20 text-slate-900 transition-all rounded-full p-2 flex items-center gap-2 px-4 shadow-sm border border-white/20 backdrop-blur-md cursor-pointer"
                 >
                     <span className="material-symbols-outlined text-lg">arrow_back</span>
                     <span className="text-sm font-medium">{t.back}</span>
@@ -52,7 +66,7 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
                             <div className="absolute inset-2 rounded-glass-md bg-gradient-to-br from-petite-orchid/20 to-cold-purple/20 relative overflow-hidden">
                                 <Image 
                                     src="https://media.licdn.com/dms/image/v2/D4D03AQHq2Exg3kW3RA/profile-displayphoto-crop_800_800/B4DZ5NnYb1I8AI-/0/1779418631855?e=1781740800&v=beta&t=OVYpMtoAYIyZbB4OdG1gX5ZbChMWKnI-zPy9YPUPECg"
-                                    alt="María Alejandra Tavera"
+                                    alt="María Alejandra Tavera — MTB Labs UI UX Designer & Frontend Programmer"
                                     fill
                                     className="object-cover"
                                     priority
@@ -68,28 +82,31 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
                         animate={{ opacity: 1, x: 0 }}
                         className="md:col-span-8 lg:col-span-7 flex flex-col justify-center"
                     >
-                        <h3 className="text-4xl md:text-5xl font-black text-slate-900 mb-6">{t.greeting}</h3>
-                        <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-medium mb-6">
+                        <h3 className="text-3xl md:text-4xl font-black text-slate-900 mb-4">{t.greeting}</h3>
+                        <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-medium mb-4">
                             {t.bio1}
                         </p>
-                        <p className="text-base text-slate-600 leading-relaxed mb-10">
+                        <p className="text-base text-slate-600 leading-relaxed mb-4">
                             {t.bio2}
+                        </p>
+                        <p className="text-base text-slate-600 leading-relaxed mb-8 font-light">
+                            {t.bio3}
                         </p>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
                             <div>
-                                <h4 className="text-sm font-bold uppercase tracking-widest text-slate-900 mb-4">{t.servicesTitle}</h4>
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900 mb-4">{t.servicesTitle}</h4>
                                 <ul className="space-y-2">
                                     {t.services.map((service, idx) => (
-                                        <li key={idx} className="text-slate-600 flex items-center gap-2 font-medium">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-petite-orchid"></span>
-                                            {service}
+                                        <li key={idx} className="text-slate-600 flex items-start gap-2 font-medium text-xs">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-petite-orchid mt-1.5 shrink-0"></span>
+                                            <span>{service}</span>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
                             <div>
-                                <h4 className="text-sm font-bold uppercase tracking-widest text-slate-900 mb-4">{t.clientsTitle}</h4>
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900 mb-4">{t.clientsTitle}</h4>
                                 <ul className="flex flex-wrap gap-2 text-slate-600">
                                     {['TiendApp SAS', 'Alpina', 'SproutLoud', 'Samsung', 'El Colombiano', 'Grupo Éxito', 'Yuxi Global', 'Linkapedia'].map((client, idx) => (
                                         <li key={idx} className="glass-panel px-3 py-1 rounded-full text-xs font-medium border border-white/40">
@@ -101,10 +118,10 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
                         </div>
 
                         <div className="glass-panel rounded-glass-md p-6 border border-white/30 flex flex-col sm:flex-row items-center gap-6 justify-between bg-white/20">
-                            <h4 className="text-lg font-bold text-slate-900 text-center sm:text-left max-w-[200px] leading-tight">
+                            <h4 className="text-lg font-bold text-slate-900 text-center sm:text-left max-w-[240px] leading-tight">
                                 {t.contactTitle}
                             </h4>
-                            <a href="https://www.linkedin.com/in/maleja-tavera/" target="_blank" rel="noreferrer" className="w-full sm:w-auto bg-slate-900 text-white font-bold tracking-wider uppercase text-sm px-8 py-3 rounded-full hover:bg-slate-800 transition-colors shadow-lg hover:shadow-xl hover:scale-105 text-center">
+                            <a href="https://www.linkedin.com/in/maleja-tavera/" target="_blank" rel="noreferrer" className="w-full sm:w-auto bg-slate-900 text-white font-bold tracking-wider uppercase text-xs px-8 py-4 rounded-full hover:bg-slate-800 transition-colors shadow-lg hover:shadow-xl hover:scale-105 text-center">
                                 {t.contactBtn}
                             </a>
                         </div>

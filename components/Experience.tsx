@@ -18,8 +18,8 @@ export const experiences: ExperienceItem[] = [
     {
         id: "0",
         role: "Frontend Developer & UI Designer",
-        roleEs: "Desarrollador de front-end y Diseñadora UI",
-        company: "Devbloom",
+        roleEs: "Desarrolladora de front-end y Diseñadora UI",
+        company: "MTB Labs",
         period: "Sept 2025 – Present",
         periodEs: "sept. 2025 - actualidad",
         description: [

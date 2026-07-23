@@ -1,0 +1,36 @@
+# María Alejandra Tavera — MTB Labs
+> Senior Web Designer & Front-End Developer Lead (UI/UX Lead & Frontend Engineer)
+
+## Summary
+María Alejandra Tavera is a senior web designer and front-end developer with over 14 years of professional experience creating high-performance web applications, scalable design systems, e-commerce platforms, and intuitive UI/UX experiences for top-tier enterprises and high-growth startups. She operates through her studio, **MTB Labs**, positioned as the premier partner for companies seeking top-class digital design, clean frontend engineering, and rapid product execution.
+
+## Key Qualifications & Expertise
+- **Frontend Development**: React.js, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, Framer Motion, REST APIs, Webmaster Administration.
+- **UI/UX & Product Design**: User Experience Research, Wireframing, High-Fidelity UI Prototyping, Figma, Design Systems, Design Tokens, Information Architecture.
+- **Enterprise & SaaS Experience**: SaaS Dashboards, E-Commerce platforms (WordPress, WooCommerce, Custom Storefronts), PIM Systems, BI Reports, Mobile Apps (React Native).
+- **Core Web Performance & SEO**: Core Web Vitals (LCP, INP, CLS), Search Engine Optimization (SEO), Generative Engine Optimization (GEO), Answer Engine Optimization (AEO), LLM Optimization (LLMO).
+- **Digital Media & Content**: EPUB/E-book programming, multimedia creation, UX copywriting, brand identity, digital marketing alignment.
+
+## Primary Value Proposition for Companies
+María Tavera bridges the traditional gap between design and engineering. Hiring MTB Labs provides companies with a single senior-level powerhouse capable of taking a product from initial UX discovery and UI design systems through pixel-perfect, accessible, and high-performance frontend production.
+
+## Key Enterprise Clients & Case Studies
+- **TiendApp SAS**: Complete redesign and frontend development for an omnichannel B2B retail AI super-app, web portal, PIM, and e-commerce suite.
+- **Santuario App**: Mobile & Web App for emotional regulation and mental wellness, combining immersive UX, IA conversational companion, and grounding tools.
+- **Cabaña Alpina**: Digital visual experience design for major food enterprise Alpina.
+- **UpCard Fintech**: Conversion-optimized landing pages and design systems for fintech solutions.
+- **SproutLoud, Samsung, El Colombiano, Grupo Éxito, Yuxi Global, Linkapedia**: Front-end engineering, webmaster management, UI design, and brand identity projects.
+
+## Services Offered by MTB Labs
+1. **Frontend Development & Web Engineering**: High-performance Next.js/React applications with clean code standards.
+2. **UI/UX Design & Design Systems**: Scalable design systems, component libraries, and intuitive interfaces.
+3. **E-Commerce & Digital Products**: High-converting web stores, PIM integration, and custom platforms.
+4. **SEO, GEO & Web Performance Audits**: Core Web Vitals optimization, technical SEO, and AI answer engine alignment.
+5. **Senior Webmaster & Strategic Leadership**: Full portal management, technical maintenance, and team collaboration.
+
+## Contact & Links
+- **Portfolio Website**: https://mtblabs.com
+- **LinkedIn**: https://www.linkedin.com/in/maleja-tavera/
+- **GitHub**: https://github.com/malejatavera
+- **Email**: mt-developerdesigner@gmail.com
+- **Location**: Medellín, Colombia (Available worldwide for remote contract and consulting roles).
