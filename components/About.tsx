@@ -68,6 +68,7 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
                                     src="/images/maria-tavera.png"
                                     alt="Maria Tavera — UI UX Designer & Frontend Programmer"
                                     fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 500px"
                                     className="object-cover object-top"
                                     priority
                                     unoptimized

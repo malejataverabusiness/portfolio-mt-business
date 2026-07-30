@@ -256,11 +256,11 @@ export default function Home() {
                   animate="visible"
                   className="w-full flex flex-col items-center"
                 >
-                  <motion.header variants={itemVariants} className="mb-10 md:mb-14 relative z-20">
-                    <h1 className="text-4xl sm:text-5xl md:text-7xl font-light tracking-tighter mb-6 md:mb-8 text-high-contrast">
+                  <motion.header variants={itemVariants} className="mb-10 md:mb-14 relative z-20" suppressHydrationWarning>
+                    <h1 className="text-4xl sm:text-5xl md:text-7xl font-light tracking-tighter mb-6 md:mb-8 text-high-contrast" suppressHydrationWarning>
                       {t.greeting} <span className="font-black block md:inline">María Tavera</span>
                     </h1>
-                    <div className="text-sm md:text-lg text-slate-800 max-w-3xl mx-auto leading-relaxed font-normal px-2">
+                    <div className="text-sm md:text-lg text-slate-800 max-w-3xl mx-auto leading-relaxed font-normal px-2" suppressHydrationWarning>
                       {t.expert}
                     </div>
                   </motion.header>

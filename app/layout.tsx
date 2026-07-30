@@ -67,9 +67,7 @@ export const metadata: Metadata = {
     title: "Maria Tavera — Diseñadora & Programadora Web Senior",
     description:
       "Diseño UI/UX de alto impacto y desarrollo Frontend con React & Next.js. Solución integral para empresas.",
-    images: [
-      "https://media.licdn.com/dms/image/v2/D4D03AQHq2Exg3kW3RA/profile-displayphoto-crop_800_800/B4DZ5NnYb1I8AI-/0/1779418631855?e=1781740800&v=beta&t=OVYpMtoAYIyZbB4OdG1gX5ZbChMWKnI-zPy9YPUPECg",
-    ],
+    images: [`${siteUrl}/images/maria-tavera.png`],
   },
   robots: {
     index: true,
