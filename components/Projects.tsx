@@ -10,15 +10,20 @@ export default function Projects({ onBack, language = 'en' }: { onBack: () => vo
     const scrollRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (scrollRef.current) {
-            scrollRef.current.scrollTop = 0;
-        }
-        const timer = setTimeout(() => {
+        const resetScroll = () => {
             if (scrollRef.current) {
                 scrollRef.current.scrollTop = 0;
             }
-        }, 100);
-        return () => clearTimeout(timer);
+        };
+        resetScroll();
+        const timer1 = setTimeout(resetScroll, 50);
+        const timer2 = setTimeout(resetScroll, 150);
+        const timer3 = setTimeout(resetScroll, 350);
+        return () => {
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+            clearTimeout(timer3);
+        };
     }, []);
 
     const t = {

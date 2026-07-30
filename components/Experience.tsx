@@ -228,15 +228,20 @@ export default function Experience({ onBack, language = 'en' }: { onBack: () => 
     const scrollRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (scrollRef.current) {
-            scrollRef.current.scrollTop = 0;
-        }
-        const timer = setTimeout(() => {
+        const resetScroll = () => {
             if (scrollRef.current) {
                 scrollRef.current.scrollTop = 0;
             }
-        }, 100);
-        return () => clearTimeout(timer);
+        };
+        resetScroll();
+        const timer1 = setTimeout(resetScroll, 50);
+        const timer2 = setTimeout(resetScroll, 150);
+        const timer3 = setTimeout(resetScroll, 350);
+        return () => {
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+            clearTimeout(timer3);
+        };
     }, []);
 
     const t = {
@@ -253,20 +258,9 @@ export default function Experience({ onBack, language = 'en' }: { onBack: () => 
 
     return (
         <div className="w-full max-w-4xl mx-auto h-full flex flex-col">
-            <div className="flex-none flex flex-wrap items-center justify-between gap-4 mb-8 relative z-10">
-                <div className="flex flex-wrap items-center gap-4">
+            <div className="flex-none flex items-center justify-between mb-8 relative z-10">
+                <div>
                     <h2 className="text-3xl font-bold text-slate-900 tracking-tight">{t.title}</h2>
-                    <div className="hidden sm:flex items-center gap-3 glass-panel px-4 py-2 rounded-full border border-white/30 text-xs text-slate-700 font-medium">
-                        <a href="mailto:mt.developerdesigner@gmail.com" className="hover:text-petite-orchid transition-colors flex items-center gap-1">
-                            <span className="material-symbols-outlined text-sm text-petite-orchid">mail</span>
-                            mt.developerdesigner@gmail.com
-                        </a>
-                        <span className="text-slate-300">•</span>
-                        <a href="tel:+573206230365" className="hover:text-petite-orchid transition-colors flex items-center gap-1">
-                            <span className="material-symbols-outlined text-sm text-petite-orchid">call</span>
-                            +57 320 623 0365
-                        </a>
-                    </div>
                 </div>
                 <button
                     onClick={onBack}

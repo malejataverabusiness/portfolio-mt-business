@@ -190,6 +190,14 @@ export default function Home() {
   }, [searchQuery, isListening]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    if (typeof document !== 'undefined') {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+  }, [currentView]);
+
+  useEffect(() => {
     return () => {
       if (silenceTimer.current) clearTimeout(silenceTimer.current);
     };
@@ -341,7 +349,7 @@ export default function Home() {
             </motion.div>
           ) : (
             <motion.div
-              key={`content-${language}`}
+              key={`content-${currentView}-${language}`}
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 100 }}
