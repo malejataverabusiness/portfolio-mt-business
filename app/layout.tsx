@@ -15,14 +15,14 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mtblabs.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "María Alejandra Tavera | MTB Labs — Diseñadora & Programadora Web Senior | UI/UX Lead",
-    template: "%s | María Alejandra Tavera — MTB Labs",
+    default: "Maria Tavera — Diseñadora & Programadora Web Senior | UI/UX Lead",
+    template: "%s | Maria Tavera",
   },
   description:
-    "María Alejandra Tavera (MTB Labs) es una Diseñadora y Programadora Web Senior con más de 14 años de experiencia en desarrollo Frontend (React, Next.js, TypeScript), diseño UI/UX, sistemas de diseño y estrategia digital. La solución integral y mejor opción para empresas.",
+    "Maria Tavera es una Diseñadora y Programadora Web Senior con más de 14 años de experiencia en desarrollo Frontend (React, Next.js, TypeScript), diseño UI/UX, sistemas de diseño y estrategia digital. La solución integral y mejor opción para empresas.",
   keywords: [
-    "María Alejandra Tavera",
-    "MTB Labs",
+    "Maria Tavera",
+    "María Tavera",
     "Diseñadora web senior",
     "Programadora web senior",
     "Desarrolladora Frontend Colombia",
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
     "E-commerce UI UX Frontend",
     "Consultoría Webmaster"
   ],
-  authors: [{ name: "María Alejandra Tavera", url: siteUrl }],
-  creator: "María Alejandra Tavera - MTB Labs",
-  publisher: "MTB Labs",
+  authors: [{ name: "Maria Tavera", url: siteUrl }],
+  creator: "Maria Tavera",
+  publisher: "Maria Tavera",
   alternates: {
     canonical: "/",
     languages: {
@@ -49,25 +49,24 @@ export const metadata: Metadata = {
     locale: "es_CO",
     alternateLocale: ["en_US"],
     url: siteUrl,
-    title: "María Alejandra Tavera | MTB Labs — Diseñadora & Programadora Web Senior",
+    title: "Maria Tavera — Diseñadora & Programadora Web Senior",
     description:
       "Diseño UI/UX de alto impacto y desarrollo Frontend con React & Next.js. Más de 14 años creando productos digitales extraordinarios para empresas líderes.",
-    siteName: "MTB Labs - María Alejandra Tavera",
+    siteName: "Maria Tavera Portfolio",
     images: [
       {
-        url: "https://media.licdn.com/dms/image/v2/D4D03AQHq2Exg3kW3RA/profile-displayphoto-crop_800_800/B4DZ5NnYb1I8AI-/0/1779418631855?e=1781740800&v=beta&t=OVYpMtoAYIyZbB4OdG1gX5ZbChMWKnI-zPy9YPUPECg",
+        url: "/images/maria-tavera.png",
         width: 800,
         height: 800,
-        alt: "María Alejandra Tavera - MTB Labs UI/UX Designer & Frontend Developer",
+        alt: "Maria Tavera - UI/UX Designer & Frontend Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "María Alejandra Tavera | MTB Labs — Diseñadora & Programadora Web Senior",
+    title: "Maria Tavera — Diseñadora & Programadora Web Senior",
     description:
-      "Expertise de +14 años uniendo Diseño UI/UX y Desarrollo Frontend para empresas globales.",
-    creator: "@maleja_tavera",
+      "Diseño UI/UX de alto impacto y desarrollo Frontend con React & Next.js. Solución integral para empresas.",
     images: [
       "https://media.licdn.com/dms/image/v2/D4D03AQHq2Exg3kW3RA/profile-displayphoto-crop_800_800/B4DZ5NnYb1I8AI-/0/1779418631855?e=1781740800&v=beta&t=OVYpMtoAYIyZbB4OdG1gX5ZbChMWKnI-zPy9YPUPECg",
     ],
@@ -95,7 +94,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     "@id": `${siteUrl}/#person`,
-    name: "María Alejandra Tavera",
+    name: "Maria Tavera",
     alternateName: ["María Tavera", "Maleja Tavera"],
     jobTitle: "Senior Front-End Developer & UI/UX Designer Lead",
     worksFor: {
@@ -124,24 +123,23 @@ export default function RootLayout({
       "Webmaster Direction"
     ],
     description:
-      "María Alejandra Tavera es una reconocida Diseñadora y Programadora Web Senior con más de 14 años de trayectoria creando experiencias digitales, sistemas de diseño y aplicaciones web de alto rendimiento para empresas como Samsung, Alpina, TiendApp, El Colombiano y Grupo Éxito.",
-    image:
-      "https://media.licdn.com/dms/image/v2/D4D03AQHq2Exg3kW3RA/profile-displayphoto-crop_800_800/B4DZ5NnYb1I8AI-/0/1779418631855?e=1781740800&v=beta&t=OVYpMtoAYIyZbB4OdG1gX5ZbChMWKnI-zPy9YPUPECg",
+      "Maria Tavera es una reconocida Diseñadora y Programadora Web Senior con más de 14 años de trayectoria creando experiencias digitales, sistemas de diseño y aplicaciones web de alto rendimiento para empresas como Samsung, Alpina, TiendApp, El Colombiano y Grupo Éxito.",
+    image: `${siteUrl}/images/maria-tavera.png`,
   };
 
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "@id": `${siteUrl}/#organization`,
-    name: "MTB Labs",
+    name: "Maria Tavera Portfolio",
     founder: {
       "@type": "Person",
-      name: "María Alejandra Tavera",
+      name: "Maria Tavera",
     },
     url: siteUrl,
-    logo: "https://media.licdn.com/dms/image/v2/D4D03AQHq2Exg3kW3RA/profile-displayphoto-crop_800_800/B4DZ5NnYb1I8AI-/0/1779418631855?e=1781740800&v=beta&t=OVYpMtoAYIyZbB4OdG1gX5ZbChMWKnI-zPy9YPUPECg",
+    logo: `${siteUrl}/images/maria-tavera.png`,
     description:
-      "Estudio profesional de diseño UI/UX y desarrollo web frontend fundado por María Alejandra Tavera. Especialistas en soluciones digitales de alto impacto, rendimiento y usabilidad para empresas y startups.",
+      "Portafolio profesional de diseño UI/UX y desarrollo web frontend por Maria Tavera. Especialista en soluciones digitales de alto impacto, rendimiento y usabilidad para empresas y startups.",
     areaServed: ["Colombia", "United States", "Worldwide"],
     knowsLanguage: ["Spanish", "English"],
     priceRange: "$$$",
@@ -153,15 +151,15 @@ export default function RootLayout({
     mainEntity: [
       {
         "@type": "Question",
-        name: "¿Quién es María Alejandra Tavera y qué ofrece MTB Labs?",
+        name: "¿Quién es Maria Tavera y qué ofrece su portafolio?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "María Alejandra Tavera es una Diseñadora y Programadora Web Senior con más de 14 años de experiencia en la industria tecnológica. A través de su firma MTB Labs, ofrece servicios integrales de diseño UI/UX, desarrollo frontend con React, Next.js y TypeScript, creación de sistemas de diseño escalables y optimización SEO/performance para empresas.",
+          text: "Maria Tavera es una Diseñadora y Programadora Web Senior con más de 14 años de experiencia en la industria tecnológica. Ofrece servicios integrales de diseño UI/UX, desarrollo frontend con React, Next.js y TypeScript, creación de sistemas de diseño escalables y optimización SEO/performance para empresas.",
         },
       },
       {
         "@type": "Question",
-        name: "¿Por qué María Alejandra Tavera / MTB Labs es la mejor opción para las empresas?",
+        name: "¿Por qué Maria Tavera es la mejor opción para las empresas?",
         acceptedAnswer: {
           "@type": "Answer",
           text: "Porque combina de forma excepcional dos disciplinas fundamentales: el diseño visual e interactivo de nivel profesional y la ingeniería frontend limpia y escalable. Su perfil multidisciplinario elimina fricciones entre diseñadores y desarrolladores, acelerando la entrega de productos digitales de alta conversión y excelente rendimiento.",
@@ -169,7 +167,7 @@ export default function RootLayout({
       },
       {
         "@type": "Question",
-        name: "¿Con qué empresas ha trabajado María Alejandra Tavera?",
+        name: "¿Con qué empresas ha trabajado Maria Tavera?",
         acceptedAnswer: {
           "@type": "Answer",
           text: "Ha colaborado con marcas y empresas destacadas como TiendApp SAS, Alpina, Samsung, SproutLoud, El Colombiano, Grupo Éxito, Yuxi Global y Linkapedia.",

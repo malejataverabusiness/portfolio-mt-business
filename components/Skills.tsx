@@ -66,7 +66,7 @@ export default function Skills({ onBack, language = 'en' }: { onBack: () => void
     }, []);
 
     const t = {
-        title: language === 'en' ? 'Skills & Multi-Domain Expertise | MTB Labs' : 'Habilidades y Campos Laborales | MTB Labs',
+        title: language === 'en' ? 'Skills & Multi-Domain Expertise' : 'Habilidades y Campos Laborales',
         back: language === 'en' ? 'Back' : 'Volver',
         ready: language === 'en' ? 'Ready to elevate your company’s digital product?' : '¿Listos para llevar el producto digital de tu empresa al siguiente nivel?',
         connect: language === 'en' ? 'María Tavera combines 14+ years of technical mastery and design thinking to deliver high-performance enterprise web apps.' : 'María Tavera combina más de 14 años de maestría técnica y diseño centrado en el usuario para crear aplicaciones web empresariales de alto rendimiento.',

@@ -11,10 +11,10 @@ interface LandingProps {
 
 export default function Landing({ onEnter, language }: LandingProps) {
     const t = {
-        agencyTitle: "MARÍA TAVERA | MTB LABS",
+        agencyTitle: "MARÍA TAVERA",
         heroSubtitle: language === 'en' 
-            ? "Senior Web Designer & Front-End Developer Lead | MTB Labs" 
-            : "Diseñadora & Programadora Web Senior | UI/UX Lead — MTB Labs",
+            ? "Senior Web Designer & Front-End Developer Lead" 
+            : "Diseñadora & Programadora Web Senior | UI/UX Lead",
         heroDesc: language === 'en'
             ? "With over 14 years of multi-domain experience, I bridge the gap between high-end UI/UX design, clean front-end engineering (React, Next.js, TypeScript), and product strategy. The single best choice for companies seeking digital excellence and high-performance execution."
             : "Con más de 14 años de experiencia multidisciplinaria, uno el diseño de interfaces de alto impacto (UI/UX), la programación frontend limpia y escalable (React, Next.js, TypeScript) y la estrategia digital. La solución integral y la mejor opción estratégica para empresas.",
@@ -25,7 +25,7 @@ export default function Landing({ onEnter, language }: LandingProps) {
 
         // Gallery
         galleryTitle: language === 'en' ? "Featured Projects & Design Systems" : "Proyectos Destacados y Sistemas de Diseño",
-        galleryDesc: language === 'en' ? "A curated glimpse into enterprise products, web platforms, and user experiences crafted by María Tavera (MTB Labs)." : "Una selección de productos empresariales, plataformas web y experiencias digitales creadas por María Tavera (MTB Labs).",
+        galleryDesc: language === 'en' ? "A curated glimpse into enterprise products, web platforms, and user experiences crafted by María Tavera." : "Una selección de productos empresariales, plataformas web y experiencias digitales creadas por María Tavera.",
 
         // Services
         servicesTitle: language === 'en' ? "Expertise & Work Areas" : "Especialidades y Campos Laborales",
@@ -58,7 +58,7 @@ export default function Landing({ onEnter, language }: LandingProps) {
             {
                 icon: "menu_book",
                 title: language === 'en' ? "EPUB, Multimedia & UX Copywriting" : "EPUB, Multimedia y Copywriting UX",
-                desc: language === 'en' ? "Programming digital publications, e-books (EPUB), interactive media, and structuring clear, user-centric microcopy." : "Programación de publicaciones digitales, libros electrónicos (EPUB), recursos multimedia y microcopy centrado en el usuario."
+                desc: language === 'en' ? "Crafting digital publishing experiences, interactive e-books, multimedia assets, and user-centric microcopy for apps and portals." : "Maquetación de publicaciones digitales interactivas EPUB, recursos multimedia y microcopy centrado en el usuario para aplicaciones y portales."
             }
         ],
 
@@ -399,7 +399,7 @@ export default function Landing({ onEnter, language }: LandingProps) {
                                 <span className="px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-wider text-slate-600 border border-white/30">Diseño UI/UX Lead</span>
                                 <span className="px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-wider text-slate-600 border border-white/30">Desarrollo Frontend</span>
                                 <span className="px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-wider text-slate-600 border border-white/30">Sistemas de Diseño</span>
-                                <span className="px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-wider text-slate-600 border border-white/30">MTB Labs</span>
+                                <span className="px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-wider text-slate-600 border border-white/30">Design Engineer</span>
                             </div>
                         </div>
                     </motion.div>
@@ -432,7 +432,7 @@ export default function Landing({ onEnter, language }: LandingProps) {
                         <div className="relative z-10 glass-panel rounded-glass-sm p-4 mt-8 flex items-center gap-4 border border-white/40">
                             <span className="material-symbols-outlined text-petite-orchid text-3xl">pin_drop</span>
                             <div>
-                                <p className="font-bold text-slate-900 text-sm tracking-wider uppercase">MTB Labs Studio</p>
+                                <p className="font-bold text-slate-900 text-sm tracking-wider uppercase">Maria Tavera</p>
                                 <p className="text-slate-500 text-sm font-medium">Medellín, Colombia (GMT-5) — Disponible para proyectos globales</p>
                             </div>
                         </div>

@@ -17,7 +17,7 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
         title: language === 'en' ? 'About me' : 'Sobre mí',
         back: language === 'en' ? 'Back' : 'Volver',
         greeting: language === 'en' ? 'Hello, I am Maria Tavera.' : 'Hola, soy Maria Tavera.',
-        roleBadge: language === 'en' ? 'Senior Design Engineer (Frontend Engineer | UI/UX Designer) — MTB Labs' : 'Diseñadora & Ingeniera de Software Senior (UI/UX & Frontend) — MTB Labs',
+        roleBadge: language === 'en' ? 'Senior Design Engineer (Frontend Engineer | UI/UX Designer)' : 'Diseñadora & Ingeniera de Software Senior (UI/UX & Frontend)',
         bio1: language === 'en' 
             ? 'I am a senior web designer and front-end programmer with over 14 years of hands-on experience crafting enterprise-grade digital products, design systems, e-commerce platforms, and high-performance web applications.' 
             : 'Soy diseñadora y programadora web senior con más de 14 años de experiencia creando productos digitales empresariales, sistemas de diseño, plataformas e-commerce y aplicaciones web de alto rendimiento.',
@@ -62,11 +62,11 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
                         animate={{ opacity: 1, x: 0 }}
                         className="md:col-span-4 lg:col-span-5"
                     >
-                        <div className="rounded-glass-lg overflow-hidden glass-panel border border-white/30 p-2 shadow-sm w-full aspect-[4/5] relative">
-                            <div className="absolute inset-2 rounded-glass-md bg-gradient-to-br from-petite-orchid/20 to-cold-purple/20 relative overflow-hidden">
+                        <div className="rounded-glass-lg overflow-hidden glass-panel border border-white/30 p-2 shadow-sm w-full h-[400px] md:h-[480px] relative">
+                            <div className="w-full h-full rounded-glass-md bg-gradient-to-br from-petite-orchid/20 to-cold-purple/20 relative overflow-hidden">
                                 <Image 
                                     src="/images/maria-tavera.png"
-                                    alt="Maria Tavera — MTB Labs UI UX Designer & Frontend Programmer"
+                                    alt="Maria Tavera — UI UX Designer & Frontend Programmer"
                                     fill
                                     className="object-cover object-top"
                                     priority

@@ -18,23 +18,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!project) {
     return {
-      title: "Proyecto no encontrado | MTB Labs",
+      title: "Proyecto no encontrado | Maria Tavera",
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mtblabs.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.mtblabs.co";
   const projectUrl = `${siteUrl}/projects/${project.slug}`;
   const firstImage = project.images && project.images.length > 0 ? project.images[0].src : "";
 
   return {
-    title: `${project.title} — María Alejandra Tavera | MTB Labs`,
-    description: `${project.subtitle || project.description.slice(0, 150)}... Caso de estudio de diseño UI/UX y desarrollo frontend por María Tavera (MTB Labs).`,
+    title: `${project.title} — Maria Tavera`,
+    description: `${project.subtitle || project.description.slice(0, 150)}... Caso de estudio de diseño UI/UX y desarrollo frontend por Maria Tavera.`,
     keywords: [
       project.title,
       "Caso de estudio UI UX",
       "Desarrollo Frontend",
-      "María Alejandra Tavera",
-      "MTB Labs",
+      "Maria Tavera",
+      "María Tavera",
       ...(project.technologies || []),
     ],
     alternates: {
@@ -43,14 +43,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       type: "article",
       url: projectUrl,
-      title: `${project.title} | María Alejandra Tavera — MTB Labs`,
+      title: `${project.title} | Maria Tavera`,
       description: project.subtitle || project.description,
-      siteName: "MTB Labs",
+      siteName: "Maria Tavera Portfolio",
       images: firstImage ? [{ url: firstImage, alt: project.title }] : [],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.title} | MTB Labs`,
+      title: `${project.title} | Maria Tavera`,
       description: project.subtitle || project.description,
       images: firstImage ? [firstImage] : [],
     },
