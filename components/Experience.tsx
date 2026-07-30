@@ -24,18 +24,18 @@ export const experiences: ExperienceItem[] = [
         period: "Sep 2025 – Present",
         periodEs: "Sept 2025 – Presente",
         description: [
-            "Lead end-to-end product design and frontend engineering processes, from discovery, research, and wireframing to interaction design and production-ready implementation.",
-            "Design and implement scalable Design Systems, reusable component libraries, and modern frontend architectures that enhance visual consistency and code maintainability.",
-            "Redesign complex workflows into intuitive, user-centered interfaces using modern design-to-code workflows and responsive design standards.",
-            "Partner closely with product managers, designers, and engineers to align user needs, business objectives, and technical feasibility throughout the product lifecycle.",
-            "Accelerate product delivery and UX performance through AI-assisted workflows, design tokens, and continuous frontend optimization."
+            "Lead end-to-end product design processes, from user research, discovery, and wireframing to interaction design and high-fidelity prototypes.",
+            "Design, build, and scale corporate Design Systems, reusable component libraries, and visual tokens for consistent brand identity.",
+            "Develop responsive, high-performance web applications and e-commerce interfaces using React, Next.js, TypeScript, and modern frontend architectures.",
+            "Transform complex user flows into intuitive, accessible, and conversion-optimized interfaces using modern design-to-code workflows.",
+            "Partner with cross-functional teams to align UX strategy, business goals, and technical feasibility, accelerating delivery through AI-assisted workflows."
         ],
         descriptionEs: [
-            "Liderazgo en procesos de diseño de producto e ingeniería frontend end-to-end, desde investigación, descubrimiento y wireframing hasta diseño de interacción e implementación en producción.",
-            "Diseño e implementación de Sistemas de Diseño escalables, librerías de componentes reutilizables y arquitecturas frontend modernas que mejoran la consistencia visual y mantenibilidad del código.",
-            "Rediseño de flujos de trabajo complejos en interfaces intuitivas centradas en el usuario utilizando flujos design-to-code y estándares de diseño responsivo.",
-            "Colaboración estratégica con product managers, diseñadores e ingenieros para alinear necesidades del usuario, objetivos de negocio y viabilidad técnica.",
-            "Aceleración en la entrega de productos y rendimiento UX mediante flujos asistidos por IA, design tokens y optimización continua de frontend."
+            "Liderazgo en procesos de diseño de producto end-to-end, desde investigación con usuarios, descubrimiento y wireframing hasta diseño de interacción y prototipos de alta fidelidad.",
+            "Diseño, construcción y escalado de Sistemas de Diseño corporativos, librerías de componentes reutilizables y tokens visuales para garantizar consistencia de marca.",
+            "Desarrollo de aplicaciones web responsivas y de alto rendimiento e interfaces e-commerce utilizando React, Next.js, TypeScript y arquitecturas frontend modernas.",
+            "Transformación de flujos complejos de usuario en interfaces intuitivas, accesibles y optimizadas para conversión mediante flujos design-to-code.",
+            "Colaboración estratégica con equipos multidisciplinarios para alinear estrategia UX, metas de negocio y viabilidad técnica, acelerando entregas con herramientas asistidas por IA."
         ],
         tags: ["Figma", "Design Systems", "UX Research", "Prototyping", "React", "Next.js", "TypeScript", "Tailwind CSS", "Storybook", "Git", "CI/CD", "AI Tools (Claude, Antigravity)"]
     },
@@ -47,18 +47,18 @@ export const experiences: ExperienceItem[] = [
         period: "Oct 2022 – Sep 2025",
         periodEs: "Oct 2022 – Sept 2025",
         description: [
-            "Led the UI/UX design and frontend development team, defining product design strategy and aligning user experience with enterprise business goals.",
-            "Designed, prototyped, and optimized end-to-end user journeys and responsive interfaces across web and mobile platforms (React Native & Next.js).",
-            "Built, maintained, and scaled corporate Design Systems to ensure brand consistency and streamline cross-functional design-to-development workflows.",
-            "Conducted user research, usability testing, and data-driven experimentation (A/B testing) to validate product decisions and improve conversion metrics.",
-            "Mentored designers and frontend developers, establishing best practices for UX architecture, component design, and implementation quality."
+            "Directed the UI/UX team and product design strategy, conducting user research, usability testing, and A/B experimentation to validate decisions.",
+            "Designed, prototyped, and optimized end-to-end user journeys and interface architectures across web and mobile platforms.",
+            "Built, maintained, and scaled corporate Design Systems and component libraries, bridging the gap between design and engineering.",
+            "Engineered high-performance mobile apps (React Native) and web platforms (Next.js/TypeScript), optimizing load times, code maintainability, and responsiveness.",
+            "Facilitated alignment between enterprise business goals and technical objectives, technically guiding product lifecycle execution."
         ],
         descriptionEs: [
-            "Liderazgo del equipo de diseño UI/UX y desarrollo frontend, definiendo la estrategia de diseño de producto y alineando la experiencia de usuario con metas empresariales.",
-            "Diseño, prototipado y optimización de recorridos de usuario (user journeys) de extremo a extremo e interfaces responsivas en plataformas web y móviles (React Native & Next.js).",
-            "Construcción, mantenimiento y escalado de Sistemas de Diseño corporativos para garantizar consistencia de marca y agilizar flujos design-to-development.",
-            "Investigación de usuarios, pruebas de usabilidad y experimentación basada en datos (pruebas A/B) para validar decisiones e incrementar métricas de conversión.",
-            "Mentoría a diseñadores y desarrolladores frontend, estableciendo mejores prácticas de arquitectura UX, diseño de componentes y calidad de código."
+            "Dirección del equipo de UI/UX y la estrategia de diseño de producto, realizando investigación de usuarios, pruebas de usabilidad y experimentación A/B.",
+            "Diseño, prototipado y optimización de recorridos de usuario (user journeys) e interfaces de extremo a extremo en plataformas web y móviles.",
+            "Construcción, mantenimiento y escalado de Sistemas de Diseño corporativos y librerías de componentes, uniendo diseño e ingeniería.",
+            "Desarrollo e ingeniería de aplicaciones móviles (React Native) y plataformas web (Next.js/TypeScript), optimizando tiempos de carga, mantenibilidad del código y adaptabilidad.",
+            "Alineación entre metas de negocio y objetivos técnicos de ingeniería, liderando la ejecución técnica del ciclo de vida del producto."
         ],
         tags: ["Figma", "Adobe XD", "Design Systems", "User Flows", "UX Strategy", "A/B Testing", "React", "React Native", "TypeScript", "Next.js", "SCSS", "Storybook", "CRM/ERP", "Analytics", "Git"]
     },
@@ -70,16 +70,16 @@ export const experiences: ExperienceItem[] = [
         period: "Mar 2020 – Feb 2022",
         periodEs: "Mar 2020 – Feb 2022",
         description: [
-            "Designed and delivered high-conversion digital experiences and enterprise web platforms, aligning user needs with brand and business objectives.",
-            "Simplified complex user journeys through improved information architecture, interaction design, wireframes, and high-fidelity prototypes.",
-            "Translated business requirements into scalable, responsive frontend solutions, maintaining pixel-perfect fidelity and cross-browser performance.",
-            "Collaborated with multidisciplinary teams to build landing pages, corporate portals, and email campaigns optimized for accessibility, SEO, and performance."
+            "Designed and wireframed high-conversion digital experiences, landing pages, and interaction flows for product launches and enterprise brands.",
+            "Simplified complex user journeys through information architecture, interaction design, and brand-consistent interface guidelines.",
+            "Coded, deployed, and maintained web portals and custom web applications using HTML5, CSS3, JavaScript, jQuery, and PHP/CMS architectures.",
+            "Optimized website speed, Core Web Vitals, and technical SEO while managing webmaster operations to ensure zero-downtime performance."
         ],
         descriptionEs: [
-            "Diseño y entrega de experiencias digitales de alta conversión y plataformas web empresariales, alineando necesidades del usuario con objetivos de marca y negocio.",
-            "Simplificación de flujos complejos de usuario mediante mejoras en arquitectura de información, diseño de interacción, wireframes y prototipos de alta fidelidad.",
-            "Traducción de requerimientos comerciales en soluciones frontend responsivas y escalables, garantizando fidelidad pixel-perfect y rendimiento técnico.",
-            "Colaboración con equipos multidisciplinarios en el desarrollo de landing pages, portales corporativos y campañas optimizadas para accesibilidad, SEO y conversión."
+            "Diseño y creación de wireframes para experiencias digitales de alta conversión, landing pages y flujos de interacción para lanzamientos de marca y portales corporativos.",
+            "Simplificación de flujos complejos de usuario a través de mejoras en arquitectura de información, diseño de interacción y guías de marca.",
+            "Programación, desarrollo y mantenimiento de portales web y aplicaciones personalizadas con HTML5, CSS3, JavaScript, jQuery y PHP/CMS.",
+            "Optimización de velocidad web, Core Web Vitals y SEO técnico, liderando operaciones de Webmaster para garantizar cero interrupciones."
         ],
         tags: ["Figma", "Adobe XD", "Wireframing", "Prototyping", "UI/UX Design", "HTML5", "CSS3", "JavaScript", "PHP", "CMS", "Google Analytics", "SEO", "Email Marketing"]
     },
@@ -91,14 +91,16 @@ export const experiences: ExperienceItem[] = [
         period: "Apr 2019 – Oct 2019",
         periodEs: "Abr 2019 – Oct 2019",
         description: [
-            "Developed responsive websites and high-converting landing pages combining visual design principles with CMS-based architectures.",
-            "Improved site performance and technical quality through asset optimization, responsive code refactoring, and structured QA testing.",
-            "Collaborated with designers and cross-functional teams to deliver accessible, user-friendly digital features in Agile sprint environments."
+            "Designed user-friendly layout concepts and landing pages aligned with brand identity and marketing guidelines.",
+            "Conducted usability evaluation and testing strategies to identify UX friction points and fix interface usability issues.",
+            "Developed and migrated responsive websites on CMS architectures using clean HTML5, CSS3, and JavaScript code.",
+            "Reduced page load times and raised frontend code quality through image compression, script optimization, and QA testing."
         ],
         descriptionEs: [
-            "Desarrollo de sitios web responsivos y landing pages de alta conversión combinando principios de diseño visual con arquitecturas CMS.",
-            "Optimización de rendimiento web y calidad técnica a través de compresión de recursos, refactorización de código responsivo y pruebas de QA.",
-            "Colaboración con diseñadores y equipos multidisciplinarios para entregar funcionalidades digitales accesibles en entornos ágiles."
+            "Diseño de maquetación y landing pages amigables centradas en el usuario, alineadas con la identidad de marca y directrices de marketing.",
+            "Evaluación de usabilidad y ejecución de pruebas para identificar puntos de fricción UX y corregir problemas de interfaz.",
+            "Desarrollo y migración de sitios web responsivos sobre arquitecturas CMS utilizando código limpio en HTML5, CSS3 y JavaScript.",
+            "Reducción de tiempos de carga y optimización de rendimiento frontend mediante compresión de recursos, refactorización de scripts y pruebas QA."
         ],
         tags: ["Web Design", "HTML5", "CSS3", "JavaScript", "CMS Platforms", "Responsive Design", "QA Testing", "Performance Optimization"]
     },
@@ -110,14 +112,16 @@ export const experiences: ExperienceItem[] = [
         period: "Sep 2018 – Apr 2019",
         periodEs: "Sept 2018 – Abr 2019",
         description: [
-            "Optimized e-commerce experiences across retail platforms, improving content structure, visual hierarchy, and user journey flow.",
-            "Designed and implemented product page (PDP) enhancements aligned with conversion strategies and global launch guidelines.",
-            "Served as a bridge between design, marketing, and development teams to ensure consistent, high-quality user experiences and content governance."
+            "Designed and optimized product pages (PDP) and user journeys, improving visual hierarchy, content structure, and UI/UX conversion rates.",
+            "Created interactive digital content and web assets aligned with global product launch strategies and brand governance.",
+            "Implemented frontend enhancements across e-commerce retail platforms (Adobe Experience Manager/CMS) using HTML5 and CSS3.",
+            "Monitored web analytics and user metrics to drive continuous performance optimization and bridge design with development."
         ],
         descriptionEs: [
-            "Optimización de experiencias de comercio electrónico en plataformas retail, mejorando la estructura de contenido, jerarquía visual y flujos de usuario.",
-            "Diseño e implementación de mejoras en páginas de producto (PDP) alineadas con estrategias de conversión y guías globales de marca.",
-            "Conexión efectiva entre equipos de diseño, marketing e ingeniería para garantizar experiencias de usuario de alta calidad y gobernanza de contenido."
+            "Diseño y optimización de páginas de producto (PDP) y flujos de navegación, mejorando la jerarquía visual, estructura de contenido y conversión UI/UX.",
+            "Creación de contenido digital interactivo y piezas web alineadas con estrategias globales de lanzamiento y gobernanza de marca.",
+            "Implementación y desarrollo frontend en plataformas e-commerce (Adobe Experience Manager/CMS) mediante HTML5 y CSS3.",
+            "Monitoreo de analítica web y métricas de comportamiento de usuario para impulsar optimizaciones continuas y conectar el diseño con el desarrollo."
         ],
         tags: ["UX Optimization", "Content Strategy", "Adobe Experience Manager", "CMS", "E-commerce", "HTML5", "CSS3", "Analytics"]
     },
@@ -129,14 +133,16 @@ export const experiences: ExperienceItem[] = [
         period: "Feb 2015 – Sep 2018",
         periodEs: "Feb 2015 – Sept 2018",
         description: [
-            "Led the design and development of responsive websites, e-commerce stores, and interactive digital products for clients across multiple industries.",
-            "Created wireframes, user flows, and custom UI components before translating them into production-ready frontend code.",
-            "Implemented Design Systems, SEO strategies, analytics tracking, and performance optimization practices for long-term scalability."
+            "Designed user journeys, wireframes, prototypes, and interactive UI interfaces for e-commerce platforms and media portals.",
+            "Created Design Systems, visual guidelines, and branding assets to ensure cross-platform experience consistency.",
+            "Programmed custom WordPress and Shopify themes, developing frontend layouts with HTML5, CSS3, JavaScript, jQuery, Bootstrap, and PHP.",
+            "Managed webmaster operations, technical SEO implementation, analytics tracking, and speed optimization for enterprise clients."
         ],
         descriptionEs: [
-            "Liderazgo en el diseño y desarrollo de sitios web responsivos, tiendas e-commerce y productos digitales interactivos para diversas industrias.",
-            "Creación de wireframes, flujos de usuario y componentes personalizados de UI antes de traducirlos en código frontend listo para producción.",
-            "Implementación de Sistemas de Diseño, estrategias SEO, métricas de analítica y optimización de rendimiento para sostenibilidad a largo plazo."
+            "Diseño de flujos de usuario, wireframes, prototipos e interfaces UI interactivas para plataformas de comercio electrónico y portales de medios.",
+            "Creación de Sistemas de Diseño, guías de estilo visual y recursos de marca para garantizar consistencia multicanal.",
+            "Programación y desarrollo de temas personalizados en WordPress y Shopify utilizando HTML5, CSS3, JavaScript, jQuery, Bootstrap y PHP.",
+            "Gestión de operaciones de Webmaster, SEO técnico, métricas de analítica y optimización de velocidad para clientes corporativos."
         ],
         tags: ["Figma", "Adobe XD", "Photoshop", "Illustrator", "UX/UI Design", "WordPress", "Shopify", "PHP", "JavaScript", "HTML5/CSS3", "Bootstrap", "SEO", "Analytics"]
     },
@@ -148,14 +154,14 @@ export const experiences: ExperienceItem[] = [
         period: "Sep 2013 – Sep 2014",
         periodEs: "Sept 2013 – Sept 2014",
         description: [
-            "Designed and developed user interfaces for e-commerce sites, corporate platforms, and digital marketing campaigns.",
-            "Built reusable UI components and responsive landing pages ensuring visual consistency and intuitive user interaction.",
-            "Supported branding initiatives from initial visual concept to functional frontend deployment."
+            "Participated in the UX/UI Design area, creating user-centric wireframes, visual branding, and interactive interfaces.",
+            "Built reusable UI components and responsive layouts that ensured visual consistency across e-commerce sites.",
+            "Programmed responsive web pages and digital assets using HTML5, CSS3, JavaScript, jQuery, and CMS platforms."
         ],
         descriptionEs: [
-            "Diseño y desarrollo de interfaces de usuario para sitios e-commerce, plataformas corporativas y campañas de marketing digital.",
-            "Construcción de componentes reutilizables de UI y landing pages responsivas garantizando consistencia visual e interacción intuitiva.",
-            "Soporte a iniciativas de marca desde el concepto visual inicial hasta el despliegue frontend funcional."
+            "Participación en el área de Diseño UX/UI, creando wireframes centrados en el usuario, branding visual e interfaces interactivas.",
+            "Construcción de componentes reutilizables de UI y maquetación responsiva garantizando la consistencia visual en sitios e-commerce.",
+            "Programación de páginas web responsivas y recursos digitales utilizando HTML5, CSS3, JavaScript, jQuery y plataformas CMS."
         ],
         tags: ["UI Design", "Branding", "Photoshop", "Illustrator", "HTML5", "CSS3", "JavaScript", "jQuery", "CMS", "Responsive Design"]
     },
@@ -167,12 +173,12 @@ export const experiences: ExperienceItem[] = [
         period: "2013 – 2014",
         periodEs: "2013 – 2014",
         description: [
-            "Designed editorial, branding, and digital assets with strong visual hierarchy and clear communication standards.",
-            "Created web-ready graphics and visual resources supporting early digital user experiences."
+            "Designed editorial materials, branding identity, and educational books with strong visual hierarchy and layout precision.",
+            "Produced web-ready visual assets, digital graphics, and UI graphics supporting early digital web initiatives."
         ],
         descriptionEs: [
-            "Diseño de piezas editoriales, de marca y digitales con jerarquía visual sólida y altos estándares de comunicación.",
-            "Creación de recursos gráficos optimizados para la web apoyando las primeras experiencias digitales de usuario."
+            "Diseño de materiales editoriales, identidad de marca y libros educativos con sólida jerarquía visual y precisión de maquetación.",
+            "Creación de recursos gráficos optimizados para la web y piezas de UI apoyando las primeras iniciativas digitales."
         ],
         tags: ["Adobe Creative Suite", "Photoshop", "Illustrator", "InDesign", "Premiere Pro", "Visual Design", "Branding", "Layout", "Digital Assets"]
     },
@@ -184,12 +190,14 @@ export const experiences: ExperienceItem[] = [
         period: "Dec 2012 – Apr 2013",
         periodEs: "Dic 2012 – Abr 2013",
         description: [
-            "Developed interactive digital publications and e-books (EPUB) optimized for responsive viewing across mobile devices.",
-            "Collaborated on frontend implementation, testing, and cross-platform compatibility for publishing projects."
+            "Designed layout structures and digital publishing interfaces for interactive e-books and EPUB publications.",
+            "Programmed EPUB interactive digital publications optimized for responsive reading across mobile devices using HTML/CSS/JS.",
+            "Executed cross-browser testing, QA verification, and code optimization for seamless digital distribution."
         ],
         descriptionEs: [
-            "Desarrollo de publicaciones digitales interactivas y libros electrónicos (EPUB) optimizados para visualización responsiva en dispositivos móviles.",
-            "Colaboración en la implementación frontend, pruebas de calidad y compatibilidad multiplataforma para proyectos editoriales digitales."
+            "Diseño de maquetación y estructuras de interfaz para publicaciones digitales e-books y formato EPUB.",
+            "Programación de publicaciones digitales interactivas EPUB optimizadas para lectura responsiva en dispositivos móviles con HTML/CSS/JS.",
+            "Ejecución de pruebas de compatibilidad multiplataforma, control de calidad (QA) y optimización de código para distribución digital."
         ],
         tags: ["EPUB Programming", "Interactive Digital Media", "HTML", "CSS", "JavaScript", "Cross-browser Testing", "QA"]
     }
@@ -234,7 +242,6 @@ export default function Experience({ onBack, language = 'en' }: { onBack: () => 
     const t = {
         title: language === 'en' ? 'Experience' : 'Experiencia',
         back: language === 'en' ? 'Back' : 'Volver',
-        techStack: language === 'en' ? 'Tools & Tech Stack' : 'Herramientas & Stack Tecnológico',
         education: language === 'en' ? 'Education' : 'Educación',
         edu1_deg: language === 'en' ? 'Digital Marketing' : 'Marketing Digital',
         edu1_inst: language === 'en' ? 'EAFIT University / Diploma' : 'Universidad EAFIT / Diplomado',
@@ -304,22 +311,17 @@ export default function Experience({ onBack, language = 'en' }: { onBack: () => 
                                         ))}
                                     </ul>
 
-                                    {/* Tech & Tools Stack Tags */}
+                                    {/* Tech & Tools Tags (Glass Pills) */}
                                     {exp.tags && exp.tags.length > 0 && (
-                                        <div className="mt-4 pt-3 border-t border-slate-200/40">
-                                            <div className="text-[10px] font-bold tracking-widest text-slate-500 uppercase mb-2">
-                                                {t.techStack}
-                                            </div>
-                                            <div className="flex flex-wrap gap-1.5">
-                                                {exp.tags.map((tag, tIdx) => (
-                                                    <span 
-                                                        key={tIdx} 
-                                                        className="px-2.5 py-1 rounded-md text-[11px] font-semibold glass-panel text-slate-800 border border-white/60 bg-white/40 shadow-2xs hover:border-petite-orchid/60 transition-colors"
-                                                    >
-                                                        {tag}
-                                                    </span>
-                                                ))}
-                                            </div>
+                                        <div className="flex flex-wrap gap-2 mt-4">
+                                            {exp.tags.map((tag, tIdx) => (
+                                                <span 
+                                                    key={tIdx} 
+                                                    className="glass-panel px-3 py-1 rounded-full text-xs font-medium border border-white/40 text-slate-700 shadow-sm hover:bg-white/30 transition-colors"
+                                                >
+                                                    {tag}
+                                                </span>
+                                            ))}
                                         </div>
                                     )}
                                 </motion.div>
