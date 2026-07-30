@@ -185,7 +185,7 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back,arrow_forward,branding_watermark,call,campaign,code,diamond,expand_more,format_quote,grid_view,help_outline,location_on,mail,menu_book,mic,mic_off,my_location,person,photo_library,pin_drop,psychology,public,schedule,school,share_location,storefront,swipe,troubleshoot,work_history&display=swap"
         />
         {/* JSON-LD Schemas for GEO, AEO, and Search Engines */}
         <script
