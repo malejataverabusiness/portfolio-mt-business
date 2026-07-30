@@ -40,6 +40,18 @@ body {
   border-radius: 50%;
 }
 
+@media (max-width: 768px) {
+  .blob {
+    filter: blur(35px);
+    mix-blend-mode: normal;
+    opacity: 0.35;
+  }
+  .blob-1, .blob-2, .blob-3, .blob-4 {
+    width: 320px !important;
+    height: 320px !important;
+  }
+}
+
 .blob-1 {
   width: 800px;
   height: 800px;

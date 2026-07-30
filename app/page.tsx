@@ -31,11 +31,10 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 10, filter: "blur(4px)" },
+  hidden: { opacity: 1, y: 0 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { type: "spring", stiffness: 50, damping: 15 }
   }
 };

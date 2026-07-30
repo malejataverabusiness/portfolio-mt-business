@@ -127,8 +127,8 @@ export default function Landing({ onEnter, language }: LandingProps) {
     };
 
     const fadeUpVariant: Variants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
+        hidden: { opacity: 1, y: 0 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
     };
 
     const staggerContainer: Variants = {
