@@ -555,7 +555,7 @@ export default function Landing({ onEnter, language }: LandingProps) {
 
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4 relative z-10 w-full text-xs text-slate-500 font-medium">
                         <p>© {new Date().getFullYear()} MTB Labs. {t.footerRights}</p>
-                        <p className="flex items-center gap-1">Diseñado & Programado por <span className="font-bold text-slate-700">María Alejandra Tavera</span></p>
+                        <p className="flex items-center gap-1">Diseñado & Programado por <span className="font-bold text-slate-700">Maria Tavera</span></p>
                     </div>
                 </motion.div>
             </motion.footer>

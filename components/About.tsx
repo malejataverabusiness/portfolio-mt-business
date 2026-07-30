@@ -14,16 +14,16 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
     }, []);
 
     const t = {
-        title: language === 'en' ? 'About María Tavera | MTB Labs' : 'Sobre María Tavera | MTB Labs',
+        title: language === 'en' ? 'About me' : 'Sobre mí',
         back: language === 'en' ? 'Back' : 'Volver',
-        greeting: language === 'en' ? 'Hello, I am María Alejandra Tavera.' : 'Hola, soy María Alejandra Tavera.',
+        greeting: language === 'en' ? 'Hello, I am Maria Tavera.' : 'Hola, soy Maria Tavera.',
         roleBadge: language === 'en' ? 'Senior Design Engineer (Frontend Engineer | UI/UX Designer) — MTB Labs' : 'Diseñadora & Ingeniera de Software Senior (UI/UX & Frontend) — MTB Labs',
         bio1: language === 'en' 
             ? 'I am a senior web designer and front-end programmer with over 14 years of hands-on experience crafting enterprise-grade digital products, design systems, e-commerce platforms, and high-performance web applications.' 
             : 'Soy diseñadora y programadora web senior con más de 14 años de experiencia creando productos digitales empresariales, sistemas de diseño, plataformas e-commerce y aplicaciones web de alto rendimiento.',
         bio2: language === 'en' 
-            ? 'Operating through MTB Labs, I bridge the traditional gap between design and engineering. Companies partner with me because I offer a complete end-to-end solution: from UX research, wireframing, and visual design tokens to pixel-perfect, clean, accessible, and fast React/Next.js/TypeScript code.' 
-            : 'A través de mi firma MTB Labs, elimino la brecha tradicional entre diseño e ingeniería. Las empresas confían en mi trabajo porque ofrezco una solución integral: desde investigación UX, wireframes y tokens de diseño, hasta código React/Next.js/TypeScript limpio, accesible y acelerado.',
+            ? 'I bridge the traditional gap between design and engineering. Companies partner with me because I offer a complete end-to-end solution: from UX research, wireframing, and visual design tokens to pixel-perfect, clean, accessible, and fast React/Next.js/TypeScript code.' 
+            : 'Elimino la brecha tradicional entre diseño e ingeniería. Las empresas confían en mi trabajo porque ofrezco una solución integral: desde investigación UX, wireframes y tokens de diseño, hasta código React/Next.js/TypeScript limpio, accesible y acelerado.',
         bio3: language === 'en'
             ? 'My career spans versatile work domains including UI/UX Design, Front-End Development, SaaS & PIM Platforms, E-Commerce, Webmaster Direction, Mobile Apps (React Native), EPUB Digital Publishing, and Core Web Vitals Performance Optimization.'
             : 'Mi trayectoria abarca múltiples campos laborales: Diseño UI/UX, Desarrollo Frontend, Plataformas SaaS/PIM, E-Commerce, Dirección Webmaster, Apps Móviles (React Native), Publicación Digital EPUB y Optimización de Rendimiento Web (Speed Insights/SEO).',
@@ -65,10 +65,10 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
                         <div className="rounded-glass-lg overflow-hidden glass-panel border border-white/30 p-2 shadow-sm w-full aspect-[4/5] relative">
                             <div className="absolute inset-2 rounded-glass-md bg-gradient-to-br from-petite-orchid/20 to-cold-purple/20 relative overflow-hidden">
                                 <Image 
-                                    src="https://media.licdn.com/dms/image/v2/D4D03AQHq2Exg3kW3RA/profile-displayphoto-crop_800_800/B4DZ5NnYb1I8AI-/0/1779418631855?e=1781740800&v=beta&t=OVYpMtoAYIyZbB4OdG1gX5ZbChMWKnI-zPy9YPUPECg"
-                                    alt="María Alejandra Tavera — MTB Labs UI UX Designer & Frontend Programmer"
+                                    src="/images/maria-tavera.png"
+                                    alt="Maria Tavera — MTB Labs UI UX Designer & Frontend Programmer"
                                     fill
-                                    className="object-cover"
+                                    className="object-cover object-top"
                                     priority
                                     unoptimized
                                 />
