@@ -187,20 +187,21 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        {/* Material Symbols loaded async to avoid render-blocking (~5,750ms savings) */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-          rel="stylesheet"
-          media="print"
-          // @ts-expect-error onLoad on link is valid HTML but not in React types
-          onLoad="this.media='all'"
+        {/* Material Symbols: loaded after hydration via Script to avoid render-blocking */}
+        <Script
+          id="load-material-symbols"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(){
+                var l = document.createElement('link');
+                l.rel = 'stylesheet';
+                l.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap';
+                document.head.appendChild(l);
+              })();
+            `,
+          }}
         />
-        <noscript>
-          <link
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-            rel="stylesheet"
-          />
-        </noscript>
         {/* JSON-LD Schemas for GEO, AEO, and Search Engines */}
         <script
           type="application/ld+json"
