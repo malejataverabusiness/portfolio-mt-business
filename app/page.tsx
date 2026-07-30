@@ -65,13 +65,14 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [language, setLanguage] = useState<'en' | 'es'>('en');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const nav = navigator as Navigator & { userLanguage?: string };
     const browserLang = nav.language || nav.userLanguage || '';
     if (browserLang.startsWith('es')) {
-      const timer = setTimeout(() => setLanguage('es'), 0);
-      return () => clearTimeout(timer);
+      setLanguage('es');
     }
   }, []);
   const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
