@@ -37,23 +37,43 @@ const itemVariants: Variants = {
   }
 };
 
+interface SpeechResultItem {
+  0: { transcript: string };
+}
+
+interface SpeechEvent {
+  results: SpeechResultItem[];
+}
+
+interface SpeechRecognitionInstance {
+  lang: string;
+  interimResults: boolean;
+  continuous: boolean;
+  onstart: (() => void) | null;
+  onresult: ((event: SpeechEvent) => void) | null;
+  onerror: ((event: { error: string }) => void) | null;
+  onend: (() => void) | null;
+  start: () => void;
+  stop: () => void;
+}
+
 export default function Home() {
   const [currentView, setCurrentView] = useState<ViewState>("hero");
   const [searchQuery, setSearchQuery] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [language, setLanguage] = useState<'en' | 'es'>('en');
-  const recognitionRef = useRef<any>(null);
-  const silenceTimer = useRef<NodeJS.Timeout | null>(null);
-  const latestTranscriptRef = useRef("");
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const browserLang = navigator.language || (navigator as any).userLanguage;
-      if (browserLang.startsWith('es')) {
-        setLanguage('es');
-      }
+    const nav = navigator as Navigator & { userLanguage?: string };
+    const browserLang = nav.language || nav.userLanguage || '';
+    if (browserLang.startsWith('es')) {
+      const timer = setTimeout(() => setLanguage('es'), 0);
+      return () => clearTimeout(timer);
     }
   }, []);
+  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
+  const silenceTimer = useRef<NodeJS.Timeout | null>(null);
+  const latestTranscriptRef = useRef("");
 
   const detectLanguage = (text: string) => {
     const spanishWords = ['hola', 'y', 'en', 'el', 'la', 'los', 'las', 'un', 'una', 'busco', 'necesito', 'quiero', 'experiencia', 'proyectos', 'habilidades', 'desarrollo', 'diseño', 'marketing', 'liderazgo', 'soy', 'es', 'con', 'para', 'como', 'hacer', 'trabajo'];
@@ -67,12 +87,12 @@ export default function Home() {
     return 'en';
   };
 
-  useEffect(() => {
-    if (searchQuery.length > 2) {
-      const detected = detectLanguage(searchQuery);
-      setLanguage(detected);
+  const handleQueryChange = (val: string) => {
+    setSearchQuery(val);
+    if (val.length > 2) {
+      setLanguage(detectLanguage(val));
     }
-  }, [searchQuery]);
+  };
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
@@ -97,7 +117,8 @@ export default function Home() {
     }
 
     if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
-      const recognition = new (window as any).webkitSpeechRecognition();
+      const SpeechRecognitionCtor = (window as unknown as Record<string, new () => SpeechRecognitionInstance>).webkitSpeechRecognition;
+      const recognition = new SpeechRecognitionCtor();
       recognition.lang = language === 'es' ? 'es-US' : 'en-US';
       recognition.interimResults = true;
       recognition.continuous = true;
@@ -107,19 +128,14 @@ export default function Home() {
         latestTranscriptRef.current = "";
       };
 
-      recognition.onresult = (event: any) => {
+      recognition.onresult = (event: SpeechEvent) => {
         if (silenceTimer.current) clearTimeout(silenceTimer.current);
 
-        let transcript = '';
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-          transcript += event.results[i][0].transcript;
-        }
-
         const allTranscripts = Array.from(event.results)
-          .map((result: any) => result[0].transcript)
+          .map((result) => result[0].transcript)
           .join('');
 
-        setSearchQuery(allTranscripts);
+        handleQueryChange(allTranscripts);
         latestTranscriptRef.current = allTranscripts;
 
         silenceTimer.current = setTimeout(() => {
@@ -134,7 +150,7 @@ export default function Home() {
         }, 3000);
       };
 
-      recognition.onerror = (event: any) => {
+      recognition.onerror = (event: { error: string }) => {
         console.error("Speech recognition error", event.error);
         if (silenceTimer.current) clearTimeout(silenceTimer.current);
         setIsListening(false);
@@ -153,13 +169,13 @@ export default function Home() {
 
   const getMicIcon = () => {
     if (isListening) return 'mic';
-    if (!isListening && searchQuery.length > 0 && recognitionRef.current) return 'mic_off';
+    if (!isListening && searchQuery.length > 0) return 'mic_off';
     return 'mic';
   };
 
   const getMicColorClass = () => {
     if (isListening) return 'text-cold-purple animate-pulse bg-cold-purple/20';
-    if (!isListening && recognitionRef.current) return 'text-slate-400';
+    if (!isListening && searchQuery.length > 0) return 'text-slate-400';
     return 'text-petite-orchid';
   };
 
@@ -256,7 +272,7 @@ export default function Home() {
                         placeholder={t.placeholder}
                         type="text"
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onChange={(e) => handleQueryChange(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                       />
                       <button onClick={handleSearch} className="mr-0 md:mr-2 w-10 h-10 rounded-glass-sm flex items-center justify-center bg-slate-900/5 hover:bg-slate-900/10 transition-all cursor-pointer hover:scale-105 flex-shrink-0">

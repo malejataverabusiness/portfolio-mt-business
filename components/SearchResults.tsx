@@ -1,9 +1,9 @@
 "use client";
 
-import { experiences, ExperienceItem } from "./Experience";
+import { experiences } from "./Experience";
 import { skillCategories } from "./Skills";
-import { projects, getProjects } from "@/data/projectsData";
-import { useEffect, useRef, useState } from "react";
+import { getProjects } from "@/data/projectsData";
+import { useEffect, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,20 +16,19 @@ interface SearchResultsProps {
 
 export default function SearchResults({ query, onBack, language = 'en' }: SearchResultsProps) {
     const scrollRef = useRef<HTMLDivElement>(null);
-    const [matchedExperiences, setMatchedExperiences] = useState<ExperienceItem[]>([]);
-    const [matchedSkills, setMatchedSkills] = useState<{ category: string; skills: string[] }[]>([]);
-    const [matchedProjects, setMatchedProjects] = useState<typeof projects>([]);
 
     useEffect(() => {
         if (scrollRef.current) {
             scrollRef.current.scrollTop = 0;
         }
+    }, [query]);
 
-        if (!query) return;
+    const { matchedExperiences, matchedSkills, matchedProjects } = useMemo(() => {
+        if (!query) {
+            return { matchedExperiences: [], matchedSkills: [], matchedProjects: [] };
+        }
 
         const lowerQuery = query.toLowerCase();
-        // Simple "stop word" filter might remove Spanish "de", "en"?
-        // For now, let's just split.
         const queryWords = lowerQuery.split(/\s+/).filter(w => w.length > 2);
 
         // Match Experiences
@@ -40,7 +39,6 @@ export default function SearchResults({ query, onBack, language = 'en' }: Search
             const text = `${role} ${exp.company} ${description.join(" ")}`.toLowerCase();
             return queryWords.some(word => text.includes(word)) || text.includes(lowerQuery);
         });
-        setMatchedExperiences(expMatches);
 
         // Match Skills
         const skillMatches: { category: string; skills: string[] }[] = [];
@@ -56,7 +54,6 @@ export default function SearchResults({ query, onBack, language = 'en' }: Search
                 skillMatches.push({ category: title, skills: cat.skills.slice(0, 5) });
             }
         });
-        setMatchedSkills(skillMatches);
 
         // Match Projects
         const localizedProjects = getProjects(language);
@@ -64,8 +61,12 @@ export default function SearchResults({ query, onBack, language = 'en' }: Search
             const text = `${proj.title} ${proj.category} ${proj.description}`.toLowerCase();
             return queryWords.some(word => text.includes(word)) || text.includes(lowerQuery);
         });
-        setMatchedProjects(projectMatches);
 
+        return {
+            matchedExperiences: expMatches,
+            matchedSkills: skillMatches,
+            matchedProjects: projectMatches,
+        };
     }, [query, language]);
 
     const hasResults = matchedExperiences.length > 0 || matchedSkills.length > 0 || matchedProjects.length > 0;

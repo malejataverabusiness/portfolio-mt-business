@@ -6,9 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { getProjects } from "@/data/projectsData";
 
+type ProjectItem = ReturnType<typeof getProjects>[number];
+
 export default function VisualFeed({ onBack, language = 'en' }: { onBack: () => void, language: 'en' | 'es' }) {
     const scrollRef = useRef<HTMLDivElement>(null);
-    const [selectedProject, setSelectedProject] = useState<any | null>(null);
+    const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -60,10 +62,12 @@ export default function VisualFeed({ onBack, language = 'en' }: { onBack: () => 
                             onClick={() => setSelectedProject(project)}
                         >
                             <div className="relative aspect-square w-full overflow-hidden bg-slate-50">
-                                <img
+                                <Image
                                     src={project.image}
                                     alt={project.title}
-                                    className="absolute inset-0 w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    className="object-cover transform transition-transform duration-500 group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
                                     <span className="text-[9px] font-bold tracking-wider text-petite-orchid bg-petite-orchid/15 border border-petite-orchid/20 px-2 py-0.5 rounded-full uppercase self-start mb-2">

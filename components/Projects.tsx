@@ -93,7 +93,7 @@ export default function Projects({ onBack, language = 'en' }: { onBack: () => vo
                                     transition={{ delay: index * 0.1 }}
                                 >
                                     <Link
-                                        href={(project as any).internalLink}
+                                        href={(project as { internalLink?: string }).internalLink || '#'}
                                         className="group rounded-glass-md overflow-hidden glass-panel border border-white/30 shadow-sm hover:shadow-md transition-all cursor-pointer bg-white/10 block h-full"
                                     >
                                         {cardContent}

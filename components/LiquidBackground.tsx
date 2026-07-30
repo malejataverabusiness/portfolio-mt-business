@@ -15,7 +15,7 @@ export default function LiquidBackground() {
         };
         update();
         return () => cancelAnimationFrame(animationFrame);
-    }, []);
+    }, [time]);
 
     useEffect(() => {
         const handleWheel = (e: WheelEvent) => {
@@ -25,7 +25,7 @@ export default function LiquidBackground() {
 
         window.addEventListener("wheel", handleWheel);
         return () => window.removeEventListener("wheel", handleWheel);
-    }, []);
+    }, [time]);
 
     // Amplitudes for large blobs
     const y1 = useTransform(time, (t) => Math.sin(t * 0.002) * 300);

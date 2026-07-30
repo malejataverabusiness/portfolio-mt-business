@@ -335,7 +335,7 @@ export default function Landing({ onEnter, language }: LandingProps) {
                     {t.testimonials.map((test, i) => (
                         <motion.div key={i} variants={fadeUpVariant} className="glass-panel p-8 rounded-glass-lg relative inner-glow">
                             <span className="material-symbols-outlined text-5xl absolute top-4 right-4 text-slate-300/40">format_quote</span>
-                            <p className="text-slate-700 italic mb-6 relative z-10 leading-relaxed hover:text-slate-900 transition-colors">"{test.quote}"</p>
+                            <p className="text-slate-700 italic mb-6 relative z-10 leading-relaxed hover:text-slate-900 transition-colors">&quot;{test.quote}&quot;</p>
                             <div className="flex items-center gap-4 border-t border-slate-200/50 pt-4">
                                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-petite-orchid to-cold-purple flex items-center justify-center text-white font-bold shadow-md">
                                     {test.name[0]}

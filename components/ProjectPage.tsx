@@ -48,8 +48,6 @@ export default function ProjectPage({
     images,
     backHref,
     backLabel,
-    accentColor,
-    heroGradient,
     metrics,
     children,
 }: ProjectPageProps) {

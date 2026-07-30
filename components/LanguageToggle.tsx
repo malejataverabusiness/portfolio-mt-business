@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 interface LanguageToggleProps {
     language: 'en' | 'es';
     setLanguage: (lang: 'en' | 'es') => void;

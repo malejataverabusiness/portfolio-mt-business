@@ -249,7 +249,7 @@ export default function Experience({ onBack, language = 'en' }: { onBack: () => 
                 <section>
                     <h3 className="text-2xl font-bold text-slate-900 mb-6 tracking-tight sticky top-[-10px] py-2">{t.education}</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {education.map((edu, idx) => {
+                        {education.map((edu) => {
                             let degree = edu.degree;
                             let inst = edu.institution;
                             // Simple localized mapping for static education data
