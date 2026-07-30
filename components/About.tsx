@@ -76,13 +76,12 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
                         <div className="rounded-glass-lg overflow-hidden glass-panel border border-white/30 p-2 shadow-sm w-full h-[400px] md:h-[480px] relative">
                             <div className="w-full h-full rounded-glass-md bg-gradient-to-br from-petite-orchid/20 to-cold-purple/20 relative overflow-hidden">
                                 <Image 
-                                    src="/images/maria-tavera.png"
+                                    src="/images/maria-tavera.webp"
                                     alt="Maria Tavera — UI UX Designer & Frontend Programmer"
                                     fill
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 500px"
                                     className="object-cover object-top"
                                     priority
-                                    unoptimized
                                 />
                             </div>
                         </div>

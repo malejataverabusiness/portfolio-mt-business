@@ -55,9 +55,9 @@ export const metadata: Metadata = {
     siteName: "Maria Tavera Portfolio",
     images: [
       {
-        url: "/images/maria-tavera.png",
-        width: 800,
-        height: 800,
+        url: "/images/maria-tavera.webp",
+        width: 576,
+        height: 1024,
         alt: "Maria Tavera - UI/UX Designer & Frontend Developer",
       },
     ],
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     title: "Maria Tavera — Diseñadora & Programadora Web Senior",
     description:
       "Diseño UI/UX de alto impacto y desarrollo Frontend con React & Next.js. Solución integral para empresas.",
-    images: [`${siteUrl}/images/maria-tavera.png`],
+    images: [`${siteUrl}/images/maria-tavera.webp`],
   },
   robots: {
     index: true,
@@ -122,7 +122,7 @@ export default function RootLayout({
     ],
     description:
       "Maria Tavera es una reconocida Diseñadora y Programadora Web Senior con más de 14 años de trayectoria creando experiencias digitales, sistemas de diseño y aplicaciones web de alto rendimiento para empresas como Samsung, Alpina, TiendApp, El Colombiano y Grupo Éxito.",
-    image: `${siteUrl}/images/maria-tavera.png`,
+    image: `${siteUrl}/images/maria-tavera.webp`,
   };
 
   const organizationSchema = {
@@ -135,7 +135,7 @@ export default function RootLayout({
       name: "Maria Tavera",
     },
     url: siteUrl,
-    logo: `${siteUrl}/images/maria-tavera.png`,
+    logo: `${siteUrl}/images/maria-tavera.webp`,
     description:
       "Portafolio profesional de diseño UI/UX y desarrollo web frontend por Maria Tavera. Especialista en soluciones digitales de alto impacto, rendimiento y usabilidad para empresas y startups.",
     areaServed: ["Colombia", "United States", "Worldwide"],
@@ -217,9 +217,9 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans`} suppressHydrationWarning>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-XVXD65J4D0"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -228,7 +228,7 @@ export default function RootLayout({
             gtag('config', 'G-XVXD65J4D0');
           `}
         </Script>
-        <Script id="google-tag-manager" strategy="afterInteractive">
+        <Script id="google-tag-manager" strategy="lazyOnload">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -239,7 +239,7 @@ export default function RootLayout({
         </Script>
         <Script
           src="https://t.contentsquare.net/uxa/8881a037ab792.js"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
         {/* Google Tag Manager (noscript) */}
         <noscript>
