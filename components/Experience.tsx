@@ -37,7 +37,7 @@ export const experiences: ExperienceItem[] = [
             "Colaboración estratégica con product managers, diseñadores e ingenieros para alinear necesidades del usuario, objetivos de negocio y viabilidad técnica.",
             "Aceleración en la entrega de productos y rendimiento UX mediante flujos asistidos por IA, design tokens y optimización continua de frontend."
         ],
-        tags: ["Figma", "Design Systems", "UX Research", "React", "Next.js", "TypeScript", "Tailwind CSS", "Storybook", "AI Tools (Claude, Antigravity)"]
+        tags: ["Figma", "Design Systems", "UX Research", "Prototyping", "React", "Next.js", "TypeScript", "Tailwind CSS", "Storybook", "Git", "CI/CD", "AI Tools (Claude, Antigravity)"]
     },
     {
         id: "tiendapp",
@@ -60,7 +60,7 @@ export const experiences: ExperienceItem[] = [
             "Investigación de usuarios, pruebas de usabilidad y experimentación basada en datos (pruebas A/B) para validar decisiones e incrementar métricas de conversión.",
             "Mentoría a diseñadores y desarrolladores frontend, estableciendo mejores prácticas de arquitectura UX, diseño de componentes y calidad de código."
         ],
-        tags: ["Figma", "Adobe XD", "Design Systems", "User Flows", "UX Strategy", "React", "React Native", "TypeScript", "Next.js", "Analytics"]
+        tags: ["Figma", "Adobe XD", "Design Systems", "User Flows", "UX Strategy", "A/B Testing", "React", "React Native", "TypeScript", "Next.js", "SCSS", "Storybook", "CRM/ERP", "Analytics", "Git"]
     },
     {
         id: "alpina",
@@ -81,7 +81,7 @@ export const experiences: ExperienceItem[] = [
             "Traducción de requerimientos comerciales en soluciones frontend responsivas y escalables, garantizando fidelidad pixel-perfect y rendimiento técnico.",
             "Colaboración con equipos multidisciplinarios en el desarrollo de landing pages, portales corporativos y campañas optimizadas para accesibilidad, SEO y conversión."
         ],
-        tags: ["Figma", "Adobe XD", "Wireframing", "Prototyping", "HTML5/CSS3", "JavaScript", "PHP", "CMS", "SEO", "Analytics"]
+        tags: ["Figma", "Adobe XD", "Wireframing", "Prototyping", "UI/UX Design", "HTML5", "CSS3", "JavaScript", "PHP", "CMS", "Google Analytics", "SEO", "Email Marketing"]
     },
     {
         id: "sproutloud",
@@ -100,7 +100,7 @@ export const experiences: ExperienceItem[] = [
             "Optimización de rendimiento web y calidad técnica a través de compresión de recursos, refactorización de código responsivo y pruebas de QA.",
             "Colaboración con diseñadores y equipos multidisciplinarios para entregar funcionalidades digitales accesibles en entornos ágiles."
         ],
-        tags: ["HTML5", "CSS3", "JavaScript", "CMS", "Responsive Design", "QA", "Performance Optimization"]
+        tags: ["Web Design", "HTML5", "CSS3", "JavaScript", "CMS Platforms", "Responsive Design", "QA Testing", "Performance Optimization"]
     },
     {
         id: "samsung",
@@ -119,7 +119,7 @@ export const experiences: ExperienceItem[] = [
             "Diseño e implementación de mejoras en páginas de producto (PDP) alineadas con estrategias de conversión y guías globales de marca.",
             "Conexión efectiva entre equipos de diseño, marketing e ingeniería para garantizar experiencias de usuario de alta calidad y gobernanza de contenido."
         ],
-        tags: ["Adobe Experience Manager", "CMS", "UX Optimization", "E-commerce", "HTML/CSS", "Analytics"]
+        tags: ["UX Optimization", "Content Strategy", "Adobe Experience Manager", "CMS", "E-commerce", "HTML5", "CSS3", "Analytics"]
     },
     {
         id: "ita-latam",
@@ -138,7 +138,7 @@ export const experiences: ExperienceItem[] = [
             "Creación de wireframes, flujos de usuario y componentes personalizados de UI antes de traducirlos en código frontend listo para producción.",
             "Implementación de Sistemas de Diseño, estrategias SEO, métricas de analítica y optimización de rendimiento para sostenibilidad a largo plazo."
         ],
-        tags: ["WordPress", "Shopify", "PHP", "JavaScript", "HTML/CSS", "Figma", "Adobe XD", "SEO", "Analytics"]
+        tags: ["Figma", "Adobe XD", "Photoshop", "Illustrator", "UX/UI Design", "WordPress", "Shopify", "PHP", "JavaScript", "HTML5/CSS3", "Bootstrap", "SEO", "Analytics"]
     },
     {
         id: "miguelo-linkapedia",
@@ -157,7 +157,7 @@ export const experiences: ExperienceItem[] = [
             "Construcción de componentes reutilizables de UI y landing pages responsivas garantizando consistencia visual e interacción intuitiva.",
             "Soporte a iniciativas de marca desde el concepto visual inicial hasta el despliegue frontend funcional."
         ],
-        tags: ["HTML5", "CSS3", "JavaScript", "UI Design", "Branding", "Responsive Design", "Photoshop", "Illustrator"]
+        tags: ["UI Design", "Branding", "Photoshop", "Illustrator", "HTML5", "CSS3", "JavaScript", "jQuery", "CMS", "Responsive Design"]
     },
     {
         id: "gea-cordesarrollo",
@@ -174,7 +174,24 @@ export const experiences: ExperienceItem[] = [
             "Diseño de piezas editoriales, de marca y digitales con jerarquía visual sólida y altos estándares de comunicación.",
             "Creación de recursos gráficos optimizados para la web apoyando las primeras experiencias digitales de usuario."
         ],
-        tags: ["Adobe Creative Suite", "Visual Design", "Branding", "Layout", "Digital Assets"]
+        tags: ["Adobe Creative Suite", "Photoshop", "Illustrator", "InDesign", "Premiere Pro", "Visual Design", "Branding", "Layout", "Digital Assets"]
+    },
+    {
+        id: "yuxi-global",
+        role: "EPUB Developer & Multimedia Designer",
+        roleEs: "Desarrolladora EPUB & Diseñadora Multimedia",
+        company: "Yuxi Global",
+        period: "Dec 2012 – Apr 2013",
+        periodEs: "Dic 2012 – Abr 2013",
+        description: [
+            "Developed interactive digital publications and e-books (EPUB) optimized for responsive viewing across mobile devices.",
+            "Collaborated on frontend implementation, testing, and cross-platform compatibility for publishing projects."
+        ],
+        descriptionEs: [
+            "Desarrollo de publicaciones digitales interactivas y libros electrónicos (EPUB) optimizados para visualización responsiva en dispositivos móviles.",
+            "Colaboración en la implementación frontend, pruebas de calidad y compatibilidad multiplataforma para proyectos editoriales digitales."
+        ],
+        tags: ["EPUB Programming", "Interactive Digital Media", "HTML", "CSS", "JavaScript", "Cross-browser Testing", "QA"]
     }
 ];
 
@@ -217,6 +234,7 @@ export default function Experience({ onBack, language = 'en' }: { onBack: () => 
     const t = {
         title: language === 'en' ? 'Experience' : 'Experiencia',
         back: language === 'en' ? 'Back' : 'Volver',
+        techStack: language === 'en' ? 'Tools & Tech Stack' : 'Herramientas & Stack Tecnológico',
         education: language === 'en' ? 'Education' : 'Educación',
         edu1_deg: language === 'en' ? 'Digital Marketing' : 'Marketing Digital',
         edu1_inst: language === 'en' ? 'EAFIT University / Diploma' : 'Universidad EAFIT / Diplomado',
@@ -286,17 +304,22 @@ export default function Experience({ onBack, language = 'en' }: { onBack: () => 
                                         ))}
                                     </ul>
 
-                                    {/* Tech & Tools Tags */}
+                                    {/* Tech & Tools Stack Tags */}
                                     {exp.tags && exp.tags.length > 0 && (
-                                        <div className="flex flex-wrap gap-1.5 pt-1">
-                                            {exp.tags.map((tag, tIdx) => (
-                                                <span 
-                                                    key={tIdx} 
-                                                    className="px-2.5 py-1 rounded-md text-[11px] font-semibold glass-panel text-slate-800 border border-white/50 bg-white/30 shadow-xs hover:border-petite-orchid/50 transition-colors"
-                                                >
-                                                    {tag}
-                                                </span>
-                                            ))}
+                                        <div className="mt-4 pt-3 border-t border-slate-200/40">
+                                            <div className="text-[10px] font-bold tracking-widest text-slate-500 uppercase mb-2">
+                                                {t.techStack}
+                                            </div>
+                                            <div className="flex flex-wrap gap-1.5">
+                                                {exp.tags.map((tag, tIdx) => (
+                                                    <span 
+                                                        key={tIdx} 
+                                                        className="px-2.5 py-1 rounded-md text-[11px] font-semibold glass-panel text-slate-800 border border-white/60 bg-white/40 shadow-2xs hover:border-petite-orchid/60 transition-colors"
+                                                    >
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
                                         </div>
                                     )}
                                 </motion.div>
