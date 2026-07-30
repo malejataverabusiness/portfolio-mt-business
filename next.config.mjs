@@ -51,6 +51,26 @@ const nextConfig = {
           },
         ],
       },
+      {
+        // Long-term immutable cache for hashed static assets (JS/CSS chunks)
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        // Cache optimized images for 1 hour
+        source: '/_next/image',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, stale-while-revalidate=86400',
+          },
+        ],
+      },
     ];
   },
 };

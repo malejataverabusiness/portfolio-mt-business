@@ -2,17 +2,20 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import dynamic from "next/dynamic";
 import TiltPanel from "@/components/TiltPanel";
 import TimeDisplay from "@/components/TimeDisplay";
-import Experience from "@/components/Experience";
-import Skills from "@/components/Skills";
-import Projects from "@/components/Projects";
-import SearchResults from "@/components/SearchResults";
-import Landing from "@/components/Landing";
 import clsx from "clsx";
 import LanguageToggle from "@/components/LanguageToggle";
-import VisualFeed from "@/components/VisualFeed";
-import About from "@/components/About";
+
+// Lazy-load views that aren't visible on initial render
+const Experience = dynamic(() => import("@/components/Experience"));
+const Skills = dynamic(() => import("@/components/Skills"));
+const Projects = dynamic(() => import("@/components/Projects"));
+const SearchResults = dynamic(() => import("@/components/SearchResults"));
+const Landing = dynamic(() => import("@/components/Landing"));
+const VisualFeed = dynamic(() => import("@/components/VisualFeed"));
+const About = dynamic(() => import("@/components/About"));
 
 type ViewState = "landing" | "hero" | "experience" | "skills" | "projects" | "results" | "visual-feed" | "about";
 
