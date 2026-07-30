@@ -12,140 +12,133 @@ export interface ExperienceItem {
     periodEs?: string;
     description: string[];
     descriptionEs?: string[];
+    tags?: string[];
 }
 
 export const experiences: ExperienceItem[] = [
     {
         id: "mtb-labs",
-        role: "Product Designer (UX/UI & Frontend)",
-        roleEs: "Diseñadora de Producto (UX/UI & Frontend)",
+        role: "Senior Design Engineer (Product Designer & Frontend Engineer)",
+        roleEs: "Diseñadora e Ingeniera de Software Senior (Product Design & Frontend)",
         company: "MTB Labs",
         period: "Sep 2025 – Present",
         periodEs: "Sept 2025 – Presente",
         description: [
-            "Lead end-to-end product design processes, from discovery and research to interaction design and high-fidelity execution.",
-            "Redesign complex workflows into intuitive, user-centered experiences, improving usability and task efficiency.",
-            "Create wireframes, user flows, and prototypes to define and validate scalable product solutions.",
-            "Collaborate with product owners and engineering teams to align user needs, business goals, and technical feasibility.",
-            "Accelerate product delivery through AI-assisted workflows, performance optimization, and continuous frontend improvements.",
-            "Tools & Tech: Figma, UX Research, Prototyping, Design Systems, A/B Testing, AI Tools (Claude, Antigravity), HTML, CSS, JS."
+            "Lead end-to-end product design and frontend engineering processes, from discovery, research, and wireframing to interaction design and production-ready implementation.",
+            "Design and implement scalable Design Systems, reusable component libraries, and modern frontend architectures that enhance visual consistency and code maintainability.",
+            "Redesign complex workflows into intuitive, user-centered interfaces using modern design-to-code workflows and responsive design standards.",
+            "Partner closely with product managers, designers, and engineers to align user needs, business objectives, and technical feasibility throughout the product lifecycle.",
+            "Accelerate product delivery and UX performance through AI-assisted workflows, design tokens, and continuous frontend optimization."
         ],
         descriptionEs: [
-            "Liderazgo en procesos de diseño de producto end-to-end, desde investigación y descubrimiento hasta diseño de interacción y ejecución de alta fidelidad.",
-            "Rediseño de flujos de trabajo complejos en experiencias intuitivas centradas en el usuario, mejorando la usabilidad y eficiencia de tareas.",
-            "Creación de wireframes, flujos de usuario y prototipos para definir y validar soluciones de producto escalables.",
-            "Colaboración continua con product owners y equipos de ingeniería para alinear necesidades de usuario, objetivos de negocio y viabilidad técnica.",
-            "Aceleración en la entrega de productos mediante flujos asistidos por IA, optimización de rendimiento y mejoras continuas en frontend.",
-            "Herramientas y tecnologías: Figma, UX Research, Prototipado, Sistemas de Diseño, Pruebas A/B, Herramientas de IA (Claude, Antigravity), HTML, CSS, JS."
-        ]
+            "Liderazgo en procesos de diseño de producto e ingeniería frontend end-to-end, desde investigación, descubrimiento y wireframing hasta diseño de interacción e implementación en producción.",
+            "Diseño e implementación de Sistemas de Diseño escalables, librerías de componentes reutilizables y arquitecturas frontend modernas que mejoran la consistencia visual y mantenibilidad del código.",
+            "Rediseño de flujos de trabajo complejos en interfaces intuitivas centradas en el usuario utilizando flujos design-to-code y estándares de diseño responsivo.",
+            "Colaboración estratégica con product managers, diseñadores e ingenieros para alinear necesidades del usuario, objetivos de negocio y viabilidad técnica.",
+            "Aceleración en la entrega de productos y rendimiento UX mediante flujos asistidos por IA, design tokens y optimización continua de frontend."
+        ],
+        tags: ["Figma", "Design Systems", "UX Research", "React", "Next.js", "TypeScript", "Tailwind CSS", "Storybook", "AI Tools (Claude, Antigravity)"]
     },
     {
         id: "tiendapp",
-        role: "UI/UX Designer and Frontend Developer",
-        roleEs: "Diseñadora UI/UX y Desarrolladora Frontend",
+        role: "Lead Design Engineer (UI/UX Lead & Frontend Developer)",
+        roleEs: "Líder de Diseño e Ingeniería UI/UX (Frontend & UI/UX Lead)",
         company: "TIENDAPP SAS",
         period: "Oct 2022 – Sep 2025",
         periodEs: "Oct 2022 – Sept 2025",
         description: [
-            "Led the UI/UX team, defining product design strategy and aligning user experience with business objectives.",
-            "Designed and optimized end-to-end user journeys across web and mobile platforms.",
-            "Built and scaled design systems to ensure consistency and improve design-to-development workflows.",
-            "Conducted research, usability testing, and experimentation to validate decisions and drive continuous improvement.",
-            "Tools & Tech: Figma, Adobe XD, Design Systems, User Flows, UX Strategy, Analytics, A/B Testing, HTML, CSS, JS, React, Next.js."
+            "Led the UI/UX design and frontend development team, defining product design strategy and aligning user experience with enterprise business goals.",
+            "Designed, prototyped, and optimized end-to-end user journeys and responsive interfaces across web and mobile platforms (React Native & Next.js).",
+            "Built, maintained, and scaled corporate Design Systems to ensure brand consistency and streamline cross-functional design-to-development workflows.",
+            "Conducted user research, usability testing, and data-driven experimentation (A/B testing) to validate product decisions and improve conversion metrics.",
+            "Mentored designers and frontend developers, establishing best practices for UX architecture, component design, and implementation quality."
         ],
         descriptionEs: [
-            "Liderazgo del equipo de UI/UX, definiendo la estrategia de diseño de producto y alineando la experiencia de usuario con objetivos de negocio.",
-            "Diseño y optimización de recorridos de usuario (user journeys) de extremo a extremo en plataformas web y móviles.",
-            "Construcción y escalado de sistemas de diseño para asegurar consistencia y agilizar los flujos design-to-development.",
-            "Investigación, pruebas de usabilidad y experimentación continua para validar decisiones e impulsar la mejora constante.",
-            "Herramientas y tecnologías: Figma, Adobe XD, Sistemas de Diseño, Flujos de Usuario, Estrategia UX, Analítica, Pruebas A/B, HTML, CSS, JS, React, Next.js."
-        ]
+            "Liderazgo del equipo de diseño UI/UX y desarrollo frontend, definiendo la estrategia de diseño de producto y alineando la experiencia de usuario con metas empresariales.",
+            "Diseño, prototipado y optimización de recorridos de usuario (user journeys) de extremo a extremo e interfaces responsivas en plataformas web y móviles (React Native & Next.js).",
+            "Construcción, mantenimiento y escalado de Sistemas de Diseño corporativos para garantizar consistencia de marca y agilizar flujos design-to-development.",
+            "Investigación de usuarios, pruebas de usabilidad y experimentación basada en datos (pruebas A/B) para validar decisiones e incrementar métricas de conversión.",
+            "Mentoría a diseñadores y desarrolladores frontend, estableciendo mejores prácticas de arquitectura UX, diseño de componentes y calidad de código."
+        ],
+        tags: ["Figma", "Adobe XD", "Design Systems", "User Flows", "UX Strategy", "React", "React Native", "TypeScript", "Next.js", "Analytics"]
     },
     {
         id: "alpina",
-        role: "Frontend Developer and UI Designer",
-        roleEs: "Desarrolladora Frontend y Diseñadora UI",
+        role: "Senior Frontend Engineer & UI Designer",
+        roleEs: "Ingeniera Frontend Senior & Diseñadora UI",
         company: "Alpina / Julius Connected 2 Grow",
         period: "Mar 2020 – Feb 2022",
         periodEs: "Mar 2020 – Feb 2022",
         description: [
-            "Designed and delivered high-conversion digital experiences for product launches and enterprise platforms, aligning user needs with business and brand objectives.",
-            "Simplified complex user journeys through improved information architecture, interaction design, and user flows.",
-            "Translated business requirements into scalable, user-centered solutions, ensuring consistency across multiple digital touchpoints.",
-            "Collaborated with cross-functional teams to implement solutions and continuously optimize performance based on data and analytics insights.",
-            "Tools & Tech: Figma, Adobe XD, Wireframing, Prototyping, HTML, CSS, JavaScript, PHP, CMS, Analytics, SEO."
+            "Designed and delivered high-conversion digital experiences and enterprise web platforms, aligning user needs with brand and business objectives.",
+            "Simplified complex user journeys through improved information architecture, interaction design, wireframes, and high-fidelity prototypes.",
+            "Translated business requirements into scalable, responsive frontend solutions, maintaining pixel-perfect fidelity and cross-browser performance.",
+            "Collaborated with multidisciplinary teams to build landing pages, corporate portals, and email campaigns optimized for accessibility, SEO, and performance."
         ],
         descriptionEs: [
-            "Diseño y entrega de experiencias digitales de alta conversión para lanzamientos de producto y plataformas empresariales.",
-            "Simplificación de flujos complejos de usuario mediante mejoras en arquitectura de información, diseño de interacción y navegación.",
-            "Traducción de requerimientos de negocio en soluciones escalables centradas en el usuario, garantizando consistencia multicanal.",
-            "Colaboración con equipos multidisciplinarios para implementar soluciones y optimizar el rendimiento técnico basado en analítica y datos.",
-            "Herramientas y tecnologías: Figma, Adobe XD, Wireframing, Prototipado, HTML, CSS, JavaScript, PHP, CMS, Analítica, SEO."
-        ]
+            "Diseño y entrega de experiencias digitales de alta conversión y plataformas web empresariales, alineando necesidades del usuario con objetivos de marca y negocio.",
+            "Simplificación de flujos complejos de usuario mediante mejoras en arquitectura de información, diseño de interacción, wireframes y prototipos de alta fidelidad.",
+            "Traducción de requerimientos comerciales en soluciones frontend responsivas y escalables, garantizando fidelidad pixel-perfect y rendimiento técnico.",
+            "Colaboración con equipos multidisciplinarios en el desarrollo de landing pages, portales corporativos y campañas optimizadas para accesibilidad, SEO y conversión."
+        ],
+        tags: ["Figma", "Adobe XD", "Wireframing", "Prototyping", "HTML5/CSS3", "JavaScript", "PHP", "CMS", "SEO", "Analytics"]
     },
     {
         id: "sproutloud",
-        role: "Web Developer",
-        roleEs: "Desarrolladora Web",
+        role: "Frontend Developer & Web Designer",
+        roleEs: "Desarrolladora Frontend & Diseñadora Web",
         company: "SproutLoud",
         period: "Apr 2019 – Oct 2019",
         periodEs: "Abr 2019 – Oct 2019",
         description: [
-            "Developed websites and landing pages using CMS-based architectures.",
-            "Improved performance through asset optimization and structured QA processes.",
-            "Collaborated with cross-functional teams delivering features in Agile environments.",
-            "Tools & Tech: CMS Platforms, HTML, CSS, JavaScript, QA, Performance Optimization."
+            "Developed responsive websites and high-converting landing pages combining visual design principles with CMS-based architectures.",
+            "Improved site performance and technical quality through asset optimization, responsive code refactoring, and structured QA testing.",
+            "Collaborated with designers and cross-functional teams to deliver accessible, user-friendly digital features in Agile sprint environments."
         ],
         descriptionEs: [
-            "Desarrollo de sitios web y landing pages utilizando arquitecturas basadas en CMS.",
-            "Optimización de rendimiento a través de compresión de recursos y procesos estructurados de aseguramiento de calidad (QA).",
-            "Colaboración con equipos multidisciplinarios para la entrega continua de funcionalidades en entornos Ágiles.",
-            "Herramientas y tecnologías: Plataformas CMS, HTML, CSS, JavaScript, QA, Optimización de Rendimiento."
-        ]
+            "Desarrollo de sitios web responsivos y landing pages de alta conversión combinando principios de diseño visual con arquitecturas CMS.",
+            "Optimización de rendimiento web y calidad técnica a través de compresión de recursos, refactorización de código responsivo y pruebas de QA.",
+            "Colaboración con diseñadores y equipos multidisciplinarios para entregar funcionalidades digitales accesibles en entornos ágiles."
+        ],
+        tags: ["HTML5", "CSS3", "JavaScript", "CMS", "Responsive Design", "QA", "Performance Optimization"]
     },
     {
         id: "samsung",
-        role: "Content Manager Specialist",
-        roleEs: "Especialista de Contenido Web",
+        role: "Content Manager Specialist & Frontend Lead",
+        roleEs: "Especialista de Contenido Web & Líder Frontend",
         company: "Samsung",
         period: "Sep 2018 – Apr 2019",
         periodEs: "Sept 2018 – Abr 2019",
         description: [
-            "Optimized e-commerce experiences across multiple retail platforms, improving usability and content structure.",
-            "Designed and implemented product page improvements aligned with conversion and business goals.",
-            "Bridged design and development teams to ensure consistent and high-quality user experiences.",
-            "Managed digital content strategies supported by analytics and performance insights.",
-            "Tools & Tech: CMS, Analytics, UX Optimization, HTML, CSS, Content Strategy."
+            "Optimized e-commerce experiences across retail platforms, improving content structure, visual hierarchy, and user journey flow.",
+            "Designed and implemented product page (PDP) enhancements aligned with conversion strategies and global launch guidelines.",
+            "Served as a bridge between design, marketing, and development teams to ensure consistent, high-quality user experiences and content governance."
         ],
         descriptionEs: [
-            "Optimización de experiencias de comercio electrónico en múltiples plataformas retail, mejorando la usabilidad y estructura de contenido.",
-            "Diseño e implementación de mejoras en páginas de producto (PDP) alineadas con metas de conversión y negocio.",
-            "Conexión efectiva entre equipos de diseño y desarrollo para garantizar experiencias de usuario consistentes y de alta calidad.",
-            "Gestión de estrategias de contenido digital respaldadas por analítica y métricas de rendimiento.",
-            "Herramientas y tecnologías: CMS, Analítica, Optimización UX, HTML, CSS, Estrategia de Contenido."
-        ]
+            "Optimización de experiencias de comercio electrónico en plataformas retail, mejorando la estructura de contenido, jerarquía visual y flujos de usuario.",
+            "Diseño e implementación de mejoras en páginas de producto (PDP) alineadas con estrategias de conversión y guías globales de marca.",
+            "Conexión efectiva entre equipos de diseño, marketing e ingeniería para garantizar experiencias de usuario de alta calidad y gobernanza de contenido."
+        ],
+        tags: ["Adobe Experience Manager", "CMS", "UX Optimization", "E-commerce", "HTML/CSS", "Analytics"]
     },
     {
         id: "ita-latam",
-        role: "Interactive Designer & Frontend Developer",
-        roleEs: "Diseñadora Interactiva & Desarrolladora Frontend",
-        company: "ITA LATAM",
+        role: "Lead Interactive Designer & Frontend Engineer",
+        roleEs: "Líder de Diseño Interactivo e Ingeniería Frontend",
+        company: "ITA LATAM / El Colombiano",
         period: "Feb 2015 – Sep 2018",
         periodEs: "Feb 2015 – Sept 2018",
         description: [
-            "Designed and developed responsive websites and e-commerce platforms across multiple industries.",
-            "Created user flows, wireframes, and interfaces, translating them into functional frontend implementations.",
-            "Implemented SEO, analytics tracking, and performance optimization strategies.",
-            "Worked closely with clients and teams to align user experience with business and technical requirements.",
-            "Tools & Tech: WordPress, Shopify, PHP, JavaScript, HTML, CSS, SEO, Analytics, UX/UI Design."
+            "Led the design and development of responsive websites, e-commerce stores, and interactive digital products for clients across multiple industries.",
+            "Created wireframes, user flows, and custom UI components before translating them into production-ready frontend code.",
+            "Implemented Design Systems, SEO strategies, analytics tracking, and performance optimization practices for long-term scalability."
         ],
         descriptionEs: [
-            "Diseño y desarrollo de sitios web responsivos y plataformas e-commerce para clientes de diversas industrias.",
-            "Creación de flujos de usuario, wireframes e interfaces, traduciéndolas en implementaciones frontend funcionales.",
-            "Implementación de estrategias de SEO, seguimiento de analítica y optimización de rendimiento técnico.",
-            "Trabajo colaborativo con clientes y equipos para alinear la experiencia de usuario con requerimientos técnicos y comerciales.",
-            "Herramientas y tecnologías: WordPress, Shopify, PHP, JavaScript, HTML, CSS, SEO, Analítica, Diseño UX/UI."
-        ]
+            "Liderazgo en el diseño y desarrollo de sitios web responsivos, tiendas e-commerce y productos digitales interactivos para diversas industrias.",
+            "Creación de wireframes, flujos de usuario y componentes personalizados de UI antes de traducirlos en código frontend listo para producción.",
+            "Implementación de Sistemas de Diseño, estrategias SEO, métricas de analítica y optimización de rendimiento para sostenibilidad a largo plazo."
+        ],
+        tags: ["WordPress", "Shopify", "PHP", "JavaScript", "HTML/CSS", "Figma", "Adobe XD", "SEO", "Analytics"]
     },
     {
         id: "miguelo-linkapedia",
@@ -155,17 +148,16 @@ export const experiences: ExperienceItem[] = [
         period: "Sep 2013 – Sep 2014",
         periodEs: "Sept 2013 – Sept 2014",
         description: [
-            "Designed and developed interfaces for e-commerce and digital platforms.",
-            "Built responsive landing pages ensuring usability and visual consistency.",
-            "Supported branding and digital campaigns through integrated design and frontend execution.",
-            "Tools & Tech: HTML, CSS, JavaScript, UI Design, Branding, CMS."
+            "Designed and developed user interfaces for e-commerce sites, corporate platforms, and digital marketing campaigns.",
+            "Built reusable UI components and responsive landing pages ensuring visual consistency and intuitive user interaction.",
+            "Supported branding initiatives from initial visual concept to functional frontend deployment."
         ],
         descriptionEs: [
-            "Diseño y desarrollo de interfaces para plataformas digitales y de comercio electrónico.",
-            "Construcción de landing pages responsivas garantizando usabilidad y consistencia visual.",
-            "Soporte a campañas de branding y marketing digital mediante diseño integrado y ejecución frontend.",
-            "Herramientas y tecnologías: HTML, CSS, JavaScript, Diseño UI, Branding, CMS."
-        ]
+            "Diseño y desarrollo de interfaces de usuario para sitios e-commerce, plataformas corporativas y campañas de marketing digital.",
+            "Construcción de componentes reutilizables de UI y landing pages responsivas garantizando consistencia visual e interacción intuitiva.",
+            "Soporte a iniciativas de marca desde el concepto visual inicial hasta el despliegue frontend funcional."
+        ],
+        tags: ["HTML5", "CSS3", "JavaScript", "UI Design", "Branding", "Responsive Design", "Photoshop", "Illustrator"]
     },
     {
         id: "gea-cordesarrollo",
@@ -175,17 +167,14 @@ export const experiences: ExperienceItem[] = [
         period: "2013 – 2014",
         periodEs: "2013 – 2014",
         description: [
-            "Designed editorial and digital assets with strong visual hierarchy and communication clarity.",
-            "Contributed to early digital experiences by creating web-ready visual assets.",
-            "Supported multidisciplinary teams across print and digital initiatives.",
-            "Tools & Tech: Adobe Suite, Visual Design, Layout, Digital Assets."
+            "Designed editorial, branding, and digital assets with strong visual hierarchy and clear communication standards.",
+            "Created web-ready graphics and visual resources supporting early digital user experiences."
         ],
         descriptionEs: [
-            "Diseño de piezas editoriales y digitales con jerarquía visual sólida y claridad comunicativa.",
-            "Creación de recursos visuales optimizados para la web apoyando primeras experiencias digitales.",
-            "Soporte a equipos multidisciplinarios en iniciativas impresas y digitales.",
-            "Herramientas y tecnologías: Adobe Suite, Diseño Visual, Maquetación, Recursos Digitales."
-        ]
+            "Diseño de piezas editoriales, de marca y digitales con jerarquía visual sólida y altos estándares de comunicación.",
+            "Creación de recursos gráficos optimizados para la web apoyando las primeras experiencias digitales de usuario."
+        ],
+        tags: ["Adobe Creative Suite", "Visual Design", "Branding", "Layout", "Digital Assets"]
     }
 ];
 
@@ -228,7 +217,6 @@ export default function Experience({ onBack, language = 'en' }: { onBack: () => 
     const t = {
         title: language === 'en' ? 'Experience' : 'Experiencia',
         back: language === 'en' ? 'Back' : 'Volver',
-        contact: language === 'en' ? 'Contact:' : 'Contacto:',
         education: language === 'en' ? 'Education' : 'Educación',
         edu1_deg: language === 'en' ? 'Digital Marketing' : 'Marketing Digital',
         edu1_inst: language === 'en' ? 'EAFIT University / Diploma' : 'Universidad EAFIT / Diplomado',
@@ -288,7 +276,8 @@ export default function Experience({ onBack, language = 'en' }: { onBack: () => 
                                         {role}
                                     </h3>
                                     <div className="text-lg text-slate-700 font-medium mb-4">{exp.company}</div>
-                                    <ul className="space-y-2">
+                                    
+                                    <ul className="space-y-2 mb-4">
                                         {description.map((item, i) => (
                                             <li key={i} className="text-slate-600 leading-relaxed text-sm flex gap-2">
                                                 <span className="text-slate-400 mt-1.5 min-w-[4px] h-[4px] bg-slate-400 rounded-full block"></span>
@@ -296,6 +285,20 @@ export default function Experience({ onBack, language = 'en' }: { onBack: () => 
                                             </li>
                                         ))}
                                     </ul>
+
+                                    {/* Tech & Tools Tags */}
+                                    {exp.tags && exp.tags.length > 0 && (
+                                        <div className="flex flex-wrap gap-1.5 pt-1">
+                                            {exp.tags.map((tag, tIdx) => (
+                                                <span 
+                                                    key={tIdx} 
+                                                    className="px-2.5 py-1 rounded-md text-[11px] font-semibold glass-panel text-slate-800 border border-white/50 bg-white/30 shadow-xs hover:border-petite-orchid/50 transition-colors"
+                                                >
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
                                 </motion.div>
                             );
                         })}
@@ -329,3 +332,4 @@ export default function Experience({ onBack, language = 'en' }: { onBack: () => 
         </div>
     );
 }
+

@@ -198,10 +198,12 @@ export default function Home() {
 
   const t = {
     greeting: language === 'en' ? "Hello, I'm" : "Hola, soy",
-    expert: language === 'en' ? "With over +14 years of experience in UI/UX design and front-end development, I bridge the gap between complex logic and design. Crafting the future through design, interfaces and code." : "Con más de +14 años de experiencia en diseño UI/UX y desarrollo front-end, uno la brecha entre la lógica compleja y el diseño. Creando el futuro a través del diseño, interfaces y código.",
+    expert: language === 'en' 
+      ? "Senior Design Engineer with 14+ years of multi-domain experience bridging UI/UX product design and clean frontend engineering. Combining system thinking, Figma design systems, and modern React/Next.js architectures." 
+      : "Diseñadora e Ingeniera de Software Senior con +14 años de experiencia uniendo el diseño de producto UI/UX y la ingeniería frontend limpia. Combinando pensamiento sistémico, sistemas de diseño en Figma y arquitecturas React/Next.js.",
     placeholder: language === 'en' ? "Explore María's expertise..." : "Explora la experiencia de María...",
-    role1: language === 'en' ? "UiX Design" : "Diseño UiX",
-    role2: language === 'en' ? "Front-end Development" : "Desarrollo Front-end",
+    role1: language === 'en' ? "Product & UI/UX Design" : "Diseño de Producto & UI/UX",
+    role2: language === 'en' ? "Frontend Engineering" : "Ingeniería Frontend",
     expTitle: language === 'en' ? "Experience" : "Experiencia",
     expDesc: language === 'en' ? "14+ Years Professional Journey" : "14+ Años de Trayectoria",
     skillsTitle: language === 'en' ? "Skills" : "Habilidades",

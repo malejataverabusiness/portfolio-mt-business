@@ -17,7 +17,7 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
         title: language === 'en' ? 'About María Tavera | MTB Labs' : 'Sobre María Tavera | MTB Labs',
         back: language === 'en' ? 'Back' : 'Volver',
         greeting: language === 'en' ? 'Hello, I am María Alejandra Tavera.' : 'Hola, soy María Alejandra Tavera.',
-        roleBadge: language === 'en' ? 'Senior Web Designer & Front-End Developer Lead — MTB Labs' : 'Diseñadora & Programadora Web Senior | UI/UX Lead — MTB Labs',
+        roleBadge: language === 'en' ? 'Senior Design Engineer (Frontend Engineer | UI/UX Designer) — MTB Labs' : 'Diseñadora & Ingeniera de Software Senior (UI/UX & Frontend) — MTB Labs',
         bio1: language === 'en' 
             ? 'I am a senior web designer and front-end programmer with over 14 years of hands-on experience crafting enterprise-grade digital products, design systems, e-commerce platforms, and high-performance web applications.' 
             : 'Soy diseñadora y programadora web senior con más de 14 años de experiencia creando productos digitales empresariales, sistemas de diseño, plataformas e-commerce y aplicaciones web de alto rendimiento.',
