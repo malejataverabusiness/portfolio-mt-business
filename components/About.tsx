@@ -108,7 +108,7 @@ export default function About({ onBack, language = 'en' }: { onBack: () => void,
                             <div>
                                 <h4 className="text-xs font-bold uppercase tracking-widest text-slate-900 mb-4">{t.clientsTitle}</h4>
                                 <ul className="flex flex-wrap gap-2 text-slate-600">
-                                    {['TiendApp SAS', 'Alpina', 'SproutLoud', 'Samsung', 'El Colombiano', 'Grupo Éxito', 'Yuxi Global', 'Linkapedia'].map((client, idx) => (
+                                    {['TiendApp SAS', 'Santuario App', 'Alpina', 'Cabaña Alpina', 'UpCard', 'Nova', 'Corez', 'SproutLoud', 'Samsung', 'El Colombiano', 'Grupo Éxito', 'Linkapedia'].map((client, idx) => (
                                         <li key={idx} className="glass-panel px-3 py-1 rounded-full text-xs font-medium border border-white/40">
                                             {client}
                                         </li>

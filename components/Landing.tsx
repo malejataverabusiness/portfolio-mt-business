@@ -20,8 +20,8 @@ export default function Landing({ onEnter, language }: LandingProps) {
             : "Con más de 14 años de experiencia multidisciplinaria, uno el diseño de interfaces de alto impacto (UI/UX), la programación frontend limpia y escalable (React, Next.js, TypeScript) y la estrategia digital. La solución integral y la mejor opción estratégica para empresas.",
 
         // Logos
-        trustedBy: language === 'en' ? "Companies I've Worked With" : "Empresas con las que he Trabajado",
-        clients: ["TiendApp SAS", "Alpina", "SproutLoud", "Samsung", "Ita Latam", "El Colombiano", "Grupo Éxito", "Yuxi Global"],
+        trustedBy: language === 'en' ? "Companies & Projects I've Worked With" : "Empresas y Proyectos Destacados",
+        clients: ["TiendApp SAS", "Alpina", "Santuario App", "UpCard", "Nova", "Corez", "SproutLoud", "Samsung", "El Colombiano", "Grupo Éxito", "Yuxi Global"],
 
         // Gallery
         galleryTitle: language === 'en' ? "Featured Projects & Design Systems" : "Proyectos Destacados y Sistemas de Diseño",
