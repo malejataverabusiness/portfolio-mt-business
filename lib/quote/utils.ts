@@ -57,7 +57,7 @@ export function getConfidenceLabel(
  */
 export function getConfidenceCategory(
   score: number
-): PublicQuoteResult["confidence_label"] {
+): "approximate" | "estimated" | "detailed" {
   if (score <= CONFIDENCE_THRESHOLDS.approximate.max) return "approximate";
   if (score <= CONFIDENCE_THRESHOLDS.estimated.max) return "estimated";
   return "detailed";
@@ -67,9 +67,10 @@ export function getConfidenceCategory(
  * Generate a human-readable quote reference number.
  * Format: MTB-Q-YYYY-NNNN
  */
-export function generateReferenceNumber(sequenceNumber: number): string {
+export function generateReferenceNumber(sequenceNumber?: number): string {
   const year = new Date().getFullYear();
-  const padded = String(sequenceNumber).padStart(4, "0");
+  const seq = sequenceNumber ?? Math.floor(Math.random() * 9000) + 1000;
+  const padded = String(seq).padStart(4, "0");
   return `${QUOTE_REF_PREFIX}-${year}-${padded}`;
 }
 

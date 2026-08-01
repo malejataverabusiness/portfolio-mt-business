@@ -1,47 +1,9 @@
 // =============================================================================
-// MTB Quote — Type Barrel Export
+// MTB Quote V1 — Barrel Export for Domain Types
 // =============================================================================
 
-export type {
-  Service,
-  Deliverable,
-  ServiceWithDeliverables,
-  ServiceInsert,
-  DeliverableInsert,
-  ServiceUpdate,
-  DeliverableUpdate,
-} from "./service";
-
-export type {
-  RateCard,
-  ComplexityTier,
-  PricingRule,
-  PricingRuleConfig,
-  ComplexityMultiplierConfig,
-  VolumeDiscountConfig,
-  UrgencySurchargeConfig,
-  BundleDiscountConfig,
-  MarginProfile,
-  RateCardInsert,
-  RateCardUpdate,
-  PricingRuleInsert,
-  PricingRuleUpdate,
-  MarginProfileInsert,
-  MarginProfileUpdate,
-} from "./pricing";
-
-export type {
-  QuoteStatus,
-  QuoteClientInfo,
-  QuoteLineItem,
-  Quote,
-  QuoteSnapshot,
-  QuoteRevision,
-  AuditLogEntry,
-  PublicQuoteResult,
-  PublicLineItem,
-  QuoteFormItem,
-  QuoteFormPayload,
-  QuoteInsert,
-  QuoteUpdate,
-} from "./quote";
+export * from "./service";
+export * from "./categories";
+export * from "./roles";
+export * from "./pricing";
+export * from "./quote";
