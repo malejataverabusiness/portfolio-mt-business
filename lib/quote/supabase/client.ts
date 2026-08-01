@@ -1,0 +1,15 @@
+// =============================================================================
+// MTB Quote — Supabase Browser Client
+// =============================================================================
+// Used in client components ("use client") for public-facing features.
+// This client uses the anon key and respects RLS policies.
+
+import { createBrowserClient } from "@supabase/ssr";
+
+export function createClient() {
+  return createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY)!
+  );
+}
