@@ -7,3 +7,5 @@ export * from "./categories";
 export * from "./roles";
 export * from "./pricing";
 export * from "./quote";
+export * from "./proposal";
+export * from "./analytics";

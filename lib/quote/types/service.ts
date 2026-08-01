@@ -5,13 +5,14 @@
 /** A top-level service category offered by MTB Labs */
 export interface Service {
   id: string;
+  category_id?: string;
   name: string;
   name_es: string;
-  slug: string;
-  description: string;
-  description_es: string;
-  icon: string; // Material Symbols icon name
-  display_order: number;
+  slug?: string;
+  description?: string;
+  description_es?: string;
+  icon?: string;
+  display_order?: number;
   is_active: boolean;
   created_at: string;
   updated_at: string;
@@ -29,6 +30,7 @@ export interface Deliverable {
   /** Unit of measurement: "project", "page", "hour", "component", etc. */
   unit: string;
   unit_es: string;
+  estimated_hours?: number;
   /** Default quantity when added to a quote */
   default_quantity: number;
   display_order: number;

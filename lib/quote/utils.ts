@@ -22,6 +22,22 @@ export function formatCurrency(
 }
 
 /**
+ * Formats an exact COP number as standard currency string.
+ * Example: 6247391 => "$6,247,391 COP"
+ */
+export function formatCopCurrency(amount: number): string {
+  const rounded = Math.round(amount);
+  const formatted = new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: "COP",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(rounded);
+
+  return `${formatted} COP`;
+}
+
+/**
  * Format a price range (e.g., "$2,000 – $4,500").
  */
 export function formatPriceRange(

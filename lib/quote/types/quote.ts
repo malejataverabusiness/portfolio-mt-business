@@ -4,8 +4,20 @@
 
 import type { Service, Deliverable } from "./service";
 
+export interface Client {
+  id: string;
+  name: string;
+  email?: string;
+  company?: string;
+  phone?: string;
+  referral_source?: string;
+  created_at: string;
+  updated_at?: string;
+}
+
 export type QuoteStatus =
   | "draft"
+  | "submitted"
   | "under_review"
   | "adjusted"
   | "approved"

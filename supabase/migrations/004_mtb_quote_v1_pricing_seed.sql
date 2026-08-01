@@ -1,5 +1,5 @@
 -- =============================================================================
--- MTB Quote V1 — Comprehensive Initial Pricing Seed (seed_v1.sql)
+-- MTB Quote V1 — Migration 004: Comprehensive Initial Pricing Seed
 -- =============================================================================
 -- Seeds all 25 roles (24 external + 1 MTB internal) across seniority levels,
 -- their COP hourly rates, categories, and configurable pricing settings.
@@ -13,61 +13,6 @@ ALTER TABLE roles ADD CONSTRAINT roles_seniority_check CHECK (seniority IN ('jun
 
 ALTER TABLE role_rates DROP CONSTRAINT IF EXISTS uq_role_rates_role_rate;
 ALTER TABLE role_rates ADD CONSTRAINT uq_role_rates_role_rate UNIQUE(role_id, hourly_rate_cop);
-
-ALTER TABLE quotes ADD COLUMN IF NOT EXISTS snapshot JSONB DEFAULT NULL;
-
-CREATE TABLE IF NOT EXISTS audit_logs (
-  id            UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  quote_id      UUID NOT NULL REFERENCES quotes(id) ON DELETE CASCADE,
-  user_id       UUID DEFAULT NULL,
-  action        TEXT NOT NULL DEFAULT 'UPDATE',
-  field_changed TEXT NOT NULL,
-  old_value     TEXT,
-  new_value     TEXT,
-  created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS proposals (
-  id                UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  quote_id          UUID REFERENCES quotes(id) ON DELETE SET NULL,
-  proposal_number   TEXT NOT NULL UNIQUE,
-  title             TEXT NOT NULL,
-  client_name       TEXT NOT NULL,
-  client_email      TEXT,
-  client_company    TEXT,
-  template_id       TEXT NOT NULL DEFAULT 'standard',
-  version           INT NOT NULL DEFAULT 1,
-  status            TEXT NOT NULL DEFAULT 'draft',
-  currency          TEXT NOT NULL DEFAULT 'COP',
-  total_investment  DECIMAL(14,2) NOT NULL DEFAULT 0,
-  valid_until       TIMESTAMPTZ,
-  content           JSONB NOT NULL DEFAULT '{}'::jsonb,
-  created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at        TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS proposal_versions (
-  id               UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  proposal_id      UUID NOT NULL REFERENCES proposals(id) ON DELETE CASCADE,
-  version_number   INT NOT NULL,
-  total_investment DECIMAL(14,2) NOT NULL DEFAULT 0,
-  content_snapshot JSONB NOT NULL DEFAULT '{}'::jsonb,
-  created_by       UUID DEFAULT NULL,
-  created_at       TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS actual_costs (
-  id                       UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  quote_id                 UUID NOT NULL UNIQUE REFERENCES quotes(id) ON DELETE CASCADE,
-  actual_hours             DECIMAL(10,2) NOT NULL DEFAULT 0,
-  actual_freelancer_cost   DECIMAL(14,2) NOT NULL DEFAULT 0,
-  actual_duration_weeks    INT NOT NULL DEFAULT 0,
-  actual_other_costs       DECIMAL(14,2) NOT NULL DEFAULT 0,
-  project_outcome          TEXT NOT NULL DEFAULT 'completed',
-  notes                    TEXT,
-  recorded_at              TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at               TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
 
 ALTER TABLE pricing_settings
   ADD COLUMN IF NOT EXISTS mtb_standard_rate_cop DECIMAL(14,2) NOT NULL DEFAULT 140000.00,

@@ -45,6 +45,7 @@ export const COMPLEXITY_DESCRIPTIONS = {
 /** Quote status labels (bilingual) */
 export const QUOTE_STATUS_LABELS = {
   draft: { en: "Draft", es: "Borrador" },
+  submitted: { en: "Submitted", es: "Enviado" },
   under_review: { en: "Under Review", es: "En Revisión" },
   adjusted: { en: "Adjusted", es: "Ajustado" },
   approved: { en: "Approved", es: "Aprobado" },
@@ -57,6 +58,7 @@ export const QUOTE_STATUS_LABELS = {
 /** Quote status colors for UI badges */
 export const QUOTE_STATUS_COLORS: Record<string, string> = {
   draft: "bg-slate-200 text-slate-700",
+  submitted: "bg-sky-100 text-sky-800",
   under_review: "bg-amber-100 text-amber-800",
   adjusted: "bg-blue-100 text-blue-800",
   approved: "bg-emerald-100 text-emerald-800",
@@ -77,7 +79,11 @@ export const CONFIDENCE_THRESHOLDS = {
 export const ADMIN_NAV_ITEMS = [
   { href: "/quote/admin", label: { en: "Dashboard", es: "Panel" }, icon: "dashboard" },
   { href: "/quote/admin/quotes", label: { en: "Quotes", es: "Cotizaciones" }, icon: "request_quote" },
-  { href: "/quote/admin/pricing", label: { en: "Pricing", es: "Precios" }, icon: "payments" },
-  { href: "/quote/admin/services", label: { en: "Services", es: "Servicios" }, icon: "category" },
-  { href: "/quote/admin/proposals", label: { en: "Proposals", es: "Propuestas" }, icon: "description" },
+  { href: "/quote/admin/roles", label: { en: "Roles", es: "Roles" }, icon: "badge" },
+  { href: "/quote/admin/rates", label: { en: "Rate Cards", es: "Matriz Tarifas" }, icon: "sell" },
+  { href: "/quote/admin/deliverables", label: { en: "Deliverables", es: "Entregables" }, icon: "inventory_2" },
+  { href: "/quote/admin/services", label: { en: "Services & Categories", es: "Servicios y Cat." }, icon: "category" },
+  { href: "/quote/admin/pricing", label: { en: "Global Settings", es: "Config. Precios" }, icon: "tune" },
+  { href: "/quote/admin/clients", label: { en: "Clients", es: "Clientes" }, icon: "group" },
+  { href: "/quote/admin/analytics", label: { en: "Analytics & Calibration", es: "Analítica y Calibración" }, icon: "analytics" },
 ] as const;

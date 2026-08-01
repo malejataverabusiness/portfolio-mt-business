@@ -57,6 +57,66 @@ export async function getPublicServiceCatalog(): Promise<CatalogResponse> {
 }
 
 /**
+ * Calculates a public estimate preview range (COP) without creating a quote record yet.
+ * Executes server-only COP pricing math.
+ */
+export async function calculatePublicEstimatePreview(
+  payload: PublicQuoteInput
+) {
+  if (!payload || !Array.isArray(payload.items) || payload.items.length === 0) {
+    throw new Error("Invalid request: At least one deliverable item is required.");
+  }
+
+  const supabase = await createClient();
+
+  const { data: settingsData } = await supabase
+    .from("pricing_settings")
+    .select("*")
+    .eq("is_active", true)
+    .limit(1)
+    .single();
+
+  const defaultSettings: PricingSettings = settingsData || {
+    id: "default",
+    default_margin: 0.35,
+    default_contingency: 0.1,
+    account_mgmt_rate: 0.1,
+    project_mgmt_rate: 0.1,
+    min_project_value_cop: 3000000,
+    is_active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  const mtbHourlyRateCop = 140000;
+  const freelancerHourlyRateCop = 110000;
+
+  const engineItems = payload.items.map((item) => {
+    const baseHours = 20;
+    return {
+      deliverableId: item.deliverable_id,
+      quantity: item.quantity,
+      complexity: item.complexity as ComplexityLevel,
+      mtbLaborHours: baseHours * 0.7,
+      mtbHourlyRateCop,
+      freelancerHours: baseHours * 0.3,
+      freelancerHourlyRateCop,
+    };
+  });
+
+  const result = calculateQuoteV1({
+    items: engineItems,
+    settings: defaultSettings,
+  });
+
+  return {
+    low_estimate_cop: result.customerRange.lowCop,
+    high_estimate_cop: result.customerRange.highCop,
+    formatted_range: result.customerRange.formattedRange,
+  };
+}
+
+/**
  * Submits a public quote request, executes the server-only COP pricing math,
  * stores the quote in draft status, and returns a rounded customer range.
  */
@@ -193,22 +253,32 @@ export async function submitPublicQuoteRequest(
 export async function getPublicQuoteByReference(ref: string) {
   const supabase = await createClient();
 
-  const { data, error } = await supabase
-    .from("quotes")
-    .select(
-      "id, reference_number, status, currency, final_price, valid_for_days, created_at"
-    )
-    .eq("reference_number", ref)
-    .single();
+  // Prefer calling secure definer RPC to respect hardened RLS
+  const { data: rpcData } = await supabase.rpc("get_public_quote_summary", {
+    ref_num: ref,
+  });
 
-  if (error || !data) {
-    return null;
+  let quoteSummary = rpcData && rpcData.length > 0 ? rpcData[0] : null;
+
+  if (!quoteSummary) {
+    const { data, error } = await supabase
+      .from("quotes")
+      .select(
+        "id, reference_number, status, currency, final_price, valid_for_days, created_at"
+      )
+      .eq("reference_number", ref)
+      .single();
+
+    if (error || !data) {
+      return null;
+    }
+    quoteSummary = data;
   }
 
-  const range = generateCustomerFacingRange(data.final_price);
+  const range = generateCustomerFacingRange(quoteSummary.final_price);
 
   return {
-    ...data,
+    ...quoteSummary,
     formatted_range: range.formattedRange,
   };
 }
