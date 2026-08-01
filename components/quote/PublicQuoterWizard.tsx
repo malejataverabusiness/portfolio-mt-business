@@ -3,11 +3,19 @@
 import { useEffect, useState } from "react";
 import {
   getPublicServiceCatalog,
+  getServiceScopeQuestions,
   calculatePublicEstimatePreview,
   submitPublicQuoteRequest,
   type CatalogResponse,
 } from "@/lib/quote/actions/public";
-import type { Category, Service, Deliverable, ComplexityLevel } from "@/lib/quote/types";
+import type {
+  Category,
+  Service,
+  Deliverable,
+  ComplexityLevel,
+  ScopeQuestion,
+  ScopeAnswers,
+} from "@/lib/quote/types";
 
 interface PublicQuoterWizardProps {
   language?: "en" | "es";
@@ -26,16 +34,11 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
 
-  // Dynamic answers
-  const [platforms, setPlatforms] = useState<string[]>(["Instagram", "Meta Ads"]);
-  const [postsCount, setPostsCount] = useState<number>(8);
-  const [reelsCount, setReelsCount] = useState<number>(4);
-  const [pageCount, setPageCount] = useState<number>(10);
-  const [websiteType, setWebsiteType] = useState<string>("Corporate Site");
-  const [designScope, setDesignScope] = useState<string[]>([
-    "UI Visual Design",
-    "Wireframes",
-  ]);
+  // Dynamic scope questions state
+  const [scopeQuestions, setScopeQuestions] = useState<ScopeQuestion[]>([]);
+  const [loadingQuestions, setLoadingQuestions] = useState(false);
+  const [scopeAnswers, setScopeAnswers] = useState<ScopeAnswers>({});
+
   const [complexity, setComplexity] = useState<ComplexityLevel>("standard");
   const [urgency, setUrgency] = useState<string>("normal");
 
@@ -78,6 +81,42 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
     fetchCatalog();
   }, []);
 
+  // Fetch scope questions when service is selected
+  useEffect(() => {
+    if (!selectedService) {
+      setScopeQuestions([]);
+      setScopeAnswers({});
+      return;
+    }
+
+    const loadQuestions = async () => {
+      setLoadingQuestions(true);
+      try {
+        const questions = await getServiceScopeQuestions(selectedService.id);
+        setScopeQuestions(questions);
+
+        // Initialize default answers
+        const initialAnswers: ScopeAnswers = {};
+        questions.forEach((q) => {
+          if (q.question_type === "multi_select") {
+            initialAnswers[q.id] = [];
+          } else if (q.question_type === "boolean") {
+            initialAnswers[q.id] = "false";
+          } else if (q.options.length > 0) {
+            initialAnswers[q.id] = q.options[0].value;
+          }
+        });
+        setScopeAnswers(initialAnswers);
+      } catch (err) {
+        console.error("Failed to load scope questions:", err);
+      } finally {
+        setLoadingQuestions(false);
+      }
+    };
+
+    loadQuestions();
+  }, [selectedService]);
+
   const availableServices = catalog?.services.filter(
     (s) => s.category_id === selectedCategory?.id
   ) || [];
@@ -87,18 +126,18 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
     try {
       const deliverable =
         catalog?.deliverables.find(
-          (d) => d.id === selectedService?.id || d.is_active
+          (d) => d.service_id === selectedService?.id || d.is_active
         ) || catalog?.deliverables[0];
 
       const delivId = deliverable?.id || "deliv-default";
-      let quantity = 1;
-      if (postsCount > 10 || pageCount > 15) quantity = 2;
 
       const preview = await calculatePublicEstimatePreview({
+        service_id: selectedService?.id,
+        scope_answers: scopeAnswers,
         items: [
           {
             deliverable_id: delivId,
-            quantity,
+            quantity: 1,
             complexity,
           },
         ],
@@ -131,7 +170,7 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
     setSubmitting(true);
     try {
       const deliverable =
-        catalog?.deliverables.find((d) => d.is_active) ||
+        catalog?.deliverables.find((d) => d.service_id === selectedService?.id || d.is_active) ||
         catalog?.deliverables[0];
       const delivId = deliverable?.id || "deliv-default";
 
@@ -140,6 +179,8 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
         client_email: clientEmail,
         client_company: clientCompany,
         client_phone: clientPhone,
+        service_id: selectedService?.id,
+        scope_answers: scopeAnswers,
         items: [
           {
             deliverable_id: delivId,
@@ -443,179 +484,148 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
             </p>
           </div>
 
-          {/* DYNAMIC QUESTION SET A: Digital Marketing & Social Media */}
-          {selectedCategory?.slug.includes("marketing") ||
-          selectedService?.name.toLowerCase().includes("social") ? (
-            <div className="space-y-6 bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-slate-200/80 text-xs">
-              <div>
-                <label className="block font-bold text-slate-900 mb-2">
-                  {language === "en" ? "Target Platforms" : "Plataformas Objetivo"}
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "Instagram",
-                    "TikTok",
-                    "LinkedIn",
-                    "Meta Ads",
-                    "YouTube",
-                  ].map((plat) => {
-                    const active = platforms.includes(plat);
-                    return (
-                      <button
-                        key={plat}
-                        type="button"
-                        onClick={() =>
-                          setPlatforms(
-                            active
-                              ? platforms.filter((p) => p !== plat)
-                              : [...platforms, plat]
-                          )
-                        }
-                        aria-pressed={active}
-                        className={`px-3 py-1.5 rounded-xl font-semibold transition-all focus-visible:ring-2 focus-visible:ring-slate-900 ${
-                          active
-                            ? "bg-slate-900 text-white shadow-sm"
-                            : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                        }`}
-                      >
-                        {plat}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="postsSelect" className="block font-bold text-slate-900 mb-2">
-                    {language === "en" ? "Monthly Static Posts" : "Publicaciones Mensuales"}
-                  </label>
-                  <select
-                    id="postsSelect"
-                    value={postsCount}
-                    onChange={(e) => setPostsCount(Number(e.target.value))}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus-visible:ring-2 focus-visible:ring-slate-900"
-                  >
-                    <option value={4}>4 posts / month</option>
-                    <option value={8}>8 posts / month</option>
-                    <option value={12}>12 posts / month</option>
-                    <option value={20}>20+ posts / month</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="reelsSelect" className="block font-bold text-slate-900 mb-2">
-                    {language === "en"
-                      ? "Monthly Reels / Short Video"
-                      : "Reels / Videos Cortos Mensuales"}
-                  </label>
-                  <select
-                    id="reelsSelect"
-                    value={reelsCount}
-                    onChange={(e) => setReelsCount(Number(e.target.value))}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus-visible:ring-2 focus-visible:ring-slate-900"
-                  >
-                    <option value={2}>2 Reels / month</option>
-                    <option value={4}>4 Reels / month</option>
-                    <option value={8}>8 Reels / month</option>
-                    <option value={15}>15+ Reels / month</option>
-                  </select>
-                </div>
-              </div>
+          {/* DYNAMIC SCOPE QUESTIONNAIRE */}
+          {loadingQuestions ? (
+            <div className="py-12 text-center text-slate-400 text-xs">
+              <span className="material-symbols-outlined animate-spin text-2xl mb-2 block">
+                progress_activity
+              </span>
+              {language === "en" ? "Loading questions..." : "Cargando preguntas..."}
             </div>
-          ) : selectedCategory?.slug.includes("brand") ||
-            selectedCategory?.slug.includes("uiux") ? (
-            /* DYNAMIC QUESTION SET B: UX/UI & Brand Design */
-            <div className="space-y-6 bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-slate-200/80 text-xs">
-              <div>
-                <label className="block font-bold text-slate-900 mb-2">
-                  {language === "en"
-                    ? "Design Scope Included"
-                    : "Alcance de Diseño Requerido"}
-                </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                  {[
-                    "UX Research & Discovery",
-                    "Wireframes & User Flows",
-                    "UI Visual Design",
-                    "Design System & UI Kit",
-                    "Interactive Prototype",
-                  ].map((item) => {
-                    const active = designScope.includes(item);
-                    return (
-                      <button
-                        key={item}
-                        type="button"
-                        onClick={() =>
-                          setDesignScope(
-                            active
-                              ? designScope.filter((i) => i !== item)
-                              : [...designScope, item]
-                          )
-                        }
-                        aria-pressed={active}
-                        className={`p-3 rounded-xl font-semibold text-left transition-all flex items-center justify-between focus-visible:ring-2 focus-visible:ring-slate-900 ${
-                          active
-                            ? "bg-slate-900 text-white shadow-sm"
-                            : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                        }`}
-                      >
-                        <span>{item}</span>
-                        {active && (
-                          <span className="material-symbols-outlined text-sm" aria-hidden="true">
-                            check
-                          </span>
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
+          ) : scopeQuestions.length === 0 ? (
+            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-slate-200/80 text-xs text-slate-500 text-center py-8">
+              <span className="material-symbols-outlined text-3xl text-slate-300 mb-2 block">
+                assignment
+              </span>
+              {language === "en"
+                ? "No specific scope questions required for this service. General requirements will be reviewed during project discovery."
+                : "No se requieren preguntas específicas para este servicio. Los requisitos generales se definirán en la reunión de alineación."}
             </div>
           ) : (
-            /* DYNAMIC QUESTION SET C: Web Systems & E-Commerce */
             <div className="space-y-6 bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-slate-200/80 text-xs">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="systemTypeSelect" className="block font-bold text-slate-900 mb-2">
-                    {language === "en" ? "System Type" : "Tipo de Sistema"}
-                  </label>
-                  <select
-                    id="systemTypeSelect"
-                    value={websiteType}
-                    onChange={(e) => setWebsiteType(e.target.value)}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus-visible:ring-2 focus-visible:ring-slate-900"
-                  >
-                    <option value="Landing Page">Landing Page</option>
-                    <option value="Corporate Site">Corporate Website</option>
-                    <option value="Full E-Commerce Store">
-                      Full E-Commerce Store
-                    </option>
-                    <option value="Custom Web Portal">
-                      Custom Web Portal / SaaS
-                    </option>
-                  </select>
-                </div>
+              {scopeQuestions
+                .filter((q) => {
+                  if (!q.conditional_on_question_id) return true;
+                  const parentVal = scopeAnswers[q.conditional_on_question_id];
+                  return String(parentVal) === String(q.conditional_on_value);
+                })
+                .map((q) => {
+                  const qLabel = language === "en" ? q.label : q.label_es || q.label;
+                  const currentAnswer = scopeAnswers[q.id];
 
-                <div>
-                  <label htmlFor="pageCountSelect" className="block font-bold text-slate-900 mb-2">
-                    {language === "en"
-                      ? "Approximate Pages / Views"
-                      : "Páginas / Vistas Aproximadas"}
-                  </label>
-                  <select
-                    id="pageCountSelect"
-                    value={pageCount}
-                    onChange={(e) => setPageCount(Number(e.target.value))}
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus-visible:ring-2 focus-visible:ring-slate-900"
-                  >
-                    <option value={5}>1 – 5 pages</option>
-                    <option value={10}>5 – 15 pages</option>
-                    <option value={25}>15 – 30 pages</option>
-                    <option value={50}>30+ custom views</option>
-                  </select>
-                </div>
-              </div>
+                  return (
+                    <div key={q.id} className="space-y-2">
+                      <label className="block font-bold text-slate-900">
+                        {qLabel}
+                        {q.is_required && <span className="text-red-500 ml-1">*</span>}
+                      </label>
+
+                      {/* QUESTION TYPE: SELECT */}
+                      {q.question_type === "select" && (
+                        <select
+                          value={String(currentAnswer || "")}
+                          onChange={(e) =>
+                            setScopeAnswers({ ...scopeAnswers, [q.id]: e.target.value })
+                          }
+                          className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus-visible:ring-2 focus-visible:ring-slate-900"
+                        >
+                          {q.options.map((opt) => (
+                            <option key={opt.id} value={opt.value}>
+                              {language === "en" ? opt.label : opt.label_es || opt.label}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+
+                      {/* QUESTION TYPE: MULTI_SELECT */}
+                      {q.question_type === "multi_select" && (
+                        <div className="flex flex-wrap gap-2">
+                          {q.options.map((opt) => {
+                            const selectedList = Array.isArray(currentAnswer)
+                              ? (currentAnswer as string[])
+                              : [];
+                            const active = selectedList.includes(opt.value);
+                            const optLabel =
+                              language === "en" ? opt.label : opt.label_es || opt.label;
+
+                            return (
+                              <button
+                                key={opt.id}
+                                type="button"
+                                onClick={() => {
+                                  const updated = active
+                                    ? selectedList.filter((v) => v !== opt.value)
+                                    : [...selectedList, opt.value];
+                                  setScopeAnswers({ ...scopeAnswers, [q.id]: updated });
+                                }}
+                                aria-pressed={active}
+                                className={`px-3 py-1.5 rounded-xl font-semibold transition-all focus-visible:ring-2 focus-visible:ring-slate-900 flex items-center gap-1.5 ${
+                                  active
+                                    ? "bg-slate-900 text-white shadow-sm"
+                                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                                }`}
+                              >
+                                <span>{optLabel}</span>
+                                {active && (
+                                  <span
+                                    className="material-symbols-outlined text-xs"
+                                    aria-hidden="true"
+                                  >
+                                    check
+                                  </span>
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+
+                      {/* QUESTION TYPE: BOOLEAN */}
+                      {q.question_type === "boolean" && (
+                        <div className="flex items-center gap-3">
+                          {[
+                            { value: "true", label: language === "en" ? "Yes" : "Sí" },
+                            { value: "false", label: language === "en" ? "No" : "No" },
+                          ].map((bOpt) => {
+                            const active = String(currentAnswer) === bOpt.value;
+                            return (
+                              <button
+                                key={bOpt.value}
+                                type="button"
+                                onClick={() =>
+                                  setScopeAnswers({ ...scopeAnswers, [q.id]: bOpt.value })
+                                }
+                                aria-pressed={active}
+                                className={`px-5 py-2 rounded-xl font-semibold transition-all focus-visible:ring-2 focus-visible:ring-slate-900 ${
+                                  active
+                                    ? "bg-slate-900 text-white shadow-sm"
+                                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                                }`}
+                              >
+                                {bOpt.label}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+
+                      {/* QUESTION TYPE: NUMBER */}
+                      {q.question_type === "number" && (
+                        <input
+                          type="number"
+                          value={Number(currentAnswer || 0)}
+                          onChange={(e) =>
+                            setScopeAnswers({
+                              ...scopeAnswers,
+                              [q.id]: Number(e.target.value),
+                            })
+                          }
+                          className="w-full md:w-1/2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus-visible:ring-2 focus-visible:ring-slate-900"
+                        />
+                      )}
+                    </div>
+                  );
+                })}
             </div>
           )}
 

@@ -15,6 +15,8 @@ import type {
   PublicQuoteResult,
   PricingSettings,
   ComplexityLevel,
+  ScopeQuestion,
+  ScopeAnswers,
 } from "../types";
 import { calculateQuoteV1, generateCustomerFacingRange } from "../engine";
 import { generateReferenceNumber } from "../utils";
@@ -23,6 +25,60 @@ export interface CatalogResponse {
   categories: Category[];
   services: Service[];
   deliverables: Deliverable[];
+}
+
+/**
+  * Fetches active scope questions with options for a specific service.
+  */
+export async function getServiceScopeQuestions(
+  serviceId: string
+): Promise<ScopeQuestion[]> {
+  if (!serviceId) return [];
+
+  const supabase = await createClient();
+
+  const { data: questions, error } = await supabase
+    .from("scope_questions")
+    .select("*, options:question_options(*)")
+    .eq("service_id", serviceId)
+    .eq("is_active", true)
+    .order("display_order", { ascending: true });
+
+  if (error || !questions) {
+    console.error("Error fetching scope questions:", error);
+    return [];
+  }
+
+  // Deduplicate questions by label and options by value
+  const seenQuestionLabels = new Set<string>();
+  const formatted: ScopeQuestion[] = [];
+
+  for (const q of questions) {
+    const labelKey = (q.label || "").trim().toLowerCase();
+    if (seenQuestionLabels.has(labelKey)) continue;
+    seenQuestionLabels.add(labelKey);
+
+    const rawOptions = q.options || [];
+    const seenOptionValues = new Set<string>();
+    const cleanOptions = [];
+
+    for (const o of rawOptions) {
+      if (!o.is_active) continue;
+      const optKey = (o.value || "").trim().toLowerCase();
+      if (seenOptionValues.has(optKey)) continue;
+      seenOptionValues.add(optKey);
+      cleanOptions.push(o);
+    }
+
+    cleanOptions.sort((a: any, b: any) => a.display_order - b.display_order);
+
+    formatted.push({
+      ...q,
+      options: cleanOptions,
+    });
+  }
+
+  return formatted;
 }
 
 /**
@@ -57,11 +113,66 @@ export async function getPublicServiceCatalog(): Promise<CatalogResponse> {
 }
 
 /**
+ * Helper to compute total additional hours & complexity escalation from scope answers.
+ */
+async function processScopeAnswers(
+  serviceId: string | undefined,
+  answers: ScopeAnswers | undefined
+): Promise<{ additionalHours: number; suggestedComplexity?: ComplexityLevel }> {
+  if (!serviceId || !answers || Object.keys(answers).length === 0) {
+    return { additionalHours: 0 };
+  }
+
+  const questions = await getServiceScopeQuestions(serviceId);
+  let totalAdditionalHours = 0;
+  const complexityHierarchy: ComplexityLevel[] = [
+    "basic",
+    "standard",
+    "advanced",
+    "enterprise",
+  ];
+  let highestComplexityIndex = -1;
+
+  for (const q of questions) {
+    const val = answers[q.id];
+    if (val === undefined || val === null || val === "") continue;
+
+    if (q.question_type === "select" || q.question_type === "boolean") {
+      const option = q.options.find((o) => o.value === String(val));
+      if (option) {
+        totalAdditionalHours += (Number(option.additional_hours) || 0) + (Number(q.hours_modifier) || 0) * (Number(option.hours_multiplier) || 1);
+        if (option.complexity_modifier) {
+          const idx = complexityHierarchy.indexOf(option.complexity_modifier as ComplexityLevel);
+          if (idx > highestComplexityIndex) highestComplexityIndex = idx;
+        }
+      }
+    } else if (q.question_type === "multi_select" && Array.isArray(val)) {
+      for (const itemVal of val) {
+        const option = q.options.find((o) => o.value === String(itemVal));
+        if (option) {
+          totalAdditionalHours += (Number(option.additional_hours) || 0) + (Number(q.hours_modifier) || 0) * (Number(option.hours_multiplier) || 1);
+          if (option.complexity_modifier) {
+            const idx = complexityHierarchy.indexOf(option.complexity_modifier as ComplexityLevel);
+            if (idx > highestComplexityIndex) highestComplexityIndex = idx;
+          }
+        }
+      }
+    }
+  }
+
+  return {
+    additionalHours: totalAdditionalHours,
+    suggestedComplexity:
+      highestComplexityIndex >= 0 ? complexityHierarchy[highestComplexityIndex] : undefined,
+  };
+}
+
+/**
  * Calculates a public estimate preview range (COP) without creating a quote record yet.
  * Executes server-only COP pricing math.
  */
 export async function calculatePublicEstimatePreview(
-  payload: PublicQuoteInput
+  payload: PublicQuoteInput & { service_id?: string; scope_answers?: ScopeAnswers }
 ) {
   if (!payload || !Array.isArray(payload.items) || payload.items.length === 0) {
     throw new Error("Invalid request: At least one deliverable item is required.");
@@ -91,12 +202,64 @@ export async function calculatePublicEstimatePreview(
   const mtbHourlyRateCop = 140000;
   const freelancerHourlyRateCop = 110000;
 
+  const { additionalHours, suggestedComplexity } = await processScopeAnswers(
+    payload.service_id,
+    payload.scope_answers
+  );
+
+  // Fetch deliverable & service details for dynamic baseline hours
+  let serviceSlug = "";
+  if (payload.service_id) {
+    const { data: srvData } = await supabase
+      .from("services")
+      .select("slug")
+      .eq("id", payload.service_id)
+      .maybeSingle();
+    if (srvData) serviceSlug = srvData.slug;
+  }
+
+  // Service-specific baseline hours mapping
+  const BASELINE_HOURS_BY_SLUG: Record<string, number> = {
+    "landing-page": 8,
+    "content-strategy": 10,
+    "social-media-management": 12,
+    "ecommerce-optimization": 15,
+    "marketing-campaign": 15,
+    "brand-identity": 18,
+    "uiux-design": 20,
+    "corporate-website": 25,
+    "app-redesign": 25,
+    "data-dashboard": 30,
+    "bi-implementation": 35,
+    "ecommerce-store": 40,
+    "custom-web-app": 45,
+    "mobile-app-development": 50,
+  };
+
+  const serviceBaseHours = BASELINE_HOURS_BY_SLUG[serviceSlug] ?? 15;
+
+  // For small services (landing page, content strategy, etc.), adjust minimum project value floor
+  const isSmallService = ["landing-page", "content-strategy", "social-media-management", "ecommerce-optimization"].includes(serviceSlug);
+  const effectiveSettings = {
+    ...defaultSettings,
+    min_project_value_cop: isSmallService
+      ? Math.min(defaultSettings.min_project_value_cop, 1500000)
+      : defaultSettings.min_project_value_cop,
+  };
+
   const engineItems = payload.items.map((item) => {
-    const baseHours = 20;
+    const baseHours = serviceBaseHours + additionalHours;
+    const finalComplexity = suggestedComplexity
+      ? (["basic", "standard", "advanced", "enterprise"].indexOf(suggestedComplexity) >
+         ["basic", "standard", "advanced", "enterprise"].indexOf(item.complexity)
+          ? suggestedComplexity
+          : item.complexity)
+      : item.complexity;
+
     return {
       deliverableId: item.deliverable_id,
       quantity: item.quantity,
-      complexity: item.complexity as ComplexityLevel,
+      complexity: finalComplexity as ComplexityLevel,
       mtbLaborHours: baseHours * 0.7,
       mtbHourlyRateCop,
       freelancerHours: baseHours * 0.3,
@@ -106,7 +269,7 @@ export async function calculatePublicEstimatePreview(
 
   const result = calculateQuoteV1({
     items: engineItems,
-    settings: defaultSettings,
+    settings: effectiveSettings,
   });
 
   return {
@@ -121,7 +284,7 @@ export async function calculatePublicEstimatePreview(
  * stores the quote in draft status, and returns a rounded customer range.
  */
 export async function submitPublicQuoteRequest(
-  payload: PublicQuoteInput
+  payload: PublicQuoteInput & { service_id?: string; scope_answers?: ScopeAnswers }
 ): Promise<PublicQuoteResult> {
   const supabase = await createClient();
 
@@ -145,19 +308,63 @@ export async function submitPublicQuoteRequest(
     updated_at: new Date().toISOString(),
   };
 
-  // 2. Resolve default hourly rates for MTB Internal Engineer (140,000 COP) and Freelancer (110,000 COP)
-  // In full production, this joins `service_components` and `role_rates`.
-  // Here we use the formal V1 baseline minimums for public quote calculations.
   const mtbHourlyRateCop = 140000;
   const freelancerHourlyRateCop = 110000;
 
+  const { additionalHours, suggestedComplexity } = await processScopeAnswers(
+    payload.service_id,
+    payload.scope_answers
+  );
+
+  let serviceSlug = "";
+  if (payload.service_id) {
+    const { data: srvData } = await supabase
+      .from("services")
+      .select("slug")
+      .eq("id", payload.service_id)
+      .maybeSingle();
+    if (srvData) serviceSlug = srvData.slug;
+  }
+
+  const BASELINE_HOURS_BY_SLUG: Record<string, number> = {
+    "landing-page": 8,
+    "content-strategy": 10,
+    "social-media-management": 12,
+    "ecommerce-optimization": 15,
+    "marketing-campaign": 15,
+    "brand-identity": 18,
+    "uiux-design": 20,
+    "corporate-website": 25,
+    "app-redesign": 25,
+    "data-dashboard": 30,
+    "bi-implementation": 35,
+    "ecommerce-store": 40,
+    "custom-web-app": 45,
+    "mobile-app-development": 50,
+  };
+
+  const serviceBaseHours = BASELINE_HOURS_BY_SLUG[serviceSlug] ?? 15;
+  const isSmallService = ["landing-page", "content-strategy", "social-media-management", "ecommerce-optimization"].includes(serviceSlug);
+  const effectiveSettings = {
+    ...defaultSettings,
+    min_project_value_cop: isSmallService
+      ? Math.min(defaultSettings.min_project_value_cop, 1500000)
+      : defaultSettings.min_project_value_cop,
+  };
+
   const engineItems = payload.items.map((item) => {
-    // Standard estimated hours baseline per deliverable quantity
-    const baseHours = 20;
+    const baseHours = serviceBaseHours + additionalHours;
+    const finalComplexity = suggestedComplexity
+      ? (["basic", "standard", "advanced", "enterprise"].indexOf(suggestedComplexity) >
+         ["basic", "standard", "advanced", "enterprise"].indexOf(item.complexity)
+          ? suggestedComplexity
+          : item.complexity)
+      : item.complexity;
+
     return {
       deliverableId: item.deliverable_id,
       quantity: item.quantity,
-      complexity: item.complexity as ComplexityLevel,
+      complexity: finalComplexity as ComplexityLevel,
       mtbLaborHours: baseHours * 0.7,
       mtbHourlyRateCop,
       freelancerHours: baseHours * 0.3,
@@ -168,7 +375,7 @@ export async function submitPublicQuoteRequest(
   // 3. Execute pricing formula
   const result = calculateQuoteV1({
     items: engineItems,
-    settings: defaultSettings,
+    settings: effectiveSettings,
   });
 
   // 4. Create client profile if name/email provided
@@ -194,7 +401,7 @@ export async function submitPublicQuoteRequest(
   // 5. Generate reference number
   const referenceNumber = generateReferenceNumber();
 
-  // 6. Store master quote record
+  // 6. Store master quote record with scope_data
   const { data: quoteData, error: quoteError } = await supabase
     .from("quotes")
     .insert({
@@ -210,6 +417,7 @@ export async function submitPublicQuoteRequest(
       final_price: result.finalPriceCop,
       valid_for_days: 30,
       notes: payload.notes || null,
+      scope_data: payload.scope_answers || null,
     })
     .select("id")
     .single();

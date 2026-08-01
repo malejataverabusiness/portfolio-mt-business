@@ -395,7 +395,194 @@ SET
   is_active             = true,
   updated_at            = NOW();
 
--- 5. VERIFICATION QUERIES (FOR ADMIN / CONSOLE INSPECTION)
+-- 5. SEED SERVICES — Linked to Categories by slug lookup
+-- Each category gets 2-3 relevant services.
+INSERT INTO services (name, name_es, slug, description, description_es, icon, display_order, is_active, category_id)
+VALUES
+  -- E-Commerce & Retail (slug: ecommerce-retail)
+  ('E-Commerce Store', 'Tienda E-Commerce', 'ecommerce-store',
+   'Full e-commerce store setup and launch', 'Configuración y lanzamiento completo de tienda en línea',
+   'shopping_cart', 1, true,
+   (SELECT id FROM categories WHERE slug = 'ecommerce-retail')),
+  ('E-Commerce Optimization', 'Optimización de E-Commerce', 'ecommerce-optimization',
+   'Performance and conversion optimization for existing stores', 'Optimización de rendimiento y conversión para tiendas existentes',
+   'trending_up', 2, true,
+   (SELECT id FROM categories WHERE slug = 'ecommerce-retail')),
+
+  -- Bespoke Web Systems (slug: bespoke-web-systems)
+  ('Corporate Website', 'Sitio Web Corporativo', 'corporate-website',
+   'Professional corporate website design and development', 'Diseño y desarrollo de sitio web corporativo profesional',
+   'language', 1, true,
+   (SELECT id FROM categories WHERE slug = 'bespoke-web-systems')),
+  ('Custom Web Application', 'Aplicación Web a la Medida', 'custom-web-app',
+   'Bespoke web application or SaaS platform', 'Aplicación web o plataforma SaaS a la medida',
+   'code', 2, true,
+   (SELECT id FROM categories WHERE slug = 'bespoke-web-systems')),
+  ('Landing Page', 'Landing Page', 'landing-page',
+   'High-conversion landing page design and development', 'Diseño y desarrollo de landing page de alta conversión',
+   'web', 3, true,
+   (SELECT id FROM categories WHERE slug = 'bespoke-web-systems')),
+
+  -- Data & Business Intelligence (slug: data-bi)
+  ('Data Dashboard', 'Dashboard de Datos', 'data-dashboard',
+   'Custom analytics dashboard and data visualization', 'Dashboard de analítica personalizado y visualización de datos',
+   'analytics', 1, true,
+   (SELECT id FROM categories WHERE slug = 'data-bi')),
+  ('BI Implementation', 'Implementación de BI', 'bi-implementation',
+   'Business intelligence platform setup and reporting', 'Configuración de plataforma de inteligencia de negocios y reportes',
+   'bar_chart', 2, true,
+   (SELECT id FROM categories WHERE slug = 'data-bi')),
+
+  -- Digital Marketing & Content (slug: digital-marketing)
+  ('Social Media Management', 'Gestión de Redes Sociales', 'social-media-management',
+   'Full social media strategy, content creation, and community management', 'Estrategia completa de redes sociales, creación de contenido y gestión de comunidad',
+   'campaign', 1, true,
+   (SELECT id FROM categories WHERE slug = 'digital-marketing')),
+  ('Marketing Campaign', 'Campaña de Marketing', 'marketing-campaign',
+   'Integrated digital marketing campaign with paid media', 'Campaña de marketing digital integrada con pauta',
+   'ads_click', 2, true,
+   (SELECT id FROM categories WHERE slug = 'digital-marketing')),
+  ('Content Strategy', 'Estrategia de Contenido', 'content-strategy',
+   'Content planning, production, and editorial calendar', 'Planificación de contenido, producción y calendario editorial',
+   'edit_note', 3, true,
+   (SELECT id FROM categories WHERE slug = 'digital-marketing')),
+
+  -- Brand Identity & UI/UX (slug: brand-uiux)
+  ('Brand Identity', 'Identidad de Marca', 'brand-identity',
+   'Complete brand identity design including logo, guidelines, and collateral', 'Diseño completo de identidad de marca incluyendo logo, lineamientos y material',
+   'palette', 1, true,
+   (SELECT id FROM categories WHERE slug = 'brand-uiux')),
+  ('UI/UX Design', 'Diseño UI/UX', 'uiux-design',
+   'User interface and user experience design for digital products', 'Diseño de interfaz y experiencia de usuario para productos digitales',
+   'design_services', 2, true,
+   (SELECT id FROM categories WHERE slug = 'brand-uiux')),
+
+  -- Mobile & Custom Apps (slug: mobile-apps)
+  ('Mobile App Development', 'Desarrollo de App Móvil', 'mobile-app-development',
+   'Native or cross-platform mobile application development', 'Desarrollo de aplicación móvil nativa o multiplataforma',
+   'smartphone', 1, true,
+   (SELECT id FROM categories WHERE slug = 'mobile-apps')),
+  ('App Redesign & Optimization', 'Rediseño y Optimización de App', 'app-redesign',
+   'Redesign and performance optimization of existing mobile apps', 'Rediseño y optimización de rendimiento de apps existentes',
+   'phone_android', 2, true,
+   (SELECT id FROM categories WHERE slug = 'mobile-apps'))
+
+ON CONFLICT (slug) DO UPDATE
+SET name = EXCLUDED.name,
+    name_es = EXCLUDED.name_es,
+    description = EXCLUDED.description,
+    description_es = EXCLUDED.description_es,
+    icon = EXCLUDED.icon,
+    display_order = EXCLUDED.display_order,
+    is_active = true,
+    category_id = EXCLUDED.category_id,
+    updated_at = NOW();
+
+-- 6. SEED DELIVERABLES — Linked to Services by slug lookup
+-- Each service gets 1-3 representative deliverables.
+INSERT INTO deliverables (service_id, name, name_es, slug, description, description_es, unit, unit_es, default_quantity, display_order, is_active)
+VALUES
+  -- E-Commerce Store
+  ((SELECT id FROM services WHERE slug = 'ecommerce-store'),
+   'Full Store Setup', 'Configuración Completa de Tienda', 'full-store-setup',
+   'Complete store configuration, product catalog, and checkout flow', 'Configuración completa de tienda, catálogo de productos y flujo de checkout',
+   'project', 'proyecto', 1, 1, true),
+  ((SELECT id FROM services WHERE slug = 'ecommerce-store'),
+   'Product Page Template', 'Plantilla de Página de Producto', 'product-page-template',
+   'Custom product page template design and development', 'Diseño y desarrollo de plantilla de página de producto',
+   'page', 'página', 1, 2, true),
+
+  -- E-Commerce Optimization
+  ((SELECT id FROM services WHERE slug = 'ecommerce-optimization'),
+   'Conversion Audit & Optimization', 'Auditoría y Optimización de Conversión', 'conversion-audit',
+   'Full conversion funnel audit and optimization recommendations', 'Auditoría completa de embudo de conversión y recomendaciones de optimización',
+   'project', 'proyecto', 1, 1, true),
+
+  -- Corporate Website
+  ((SELECT id FROM services WHERE slug = 'corporate-website'),
+   'Corporate Website Project', 'Proyecto de Sitio Corporativo', 'corporate-website-project',
+   'Multi-page corporate website with responsive design', 'Sitio web corporativo multi-página con diseño responsivo',
+   'project', 'proyecto', 1, 1, true),
+
+  -- Custom Web Application
+  ((SELECT id FROM services WHERE slug = 'custom-web-app'),
+   'Web Application MVP', 'MVP de Aplicación Web', 'web-app-mvp',
+   'Minimum viable product for a web application or SaaS', 'Producto mínimo viable para aplicación web o SaaS',
+   'project', 'proyecto', 1, 1, true),
+
+  -- Landing Page
+  ((SELECT id FROM services WHERE slug = 'landing-page'),
+   'Landing Page Design & Dev', 'Diseño y Desarrollo de Landing Page', 'landing-page-design',
+   'High-conversion landing page with A/B testing setup', 'Landing page de alta conversión con configuración de A/B testing',
+   'page', 'página', 1, 1, true),
+
+  -- Data Dashboard
+  ((SELECT id FROM services WHERE slug = 'data-dashboard'),
+   'Custom Dashboard', 'Dashboard Personalizado', 'custom-dashboard',
+   'Interactive data dashboard with real-time metrics', 'Dashboard de datos interactivo con métricas en tiempo real',
+   'project', 'proyecto', 1, 1, true),
+
+  -- BI Implementation
+  ((SELECT id FROM services WHERE slug = 'bi-implementation'),
+   'BI Platform Setup', 'Configuración de Plataforma BI', 'bi-platform-setup',
+   'Business intelligence platform setup with automated reporting', 'Configuración de plataforma de BI con reportes automatizados',
+   'project', 'proyecto', 1, 1, true),
+
+  -- Social Media Management
+  ((SELECT id FROM services WHERE slug = 'social-media-management'),
+   'Monthly Social Media Package', 'Paquete Mensual de Redes Sociales', 'monthly-social-media',
+   'Monthly content creation, scheduling, and community management', 'Creación de contenido mensual, programación y gestión de comunidad',
+   'month', 'mes', 1, 1, true),
+
+  -- Marketing Campaign
+  ((SELECT id FROM services WHERE slug = 'marketing-campaign'),
+   'Integrated Campaign', 'Campaña Integrada', 'integrated-campaign',
+   'Full digital marketing campaign including paid media management', 'Campaña de marketing digital completa incluyendo gestión de pauta',
+   'campaign', 'campaña', 1, 1, true),
+
+  -- Content Strategy
+  ((SELECT id FROM services WHERE slug = 'content-strategy'),
+   'Content Strategy & Calendar', 'Estrategia de Contenido y Calendario', 'content-strategy-calendar',
+   'Editorial strategy, content calendar, and production guidelines', 'Estrategia editorial, calendario de contenido y lineamientos de producción',
+   'project', 'proyecto', 1, 1, true),
+
+  -- Brand Identity
+  ((SELECT id FROM services WHERE slug = 'brand-identity'),
+   'Full Brand Identity Package', 'Paquete Completo de Identidad de Marca', 'full-brand-identity',
+   'Logo, brand guidelines, typography, color palette, and brand collateral', 'Logo, manual de marca, tipografía, paleta de colores y material de marca',
+   'project', 'proyecto', 1, 1, true),
+
+  -- UI/UX Design
+  ((SELECT id FROM services WHERE slug = 'uiux-design'),
+   'UI/UX Design Project', 'Proyecto de Diseño UI/UX', 'uiux-design-project',
+   'Complete UI/UX design including research, wireframes, and high-fidelity prototypes', 'Diseño UI/UX completo incluyendo investigación, wireframes y prototipos de alta fidelidad',
+   'project', 'proyecto', 1, 1, true),
+
+  -- Mobile App Development
+  ((SELECT id FROM services WHERE slug = 'mobile-app-development'),
+   'Mobile App MVP', 'MVP de App Móvil', 'mobile-app-mvp',
+   'Cross-platform mobile application MVP with core features', 'MVP de aplicación móvil multiplataforma con funcionalidades core',
+   'project', 'proyecto', 1, 1, true),
+
+  -- App Redesign
+  ((SELECT id FROM services WHERE slug = 'app-redesign'),
+   'App Redesign Project', 'Proyecto de Rediseño de App', 'app-redesign-project',
+   'Complete redesign and optimization of an existing mobile application', 'Rediseño completo y optimización de aplicación móvil existente',
+   'project', 'proyecto', 1, 1, true)
+
+ON CONFLICT (service_id, slug) DO UPDATE
+SET name = EXCLUDED.name,
+    name_es = EXCLUDED.name_es,
+    description = EXCLUDED.description,
+    description_es = EXCLUDED.description_es,
+    unit = EXCLUDED.unit,
+    unit_es = EXCLUDED.unit_es,
+    default_quantity = EXCLUDED.default_quantity,
+    display_order = EXCLUDED.display_order,
+    is_active = true,
+    updated_at = NOW();
+
+-- 7. VERIFICATION QUERIES (FOR ADMIN / CONSOLE INSPECTION)
 -- Run these queries after seed to confirm data integrity:
 -- 
 -- Check total distinct job titles (Expected: 25):
@@ -410,3 +597,493 @@ SET
 --          urgency_normal, urgency_urgent, urgency_very_urgent, urgency_critical,
 --          consulting_min_cop
 --   FROM pricing_settings WHERE is_active = true;
+--
+-- Check services per category (Expected: 2-3 per category):
+--   SELECT c.name AS category, COUNT(s.id) AS services
+--   FROM categories c LEFT JOIN services s ON s.category_id = c.id
+--   WHERE c.is_active = true GROUP BY c.name ORDER BY c.display_order;
+--
+  -- Check deliverables per service (Expected: 1-2 per service):
+  SELECT s.name AS service, COUNT(d.id) AS deliverables
+  FROM services s LEFT JOIN deliverables d ON d.service_id = s.id
+  WHERE s.is_active = true GROUP BY s.name ORDER BY s.display_order;
+
+-- =============================================================================
+-- 8. SEED SCOPE QUESTIONS & ANSWER OPTIONS
+-- =============================================================================
+-- Service-specific scope questions that describe project size and requirements.
+-- NEVER re-classify the service type the user already selected.
+
+-- Helper: use DO blocks so we can use variables for service lookups
+DO $$
+DECLARE
+  v_srv_id UUID;
+  v_q_id UUID;
+BEGIN
+
+-- Clear any previously inserted scope questions to prevent duplicates on re-run
+TRUNCATE scope_questions CASCADE;
+
+-- =====================================================================
+-- E-COMMERCE STORE
+-- =====================================================================
+SELECT id INTO v_srv_id FROM services WHERE slug = 'ecommerce-store';
+
+-- Q1: Product Catalog Size
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Product Catalog Size', 'Tamaño del Catálogo de Productos', 'select', true, 1, 8)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Up to 50 products', 'Hasta 50 productos', 'up_to_50', 1, 1.0, 0),
+  (v_q_id, '50 – 250 products', '50 – 250 productos', '50_250', 2, 1.3, 10),
+  (v_q_id, '250 – 1,000 products', '250 – 1,000 productos', '250_1000', 3, 1.6, 25),
+  (v_q_id, '1,000+ products', '1,000+ productos', '1000_plus', 4, 2.0, 50);
+
+-- Q2: Product Variations
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Product Variations', 'Variaciones de Producto', 'select', true, 2, 5)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours, complexity_modifier) VALUES
+  (v_q_id, 'Simple (size/color only)', 'Simple (talla/color)', 'simple', 1, 1.0, 0, NULL),
+  (v_q_id, 'Moderate (multiple attributes)', 'Moderado (múltiples atributos)', 'moderate', 2, 1.3, 8, NULL),
+  (v_q_id, 'Complex (custom configurations)', 'Complejo (configuraciones personalizadas)', 'complex', 3, 1.8, 20, 'advanced');
+
+-- Q3: Platform
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Platform Preference', 'Plataforma Preferida', 'select', false, 3, 0)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Shopify', 'Shopify', 'shopify', 1, 1.0, 0),
+  (v_q_id, 'WooCommerce', 'WooCommerce', 'woocommerce', 2, 1.0, 5),
+  (v_q_id, 'Custom Development', 'Desarrollo a la Medida', 'custom', 3, 1.0, 40),
+  (v_q_id, 'Not sure yet', 'No estoy seguro', 'not_sure', 4, 1.0, 0);
+
+-- Q4: Payment Methods
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Payment Methods', 'Métodos de Pago', 'select', true, 4, 4)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'One payment method', 'Un método de pago', 'one', 1, 1.0, 0),
+  (v_q_id, 'Multiple payment methods', 'Múltiples métodos', 'multiple', 2, 1.3, 6),
+  (v_q_id, 'Marketplace / multi-party', 'Marketplace / multi-parte', 'marketplace', 3, 2.0, 20),
+  (v_q_id, 'Not sure yet', 'No estoy seguro', 'not_sure', 4, 1.0, 0);
+
+-- Q5: Shipping Integration
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Shipping Integration', 'Integración de Envíos', 'select', false, 5, 4)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'No shipping integration', 'Sin integración de envíos', 'none', 1, 1.0, 0),
+  (v_q_id, 'One shipping carrier', 'Un transportador', 'one', 2, 1.0, 4),
+  (v_q_id, 'Multiple carriers', 'Múltiples transportadores', 'multiple', 3, 1.5, 12),
+  (v_q_id, 'Advanced logistics', 'Logística avanzada', 'advanced', 4, 2.0, 25);
+
+-- Q6: External Integrations
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'External Integrations', 'Integraciones Externas', 'select', false, 6, 6)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours, complexity_modifier) VALUES
+  (v_q_id, 'None', 'Ninguna', 'none', 1, 1.0, 0, NULL),
+  (v_q_id, '1 – 2 integrations', '1 – 2 integraciones', '1_2', 2, 1.0, 8, NULL),
+  (v_q_id, '3 – 5 integrations', '3 – 5 integraciones', '3_5', 3, 1.3, 20, 'advanced'),
+  (v_q_id, '5+ integrations', '5+ integraciones', '5_plus', 4, 1.6, 35, 'enterprise');
+
+-- =====================================================================
+-- E-COMMERCE OPTIMIZATION
+-- =====================================================================
+SELECT id INTO v_srv_id FROM services WHERE slug = 'ecommerce-optimization';
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Current Monthly Revenue', 'Facturación Mensual Actual', 'select', false, 1, 5)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Under $10M COP', 'Menos de $10M COP', 'under_10m', 1, 1.0, 0),
+  (v_q_id, '$10M – $50M COP', '$10M – $50M COP', '10m_50m', 2, 1.2, 5),
+  (v_q_id, '$50M+ COP', '$50M+ COP', '50m_plus', 3, 1.5, 15);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Optimization Focus Areas', 'Áreas de Enfoque de Optimización', 'multi_select', true, 2, 4)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Conversion rate', 'Tasa de conversión', 'conversion', 1, 1.0, 6),
+  (v_q_id, 'Page speed', 'Velocidad de carga', 'speed', 2, 1.0, 8),
+  (v_q_id, 'SEO', 'SEO', 'seo', 3, 1.0, 10),
+  (v_q_id, 'UX/UI improvements', 'Mejoras de UX/UI', 'ux_ui', 4, 1.0, 12),
+  (v_q_id, 'Checkout flow', 'Flujo de checkout', 'checkout', 5, 1.0, 8);
+
+-- =====================================================================
+-- CORPORATE WEBSITE
+-- =====================================================================
+SELECT id INTO v_srv_id FROM services WHERE slug = 'corporate-website';
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Approximate Number of Pages', 'Número Aproximado de Páginas', 'select', true, 1, 6)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '1 – 5 pages', '1 – 5 páginas', '1_5', 1, 1.0, 0),
+  (v_q_id, '5 – 15 pages', '5 – 15 páginas', '5_15', 2, 1.3, 10),
+  (v_q_id, '15 – 30 pages', '15 – 30 páginas', '15_30', 3, 1.6, 25),
+  (v_q_id, '30+ pages', '30+ páginas', '30_plus', 4, 2.0, 45);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Content Management System', 'Sistema de Gestión de Contenidos', 'select', false, 2, 0)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'WordPress', 'WordPress', 'wordpress', 1, 1.0, 0),
+  (v_q_id, 'Headless CMS', 'CMS Headless', 'headless', 2, 1.0, 15),
+  (v_q_id, 'Custom CMS', 'CMS a la Medida', 'custom', 3, 1.0, 30),
+  (v_q_id, 'No CMS needed', 'No necesita CMS', 'none', 4, 1.0, 0);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Multilingual Support', 'Soporte Multiidioma', 'boolean', false, 3, 0)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Yes', 'Sí', 'true', 1, 1.0, 15),
+  (v_q_id, 'No', 'No', 'false', 2, 1.0, 0);
+
+-- =====================================================================
+-- CUSTOM WEB APPLICATION
+-- =====================================================================
+SELECT id INTO v_srv_id FROM services WHERE slug = 'custom-web-app';
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Number of User Types', 'Tipos de Usuario', 'select', true, 1, 8)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours, complexity_modifier) VALUES
+  (v_q_id, '1 user type', '1 tipo de usuario', '1', 1, 1.0, 0, NULL),
+  (v_q_id, '2 user types', '2 tipos de usuario', '2', 2, 1.3, 10, NULL),
+  (v_q_id, '3+ user types', '3+ tipos de usuario', '3_plus', 3, 1.6, 25, 'advanced');
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Number of Screens / Views', 'Número de Pantallas / Vistas', 'select', true, 2, 5)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '5 – 10 screens', '5 – 10 pantallas', '5_10', 1, 1.0, 0),
+  (v_q_id, '10 – 20 screens', '10 – 20 pantallas', '10_20', 2, 1.3, 15),
+  (v_q_id, '20 – 40 screens', '20 – 40 pantallas', '20_40', 3, 1.6, 35),
+  (v_q_id, '40+ screens', '40+ pantallas', '40_plus', 4, 2.0, 60);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Authentication', 'Autenticación', 'select', true, 3, 4)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours, complexity_modifier) VALUES
+  (v_q_id, 'Standard (email/password)', 'Estándar (email/contraseña)', 'standard', 1, 1.0, 0, NULL),
+  (v_q_id, 'Social login + email', 'Login social + email', 'social', 2, 1.0, 6, NULL),
+  (v_q_id, 'SSO / Enterprise auth', 'SSO / Autenticación empresarial', 'sso', 3, 1.5, 20, 'enterprise');
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'API Integrations', 'Integraciones API', 'select', false, 4, 6)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'None', 'Ninguna', 'none', 1, 1.0, 0),
+  (v_q_id, '1 – 2 integrations', '1 – 2 integraciones', '1_2', 2, 1.0, 8),
+  (v_q_id, '3 – 5 integrations', '3 – 5 integraciones', '3_5', 3, 1.3, 20),
+  (v_q_id, '5+ integrations', '5+ integraciones', '5_plus', 4, 1.6, 35);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Real-time Features', 'Funcionalidades en Tiempo Real', 'boolean', false, 5, 0)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Yes', 'Sí', 'true', 1, 1.0, 20),
+  (v_q_id, 'No', 'No', 'false', 2, 1.0, 0);
+
+-- =====================================================================
+-- LANDING PAGE
+-- =====================================================================
+SELECT id INTO v_srv_id FROM services WHERE slug = 'landing-page';
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Number of Landing Pages', 'Número de Landing Pages', 'select', true, 1, 6)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '1 landing page', '1 landing page', '1', 1, 1.0, 0),
+  (v_q_id, '2 – 3 landing pages', '2 – 3 landing pages', '2_3', 2, 1.5, 8),
+  (v_q_id, '4+ landing pages', '4+ landing pages', '4_plus', 3, 2.0, 20);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'A/B Testing Required', 'Requiere A/B Testing', 'boolean', false, 2, 0)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Yes', 'Sí', 'true', 1, 1.0, 8),
+  (v_q_id, 'No', 'No', 'false', 2, 1.0, 0);
+
+-- =====================================================================
+-- DATA DASHBOARD
+-- =====================================================================
+SELECT id INTO v_srv_id FROM services WHERE slug = 'data-dashboard';
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Number of Dashboards', 'Número de Dashboards', 'select', true, 1, 10)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '1 dashboard', '1 dashboard', '1', 1, 1.0, 0),
+  (v_q_id, '2 – 3 dashboards', '2 – 3 dashboards', '2_3', 2, 1.4, 15),
+  (v_q_id, '4+ dashboards', '4+ dashboards', '4_plus', 3, 2.0, 35);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Number of Data Sources', 'Número de Fuentes de Datos', 'select', true, 2, 6)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '1 source', '1 fuente', '1', 1, 1.0, 0),
+  (v_q_id, '2 – 3 sources', '2 – 3 fuentes', '2_3', 2, 1.2, 8),
+  (v_q_id, '4+ sources', '4+ fuentes', '4_plus', 3, 1.6, 20);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Real-time Data Required', 'Datos en Tiempo Real', 'boolean', false, 3, 0)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours, complexity_modifier) VALUES
+  (v_q_id, 'Yes', 'Sí', 'true', 1, 1.0, 25, 'advanced'),
+  (v_q_id, 'No', 'No', 'false', 2, 1.0, 0, NULL);
+
+-- =====================================================================
+-- BI IMPLEMENTATION
+-- =====================================================================
+SELECT id INTO v_srv_id FROM services WHERE slug = 'bi-implementation';
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Number of Reports', 'Número de Reportes', 'select', true, 1, 8)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '1 – 5 reports', '1 – 5 reportes', '1_5', 1, 1.0, 0),
+  (v_q_id, '5 – 15 reports', '5 – 15 reportes', '5_15', 2, 1.3, 12),
+  (v_q_id, '15+ reports', '15+ reportes', '15_plus', 3, 1.8, 30);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Data Migration Required', 'Requiere Migración de Datos', 'boolean', false, 2, 0)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Yes', 'Sí', 'true', 1, 1.0, 20),
+  (v_q_id, 'No', 'No', 'false', 2, 1.0, 0);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Training Required', 'Requiere Capacitación', 'boolean', false, 3, 0)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Yes', 'Sí', 'true', 1, 1.0, 10),
+  (v_q_id, 'No', 'No', 'false', 2, 1.0, 0);
+
+-- =====================================================================
+-- SOCIAL MEDIA MANAGEMENT
+-- =====================================================================
+SELECT id INTO v_srv_id FROM services WHERE slug = 'social-media-management';
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Target Platforms', 'Plataformas Objetivo', 'multi_select', true, 1, 4)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Instagram', 'Instagram', 'instagram', 1, 1.0, 5),
+  (v_q_id, 'TikTok', 'TikTok', 'tiktok', 2, 1.0, 8),
+  (v_q_id, 'LinkedIn', 'LinkedIn', 'linkedin', 3, 1.0, 4),
+  (v_q_id, 'Facebook', 'Facebook', 'facebook', 4, 1.0, 3),
+  (v_q_id, 'YouTube', 'YouTube', 'youtube', 5, 1.0, 10),
+  (v_q_id, 'X (Twitter)', 'X (Twitter)', 'twitter', 6, 1.0, 3);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Monthly Static Posts', 'Publicaciones Estáticas Mensuales', 'select', true, 2, 3)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '4 posts / month', '4 publicaciones / mes', '4', 1, 1.0, 0),
+  (v_q_id, '8 posts / month', '8 publicaciones / mes', '8', 2, 1.3, 6),
+  (v_q_id, '12 posts / month', '12 publicaciones / mes', '12', 3, 1.6, 12),
+  (v_q_id, '20+ posts / month', '20+ publicaciones / mes', '20_plus', 4, 2.0, 24);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Monthly Reels / Short Videos', 'Reels / Videos Cortos Mensuales', 'select', true, 3, 5)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '2 reels / month', '2 reels / mes', '2', 1, 1.0, 0),
+  (v_q_id, '4 reels / month', '4 reels / mes', '4', 2, 1.3, 8),
+  (v_q_id, '8 reels / month', '8 reels / mes', '8', 3, 1.6, 18),
+  (v_q_id, '15+ reels / month', '15+ reels / mes', '15_plus', 4, 2.0, 35);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Community Management', 'Gestión de Comunidad', 'boolean', false, 4, 0)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Yes', 'Sí', 'true', 1, 1.0, 15),
+  (v_q_id, 'No', 'No', 'false', 2, 1.0, 0);
+
+-- =====================================================================
+-- MARKETING CAMPAIGN
+-- =====================================================================
+SELECT id INTO v_srv_id FROM services WHERE slug = 'marketing-campaign';
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Campaign Platforms', 'Plataformas de Campaña', 'multi_select', true, 1, 5)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Meta Ads (Facebook/Instagram)', 'Meta Ads', 'meta_ads', 1, 1.0, 8),
+  (v_q_id, 'Google Ads', 'Google Ads', 'google_ads', 2, 1.0, 10),
+  (v_q_id, 'TikTok Ads', 'TikTok Ads', 'tiktok_ads', 3, 1.0, 8),
+  (v_q_id, 'LinkedIn Ads', 'LinkedIn Ads', 'linkedin_ads', 4, 1.0, 6),
+  (v_q_id, 'Email Marketing', 'Email Marketing', 'email', 5, 1.0, 6);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Number of Campaigns', 'Número de Campañas', 'select', true, 2, 6)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '1 campaign', '1 campaña', '1', 1, 1.0, 0),
+  (v_q_id, '2 – 3 campaigns', '2 – 3 campañas', '2_3', 2, 1.4, 10),
+  (v_q_id, '4+ campaigns', '4+ campañas', '4_plus', 3, 2.0, 25);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Landing Page Required', 'Requiere Landing Page', 'boolean', false, 3, 0)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Yes', 'Sí', 'true', 1, 1.0, 15),
+  (v_q_id, 'No', 'No', 'false', 2, 1.0, 0);
+
+-- =====================================================================
+-- CONTENT STRATEGY
+-- =====================================================================
+SELECT id INTO v_srv_id FROM services WHERE slug = 'content-strategy';
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Number of Channels', 'Número de Canales', 'select', true, 1, 5)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '1 – 2 channels', '1 – 2 canales', '1_2', 1, 1.0, 0),
+  (v_q_id, '3 – 4 channels', '3 – 4 canales', '3_4', 2, 1.3, 8),
+  (v_q_id, '5+ channels', '5+ canales', '5_plus', 3, 1.6, 18);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Content Calendar Depth', 'Profundidad del Calendario', 'select', true, 2, 4)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '1 month plan', 'Plan de 1 mes', '1_month', 1, 1.0, 0),
+  (v_q_id, '3 month plan', 'Plan de 3 meses', '3_months', 2, 1.4, 10),
+  (v_q_id, '6+ month plan', 'Plan de 6+ meses', '6_months', 3, 1.8, 20);
+
+-- =====================================================================
+-- BRAND IDENTITY
+-- =====================================================================
+SELECT id INTO v_srv_id FROM services WHERE slug = 'brand-identity';
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Brand Scope', 'Alcance de Marca', 'multi_select', true, 1, 5)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Logo design', 'Diseño de logo', 'logo', 1, 1.0, 10),
+  (v_q_id, 'Color palette & typography', 'Paleta de colores y tipografía', 'color_typo', 2, 1.0, 6),
+  (v_q_id, 'Brand guidelines manual', 'Manual de marca', 'guidelines', 3, 1.0, 15),
+  (v_q_id, 'Social media templates', 'Plantillas de redes sociales', 'social_templates', 4, 1.0, 10),
+  (v_q_id, 'Stationery & print collateral', 'Papelería y material impreso', 'stationery', 5, 1.0, 8);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Number of Brand Applications', 'Número de Aplicaciones de Marca', 'select', false, 2, 3)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '1 – 3 applications', '1 – 3 aplicaciones', '1_3', 1, 1.0, 0),
+  (v_q_id, '4 – 8 applications', '4 – 8 aplicaciones', '4_8', 2, 1.3, 8),
+  (v_q_id, '8+ applications', '8+ aplicaciones', '8_plus', 3, 1.6, 18);
+
+-- =====================================================================
+-- UI/UX DESIGN
+-- =====================================================================
+SELECT id INTO v_srv_id FROM services WHERE slug = 'uiux-design';
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Number of Screens to Design', 'Número de Pantallas a Diseñar', 'select', true, 1, 6)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '5 – 10 screens', '5 – 10 pantallas', '5_10', 1, 1.0, 0),
+  (v_q_id, '10 – 20 screens', '10 – 20 pantallas', '10_20', 2, 1.3, 12),
+  (v_q_id, '20 – 40 screens', '20 – 40 pantallas', '20_40', 3, 1.6, 28),
+  (v_q_id, '40+ screens', '40+ pantallas', '40_plus', 4, 2.0, 50);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Design Scope', 'Alcance de Diseño', 'multi_select', true, 2, 4)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'UX Research & Discovery', 'Investigación UX', 'ux_research', 1, 1.0, 12),
+  (v_q_id, 'Wireframes & User Flows', 'Wireframes y Flujos', 'wireframes', 2, 1.0, 8),
+  (v_q_id, 'UI Visual Design', 'Diseño Visual UI', 'ui_design', 3, 1.0, 10),
+  (v_q_id, 'Design System / UI Kit', 'Sistema de Diseño / UI Kit', 'design_system', 4, 1.0, 20),
+  (v_q_id, 'Interactive Prototype', 'Prototipo Interactivo', 'prototype', 5, 1.0, 12);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Target Platforms', 'Plataformas Objetivo', 'multi_select', true, 3, 3)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Desktop Web', 'Web Desktop', 'desktop', 1, 1.0, 0),
+  (v_q_id, 'Mobile Web (Responsive)', 'Web Móvil (Responsive)', 'mobile_web', 2, 1.0, 8),
+  (v_q_id, 'iOS App', 'App iOS', 'ios', 3, 1.0, 10),
+  (v_q_id, 'Android App', 'App Android', 'android', 4, 1.0, 10);
+
+-- =====================================================================
+-- MOBILE APP DEVELOPMENT
+-- =====================================================================
+SELECT id INTO v_srv_id FROM services WHERE slug = 'mobile-app-development';
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Target Platforms', 'Plataformas Objetivo', 'select', true, 1, 10)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'iOS only', 'Solo iOS', 'ios', 1, 1.0, 0),
+  (v_q_id, 'Android only', 'Solo Android', 'android', 2, 1.0, 0),
+  (v_q_id, 'iOS + Android (cross-platform)', 'iOS + Android (multiplataforma)', 'cross_platform', 3, 1.4, 20);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Number of Screens', 'Número de Pantallas', 'select', true, 2, 5)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '5 – 10 screens', '5 – 10 pantallas', '5_10', 1, 1.0, 0),
+  (v_q_id, '10 – 20 screens', '10 – 20 pantallas', '10_20', 2, 1.3, 15),
+  (v_q_id, '20 – 40 screens', '20 – 40 pantallas', '20_40', 3, 1.6, 35),
+  (v_q_id, '40+ screens', '40+ pantallas', '40_plus', 4, 2.0, 60);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Authentication', 'Autenticación', 'select', true, 3, 4)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Email/password', 'Email/contraseña', 'email', 1, 1.0, 0),
+  (v_q_id, 'Social login', 'Login social', 'social', 2, 1.0, 6),
+  (v_q_id, 'Phone / OTP', 'Teléfono / OTP', 'otp', 3, 1.0, 8),
+  (v_q_id, 'Multiple methods', 'Múltiples métodos', 'multiple', 4, 1.3, 12);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Backend Requirements', 'Requisitos de Backend', 'select', true, 4, 8)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours, complexity_modifier) VALUES
+  (v_q_id, 'Existing backend / API', 'Backend / API existente', 'existing', 1, 1.0, 0, NULL),
+  (v_q_id, 'New backend required', 'Requiere backend nuevo', 'new', 2, 1.5, 40, 'advanced'),
+  (v_q_id, 'Not sure yet', 'No estoy seguro', 'not_sure', 3, 1.0, 10, NULL);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Push Notifications', 'Notificaciones Push', 'boolean', false, 5, 0)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Yes', 'Sí', 'true', 1, 1.0, 10),
+  (v_q_id, 'No', 'No', 'false', 2, 1.0, 0);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Offline Functionality', 'Funcionalidad Offline', 'boolean', false, 6, 0)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours, complexity_modifier) VALUES
+  (v_q_id, 'Yes', 'Sí', 'true', 1, 1.0, 20, 'advanced'),
+  (v_q_id, 'No', 'No', 'false', 2, 1.0, 0, NULL);
+
+-- =====================================================================
+-- APP REDESIGN
+-- =====================================================================
+SELECT id INTO v_srv_id FROM services WHERE slug = 'app-redesign';
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Redesign Scope', 'Alcance del Rediseño', 'multi_select', true, 1, 5)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, 'Visual refresh only', 'Solo actualización visual', 'visual', 1, 1.0, 0),
+  (v_q_id, 'UX flow improvements', 'Mejoras de flujo UX', 'ux_flows', 2, 1.0, 12),
+  (v_q_id, 'New features', 'Nuevas funcionalidades', 'new_features', 3, 1.0, 20),
+  (v_q_id, 'Performance optimization', 'Optimización de rendimiento', 'performance', 4, 1.0, 15),
+  (v_q_id, 'Full rebuild', 'Reconstrucción completa', 'full_rebuild', 5, 1.0, 40);
+
+INSERT INTO scope_questions (service_id, label, label_es, question_type, is_required, display_order, hours_modifier)
+VALUES (v_srv_id, 'Number of Screens to Redesign', 'Pantallas a Rediseñar', 'select', true, 2, 4)
+RETURNING id INTO v_q_id;
+INSERT INTO question_options (question_id, label, label_es, value, display_order, hours_multiplier, additional_hours) VALUES
+  (v_q_id, '5 – 10 screens', '5 – 10 pantallas', '5_10', 1, 1.0, 0),
+  (v_q_id, '10 – 20 screens', '10 – 20 pantallas', '10_20', 2, 1.3, 10),
+  (v_q_id, '20+ screens', '20+ pantallas', '20_plus', 3, 1.6, 25);
+
+END $$;

@@ -81,16 +81,24 @@ export async function getQuoteActuals(quoteId: string) {
 export async function getAnalyticsSummary(): Promise<AnalyticsSummary> {
   const supabase = await createClient();
 
-  // 1. Fetch quotes with clients, items, and actuals
-  const { data: quotes, error } = await supabase
-    .from("quotes")
-    .select("*, clients(*), quote_items(*, deliverables(*)), actual_costs(*)");
+  // 1. Fetch quotes and actual_costs in parallel to avoid PostgREST schema cache join failures
+  const [quotesRes, actualsRes] = await Promise.all([
+    supabase.from("quotes").select("*, clients(*), quote_items(*, deliverables(*))"),
+    supabase.from("actual_costs").select("*"),
+  ]);
 
-  if (error) {
-    throw new Error(`Failed to load analytics data: ${error.message}`);
+  if (quotesRes.error) {
+    throw new Error(`Failed to load analytics data: ${quotesRes.error.message}`);
   }
 
-  const quoteList = quotes || [];
+  const quoteList = quotesRes.data || [];
+  const actualsMap = new Map<string, any>();
+  if (actualsRes.data) {
+    actualsRes.data.forEach((ac: any) => {
+      if (ac.quote_id) actualsMap.set(ac.quote_id, ac);
+    });
+  }
+
   const comparisons: QuoteVarianceComparison[] = [];
   const serviceStatsMap = new Map<
     string,
@@ -112,7 +120,7 @@ export async function getAnalyticsSummary(): Promise<AnalyticsSummary> {
     const calcPrice = Number(q.calculated_price) || 0;
     const manualAdj = Number(q.manual_adjustment) || 0;
     const finalPrice = Number(q.final_price) || calcPrice;
-    const actuals = q.actual_costs;
+    const actuals = actualsMap.get(q.id) || q.actual_costs;
 
     totalManualAdjSum += manualAdj;
     const estToFinalDiff = finalPrice - recPrice;

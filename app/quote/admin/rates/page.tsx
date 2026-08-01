@@ -7,11 +7,12 @@ import { formatCopCurrency } from "@/lib/quote/utils";
 interface RateRecord {
   id: string;
   role_id: string;
-  seniority: "Junior" | "Mid" | "Senior";
+  seniority: string;
   rate_cop: number;
   is_active: boolean;
   roles?: {
     name?: string;
+    seniority?: string;
   } | null;
 }
 
@@ -93,6 +94,9 @@ export default function AdminRatesPage() {
               <tbody className="divide-y divide-slate-100">
                 {rates.map((r) => {
                   const isEditing = editingId === r.id;
+                  const seniorityText = String(r.seniority || r.roles?.seniority || "standard");
+                  const seniorityLower = seniorityText.toLowerCase();
+
                   return (
                     <tr key={r.id} className="hover:bg-slate-50/80 transition-colors">
                       <td className="py-3.5 px-2 font-bold text-slate-900">
@@ -101,14 +105,14 @@ export default function AdminRatesPage() {
                       <td className="py-3.5 px-2">
                         <span
                           className={`px-2 py-0.5 rounded text-[11px] font-semibold uppercase ${
-                            r.seniority === "Senior"
+                            seniorityLower.includes("senior") || seniorityLower.includes("expert")
                               ? "bg-purple-100 text-purple-800"
-                              : r.seniority === "Mid"
+                              : seniorityLower.includes("mid") || seniorityLower.includes("advanced")
                               ? "bg-blue-100 text-blue-800"
                               : "bg-slate-100 text-slate-700"
                           }`}
                         >
-                          {r.seniority}
+                          {seniorityText}
                         </span>
                       </td>
                       <td className="py-3.5 px-2 text-right font-mono font-bold text-slate-900 text-sm">

@@ -495,14 +495,21 @@ export async function getRoleRatesAdmin() {
 
   const { data, error } = await supabase
     .from("role_rates")
-    .select("*, roles(name)")
+    .select("*, roles(name, seniority)")
     .order("created_at", { ascending: false });
 
   if (error) {
     throw new Error(`Failed to fetch role rates: ${error.message}`);
   }
 
-  return data || [];
+  return (data || []).map((r: any) => ({
+    id: r.id,
+    role_id: r.role_id,
+    seniority: r.roles?.seniority || r.seniority || "standard",
+    rate_cop: Number(r.hourly_rate_cop ?? r.rate_cop ?? 0),
+    is_active: r.is_active,
+    roles: r.roles,
+  }));
 }
 
 export async function updateRoleRateAdmin(rateId: string, rateCop: number) {
@@ -510,7 +517,7 @@ export async function updateRoleRateAdmin(rateId: string, rateCop: number) {
 
   const { data, error } = await supabase
     .from("role_rates")
-    .update({ rate_cop: rateCop, updated_at: new Date().toISOString() })
+    .update({ hourly_rate_cop: rateCop, updated_at: new Date().toISOString() })
     .eq("id", rateId)
     .select()
     .single();

@@ -9,3 +9,5 @@ export * from "./pricing";
 export * from "./quote";
 export * from "./proposal";
 export * from "./analytics";
+export * from "./scope";
+
