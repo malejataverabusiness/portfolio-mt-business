@@ -19,6 +19,7 @@ import type {
 
 interface PublicQuoterWizardProps {
   language?: "en" | "es";
+  clientType?: "empresa" | "persona_natural" | null;
 }
 
 function getComplexityTierDetails(
@@ -611,7 +612,7 @@ function getComplexityTierDetails(
   return { title, desc, bullets };
 }
 
-export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWizardProps) {
+export default function PublicQuoterWizard({ language = "en", clientType }: PublicQuoterWizardProps) {
   // Wizard state
   const [step, setStep] = useState(1);
   const [catalog, setCatalog] = useState<CatalogResponse | null>(null);
@@ -623,6 +624,13 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
   // User selections
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
+
+  // Reset scroll position to top whenever changing steps or category
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [step, selectedCategory]);
 
   // Dynamic scope questions state
   const [scopeQuestions, setScopeQuestions] = useState<ScopeQuestion[]>([]);

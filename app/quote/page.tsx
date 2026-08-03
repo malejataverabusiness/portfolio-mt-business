@@ -3,10 +3,22 @@
 import { useState } from "react";
 import Link from "next/link";
 import PublicQuoterWizard from "@/components/quote/PublicQuoterWizard";
+import QuotePreferenceModal, {
+  type ClientType,
+  type Language,
+} from "@/components/quote/QuotePreferenceModal";
 
 export default function QuotePage() {
-  const [language, setLanguage] = useState<"en" | "es">("en");
+  const [language, setLanguage] = useState<Language>("es");
+  const [clientType, setClientType] = useState<ClientType | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [wizardStarted, setWizardStarted] = useState(false);
+
+  const handleConfirmPreferences = (prefs: { language: Language; clientType: ClientType }) => {
+    setLanguage(prefs.language);
+    setClientType(prefs.clientType);
+    setIsModalOpen(false);
+  };
 
   const t = {
     title: language === "en" ? "Get Your Project Estimate" : "Obtén Tu Estimación de Proyecto",
@@ -26,12 +38,24 @@ export default function QuotePage() {
       language === "en"
         ? "Estimates are approximate and subject to review. Final pricing is confirmed after a detailed discovery consultation."
         : "Las estimaciones son aproximadas y sujetas a revisión. Los precios finales se confirman después de una consulta detallada.",
+    clientTagEmpresa: language === "en" ? "Company" : "Empresa",
+    clientTagPersona: language === "en" ? "Individual" : "Persona Natural",
+    editPreferences: language === "en" ? "Preferences" : "Preferencias",
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-between px-4 py-8 bg-gradient-to-br from-slate-50 via-white to-purple-50/20 text-slate-900">
+      {/* Onboarding Preference Modal */}
+      <QuotePreferenceModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={handleConfirmPreferences}
+        initialLanguage={language}
+        initialClientType={clientType}
+      />
+
       {/* Top Navigation Bar */}
-      <header className="w-full max-w-6xl flex items-center justify-between py-4 border-b border-slate-200/60 mb-8">
+      <header className="w-full max-w-6xl flex items-center justify-between py-4 border-b border-slate-200/60 mb-8 flex-wrap gap-3">
         <Link
           href="/"
           aria-label={t.backToPortfolio}
@@ -43,7 +67,25 @@ export default function QuotePage() {
           <span className="text-xs font-semibold">{t.backToPortfolio}</span>
         </Link>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
+          {/* Preferences Badge & Modal Re-opener */}
+          {clientType && (
+            <button
+              onClick={() => setIsModalOpen(true)}
+              aria-label={t.editPreferences}
+              className="px-3 py-1 rounded-full bg-purple-50 hover:bg-purple-100 text-purple-900 text-xs font-bold border border-purple-200/80 shadow-sm transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-sm" aria-hidden="true">
+                {clientType === "empresa" ? "domain" : "person"}
+              </span>
+              <span>
+                {clientType === "empresa" ? t.clientTagEmpresa : t.clientTagPersona}
+              </span>
+              <span className="text-slate-300">|</span>
+              <span className="material-symbols-outlined text-xs">tune</span>
+            </button>
+          )}
+
           {/* Language Switcher */}
           <div
             role="group"
@@ -154,7 +196,7 @@ export default function QuotePage() {
         ) : (
           /* Active Interactive Wizard Component */
           <div className="py-4">
-            <PublicQuoterWizard language={language} />
+            <PublicQuoterWizard language={language} clientType={clientType} />
           </div>
         )}
       </main>
