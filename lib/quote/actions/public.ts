@@ -140,7 +140,14 @@ async function processScopeAnswers(
     if (q.question_type === "select" || q.question_type === "boolean") {
       const option = q.options.find((o) => o.value === String(val));
       if (option) {
-        totalAdditionalHours += (Number(option.additional_hours) || 0) + (Number(q.hours_modifier) || 0) * (Number(option.hours_multiplier) || 1);
+        const optAddHours = Number(option.additional_hours) || 0;
+        const optMult = Number(option.hours_multiplier) || 1;
+        const qModifier = Number(q.hours_modifier) || 0;
+        const added = optAddHours > 0
+          ? optAddHours * optMult
+          : (optMult > 1 && qModifier > 0 ? qModifier * (optMult - 1) : 0);
+        totalAdditionalHours += added;
+
         if (option.complexity_modifier) {
           const idx = complexityHierarchy.indexOf(option.complexity_modifier as ComplexityLevel);
           if (idx > highestComplexityIndex) highestComplexityIndex = idx;
@@ -150,7 +157,14 @@ async function processScopeAnswers(
       for (const itemVal of val) {
         const option = q.options.find((o) => o.value === String(itemVal));
         if (option) {
-          totalAdditionalHours += (Number(option.additional_hours) || 0) + (Number(q.hours_modifier) || 0) * (Number(option.hours_multiplier) || 1);
+          const optAddHours = Number(option.additional_hours) || 0;
+          const optMult = Number(option.hours_multiplier) || 1;
+          const qModifier = Number(q.hours_modifier) || 0;
+          const added = optAddHours > 0
+            ? optAddHours * optMult
+            : (optMult > 1 && qModifier > 0 ? qModifier * (optMult - 1) : 0);
+          totalAdditionalHours += added;
+
           if (option.complexity_modifier) {
             const idx = complexityHierarchy.indexOf(option.complexity_modifier as ComplexityLevel);
             if (idx > highestComplexityIndex) highestComplexityIndex = idx;
@@ -218,33 +232,48 @@ export async function calculatePublicEstimatePreview(
     if (srvData) serviceSlug = srvData.slug;
   }
 
-  // Service-specific baseline hours mapping
+  // Service-specific baseline hours mapping (calibrated for real LATAM market rates)
   const BASELINE_HOURS_BY_SLUG: Record<string, number> = {
-    "landing-page": 8,
-    "content-strategy": 10,
-    "social-media-management": 12,
-    "ecommerce-optimization": 15,
-    "marketing-campaign": 15,
-    "brand-identity": 18,
-    "uiux-design": 20,
-    "corporate-website": 25,
-    "app-redesign": 25,
-    "data-dashboard": 30,
-    "bi-implementation": 35,
-    "ecommerce-store": 40,
-    "custom-web-app": 45,
-    "mobile-app-development": 50,
+    "landing-page": 4,
+    "content-strategy": 5,
+    "social-media-management": 6,
+    "ecommerce-optimization": 6,
+    "brand-identity": 8,
+    "marketing-campaign": 8,
+    "uiux-design": 10,
+    "corporate-website": 12,
+    "data-dashboard": 12,
+    "app-redesign": 12,
+    "ecommerce-store": 16,
+    "bi-implementation": 18,
+    "custom-web-app": 20,
+    "mobile-app-development": 24,
   };
 
-  const serviceBaseHours = BASELINE_HOURS_BY_SLUG[serviceSlug] ?? 15;
+  const serviceBaseHours = BASELINE_HOURS_BY_SLUG[serviceSlug] ?? 12;
 
-  // For small services (landing page, content strategy, etc.), adjust minimum project value floor
-  const isSmallService = ["landing-page", "content-strategy", "social-media-management", "ecommerce-optimization"].includes(serviceSlug);
+  // Service-specific minimum entry floors in COP
+  const SERVICE_FLOORS: Record<string, number> = {
+    "landing-page": 600000,
+    "content-strategy": 800000,
+    "social-media-management": 1000000,
+    "ecommerce-optimization": 1000000,
+    "brand-identity": 1200000,
+    "marketing-campaign": 1200000,
+    "uiux-design": 1500000,
+    "corporate-website": 1800000,
+    "data-dashboard": 1800000,
+    "app-redesign": 1800000,
+    "ecommerce-store": 2500000,
+    "bi-implementation": 2500000,
+    "custom-web-app": 3000000,
+    "mobile-app-development": 3000000,
+  };
+
+  const calculatedFloor = SERVICE_FLOORS[serviceSlug] ?? 1500000;
   const effectiveSettings = {
     ...defaultSettings,
-    min_project_value_cop: isSmallService
-      ? Math.min(defaultSettings.min_project_value_cop, 1500000)
-      : defaultSettings.min_project_value_cop,
+    min_project_value_cop: Math.min(defaultSettings.min_project_value_cop, calculatedFloor),
   };
 
   const engineItems = payload.items.map((item) => {
@@ -327,29 +356,45 @@ export async function submitPublicQuoteRequest(
   }
 
   const BASELINE_HOURS_BY_SLUG: Record<string, number> = {
-    "landing-page": 8,
-    "content-strategy": 10,
-    "social-media-management": 12,
-    "ecommerce-optimization": 15,
-    "marketing-campaign": 15,
-    "brand-identity": 18,
-    "uiux-design": 20,
-    "corporate-website": 25,
-    "app-redesign": 25,
-    "data-dashboard": 30,
-    "bi-implementation": 35,
-    "ecommerce-store": 40,
-    "custom-web-app": 45,
-    "mobile-app-development": 50,
+    "landing-page": 4,
+    "content-strategy": 5,
+    "social-media-management": 6,
+    "ecommerce-optimization": 6,
+    "brand-identity": 8,
+    "marketing-campaign": 8,
+    "uiux-design": 10,
+    "corporate-website": 12,
+    "data-dashboard": 12,
+    "app-redesign": 12,
+    "ecommerce-store": 16,
+    "bi-implementation": 18,
+    "custom-web-app": 20,
+    "mobile-app-development": 24,
   };
 
-  const serviceBaseHours = BASELINE_HOURS_BY_SLUG[serviceSlug] ?? 15;
-  const isSmallService = ["landing-page", "content-strategy", "social-media-management", "ecommerce-optimization"].includes(serviceSlug);
+  const serviceBaseHours = BASELINE_HOURS_BY_SLUG[serviceSlug] ?? 12;
+
+  const SERVICE_FLOORS: Record<string, number> = {
+    "landing-page": 600000,
+    "content-strategy": 800000,
+    "social-media-management": 1000000,
+    "ecommerce-optimization": 1000000,
+    "brand-identity": 1200000,
+    "marketing-campaign": 1200000,
+    "uiux-design": 1500000,
+    "corporate-website": 1800000,
+    "data-dashboard": 1800000,
+    "app-redesign": 1800000,
+    "ecommerce-store": 2500000,
+    "bi-implementation": 2500000,
+    "custom-web-app": 3000000,
+    "mobile-app-development": 3000000,
+  };
+
+  const calculatedFloor = SERVICE_FLOORS[serviceSlug] ?? 1500000;
   const effectiveSettings = {
     ...defaultSettings,
-    min_project_value_cop: isSmallService
-      ? Math.min(defaultSettings.min_project_value_cop, 1500000)
-      : defaultSettings.min_project_value_cop,
+    min_project_value_cop: Math.min(defaultSettings.min_project_value_cop, calculatedFloor),
   };
 
   const engineItems = payload.items.map((item) => {

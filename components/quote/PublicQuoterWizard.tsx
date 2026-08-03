@@ -21,6 +21,596 @@ interface PublicQuoterWizardProps {
   language?: "en" | "es";
 }
 
+function getComplexityTierDetails(
+  tier: "basic" | "standard" | "advanced" | "enterprise",
+  serviceSlug: string | undefined,
+  answers: ScopeAnswers,
+  language: "en" | "es"
+) {
+  const isEs = language === "es";
+
+  let title = tier === "basic" ? (isEs ? "Básico (MVP)" : "Basic (MVP)")
+    : tier === "standard" ? (isEs ? "Estándar" : "Standard")
+    : tier === "advanced" ? (isEs ? "Avanzado" : "Advanced")
+    : (isEs ? "Empresarial" : "Enterprise");
+
+  let desc = tier === "basic"
+    ? (isEs ? "Esencial, rápido y enfocado en solución limpia con requerimientos básicos." : "Essential, fast, and focused on clean solution with base requirements.")
+    : tier === "standard"
+    ? (isEs ? "Funcionalidades típicas de negocio, gestión de contenidos e interacciones intermedias." : "Standard business features, CMS management, and intermediate UI interactions.")
+    : tier === "advanced"
+    ? (isEs ? "Personalización profunda, integraciones API de terceros y rendimiento optimizado." : "Deep customization, 3rd party API integrations, and performance tuning.")
+    : (isEs ? "Arquitectura a medida a gran escala, integraciones multi-sistema y máxima seguridad." : "Full-scale custom architecture, multi-system API integration, and peak security.");
+
+  let bullets: string[] = [];
+
+  if (serviceSlug === "landing-page") {
+    if (tier === "basic") {
+      bullets = isEs ? [
+        "1 Página de aterrizaje 100% responsiva (Móvil, Tablet, Desktop)",
+        "Estructura limpia orientada a conversión rápida (HTML/React)",
+        "Formulario sencillo de captura de contactos / leads",
+        "Indexación básica en buscadores (Google SEO Meta Tags)",
+        "Despliegue en producción y enlace a tu dominio web"
+      ] : [
+        "100% responsive single landing page (Mobile, Tablet, Desktop)",
+        "Clean high-performance conversion structure (HTML/React)",
+        "Simple contact / lead capture form",
+        "Basic Google SEO indexing & meta tag setup",
+        "Production deployment & custom domain connection"
+      ];
+    } else if (tier === "standard") {
+      bullets = isEs ? [
+        "Todo lo incluido en el paquete Básico +",
+        "Animaciones e interacciones dinámicas de interfaz",
+        "Integración con Google Analytics 4 y Meta Pixel",
+        "Formulario avanzado con validación interactiva",
+        "Optimización Core Web Vitals (Velocidad de carga < 1.5s)"
+      ] : [
+        "Everything in Basic +",
+        "Dynamic UI micro-animations and motion transitions",
+        "Google Analytics 4 & Meta Pixel integration",
+        "Advanced form validation and instant user feedback",
+        "Core Web Vitals performance tuning (< 1.5s load)"
+      ];
+    } else if (tier === "advanced") {
+      bullets = isEs ? [
+        "Todo lo incluido en el paquete Estándar +",
+        "Conexión directa a CRM / Email Marketing (Mailchimp, HubSpot, WhatsApp API)",
+        "Configuración de variante para A/B Testing",
+        "Soporte bilingüe (Español e Inglés)",
+        "CMS ligero para editar textos e imágenes fácilmente"
+      ] : [
+        "Everything in Standard +",
+        "Direct CRM / Email Marketing sync (HubSpot, Mailchimp, WhatsApp API)",
+        "A/B Testing variant configuration",
+        "Bilingual / Multi-language localization",
+        "Lightweight CMS for easy text and image editing"
+      ];
+    } else {
+      bullets = isEs ? [
+        "Todo lo incluido en el paquete Avanzado +",
+        "Arquitectura Headless / Serverless dedicada",
+        "Despliegue global en CDN Edge de alta velocidad",
+        "Integración de Webhooks personalizados en servidor",
+        "Soporte y acompañamiento prioritario de lanzamiento"
+      ] : [
+        "Everything in Advanced +",
+        "Dedicated Headless / Serverless architecture",
+        "Global Edge CDN deployment infrastructure",
+        "Custom server-side Webhook & API pipeline",
+        "Priority launch support and dedicated team sign-off"
+      ];
+    }
+  } else if (serviceSlug === "brand-identity") {
+    if (tier === "basic") {
+      bullets = isEs ? [
+        "Diseño de Logotipo principal (concepto limpio + revisiones)",
+        "Paleta de colores primaria y guía tipográfica básica",
+        "Entregables en formatos vectoriales y web (SVG, PNG, PDF)",
+        "Guía esencial de uso de marca (Brand One-Sheet)"
+      ] : [
+        "Primary Logo design (clean concept + revisions)",
+        "Primary color palette & core typography guidance",
+        "Deliverables in vector & web formats (SVG, PNG, PDF)",
+        "Essential Brand One-Sheet usage guide"
+      ];
+    } else if (tier === "standard") {
+      bullets = isEs ? [
+        "Todo lo incluido en el paquete Básico +",
+        "Logotipo principal + variaciones (isotipo, versión horizontal/vertical)",
+        "Manual de Identidad de Marca (usos correctos, espaciados)",
+        "Plantillas iniciales para Redes Sociales (artes editables en Figma/Canva)",
+        "Papelería corporativa esencial (tarjeta digital, firma de correo)"
+      ] : [
+        "Everything in Basic +",
+        "Primary logo + variations (icon mark, stacked/horizontal layout)",
+        "Full Brand Identity Guidelines Manual (spacing, clear space)",
+        "Initial Social Media post templates (editable Figma/Canva)",
+        "Essential digital stationery (digital card, email signature)"
+      ];
+    } else if (tier === "advanced") {
+      bullets = isEs ? [
+        "Todo lo incluido en el paquete Estándar +",
+        "Sistema de identidad visual completo (patrones de marca, texturas e iconografía)",
+        "Pack ampliado de plantillas para redes sociales y banners publicitarios",
+        "Kit de papelería corporativa física e impresa (membretes, carpetas)",
+        "Manual de Marca extendido con tono de voz e historia de marca"
+      ] : [
+        "Everything in Standard +",
+        "Full visual identity system (brand patterns, textures & icons)",
+        "Expanded social media templates & ad banner suite",
+        "Print stationery collateral kit (letterheads, folders, badges)",
+        "Extended Brand Guidelines with voice & brand story"
+      ];
+    } else {
+      bullets = isEs ? [
+        "Todo lo incluido en el paquete Avanzado +",
+        "Sistema de diseño de marca corporativo multimarca o sub-marcas",
+        "Animación de marca y motion logo (Logo Animation 2D/3D)",
+        "Guía de aplicaciones físicas, empaques, merch y señalética",
+        "Brand Portal / Drive centralizado con licencias y vectores"
+      ] : [
+        "Everything in Advanced +",
+        "Multi-brand corporate design architecture & sub-brand system",
+        "2D/3D Logo Motion Animation & brand stingers",
+        "Physical collateral, packaging, merch & signage guidelines",
+        "Centralized Brand Portal with licensed assets & vectors"
+      ];
+    }
+  } else if (serviceSlug === "uiux-design") {
+    if (tier === "basic") {
+      bullets = isEs ? [
+        "Wireframes de baja/alta fidelidad para 3 a 5 pantallas principales",
+        "Mapa de navegación y flujo de usuario básico",
+        "Guía de estilos UI esencial (colores, botones, fuentes)",
+        "Archivo entregable en Figma listo para revisión"
+      ] : [
+        "Low/High fidelity wireframes for 3 to 5 key screens",
+        "User flow navigation map",
+        "Essential UI style guide (colors, buttons, typography)",
+        "Figma source deliverable ready for review"
+      ];
+    } else if (tier === "standard") {
+      bullets = isEs ? [
+        "Todo lo del paquete Básico +",
+        "Prototipo interactivo navegable y testeable en Figma",
+        "Sistema de diseño UI (Design System) con componentes reutilizables",
+        "Diseño adaptativo para Móvil y Desktop",
+        "Handover técnico organizado para desarrolladores"
+      ] : [
+        "Everything in Basic +",
+        "Interactive clickable prototype in Figma",
+        "UI Design System with reusable UI components & variants",
+        "Responsive layout design (Mobile & Desktop)",
+        "Organized developer handover specifications"
+      ];
+    } else if (tier === "advanced") {
+      bullets = isEs ? [
+        "Todo lo del paquete Estándar +",
+        "Arquitectura de información completa y User Journeys detallados",
+        "Diseño UI/UX para 15+ pantallas o módulos complejos",
+        "Micro-interacciones y especificaciones de animación",
+        "Pruebas de usabilidad iniciales con usuarios"
+      ] : [
+        "Everything in Standard +",
+        "Full Information Architecture & detailed User Journey maps",
+        "UI/UX design for 15+ screens or complex user flows",
+        "Micro-interaction specifications & motion transitions",
+        "Initial usability user testing validation"
+      ];
+    } else {
+      bullets = isEs ? [
+        "Todo lo del paquete Avanzado +",
+        "Design System corporativo multiplataforma (Web, iOS, Android)",
+        "Auditoría de accesibilidad completa (WCAG / AA Compliance)",
+        "Investigación cualitativa/cuantitativa y pruebas A/B de usabilidad",
+        "Acompañamiento en sprint de diseño y QA visual de desarrollo"
+      ] : [
+        "Everything in Advanced +",
+        "Cross-platform corporate Design System (Web, iOS, Android)",
+        "Full Accessibility Audit (WCAG AA Compliance)",
+        "Qualitative & Quantitative UX Research & A/B testing",
+        "Design sprint facilitation & developer visual QA"
+      ];
+    }
+  } else if (serviceSlug === "content-strategy" || serviceSlug === "social-media-management") {
+    if (tier === "basic") {
+      bullets = isEs ? [
+        "Plan de contenido básico mensual (8 a 10 publicaciones)",
+        "Redacción de textos/copys optimizados para redes",
+        "Calendario editorial mensual",
+        "Diseño de piezas gráficas estáticas básicas"
+      ] : [
+        "Basic monthly content plan (8 to 10 posts)",
+        "Social media copy writing & hashtag selection",
+        "Monthly editorial calendar schedule",
+        "Basic static graphic design posts"
+      ];
+    } else if (tier === "standard") {
+      bullets = isEs ? [
+        "Todo lo del paquete Básico +",
+        "Gestión activa de 2 canales (ej. Instagram y LinkedIn/Facebook)",
+        "Producción de 15 a 20 piezas (gráficas dinámicas + carruseles)",
+        "Estrategia de palabras clave y temas de tendencia",
+        "Reporte mensual de rendimiento y alcance"
+      ] : [
+        "Everything in Basic +",
+        "Active management of 2 channels (e.g., Instagram & LinkedIn)",
+        "15 to 20 content pieces (carousels & motion graphics)",
+        "Keyword & trending topic content strategy",
+        "Monthly reach & engagement performance report"
+      ];
+    } else if (tier === "advanced") {
+      bullets = isEs ? [
+        "Todo lo del paquete Estándar +",
+        "Edición y producción de Reels / Shorts / TikToks",
+        "Gestión de 3+ redes sociales con atención a comunidad básica",
+        "Configuración y supervisión de pauta publicitaria (Ads)",
+        "Reporte analítico avanzado con recomendaciones tácticas"
+      ] : [
+        "Everything in Standard +",
+        "Reels / Shorts / TikTok video editing & production",
+        "Management of 3+ channels with community interaction",
+        "Paid ad campaign setup & oversight (Ads Manager)",
+        "Advanced analytics reporting with tactical recommendations"
+      ];
+    } else {
+      bullets = isEs ? [
+        "Todo lo del paquete Avanzado +",
+        "Equipo de contenido dedicado (Community Manager + Diseñador + Copywriter)",
+        "Estrategia multicanal 360°, influencer marketing y PR digital",
+        "Monitoreo de reputación de marca y gestión de crisis",
+        "Producción audiovisual presencial o de estudio de alto impacto"
+      ] : [
+        "Everything in Advanced +",
+        "Dedicated content squad (Community Manager + Designer + Copywriter)",
+        "360° multi-channel strategy, influencer partnerships & digital PR",
+        "Brand reputation monitoring & crisis management",
+        "High-impact video production & studio content creation"
+      ];
+    }
+  } else if (serviceSlug === "marketing-campaign") {
+    if (tier === "basic") {
+      bullets = isEs ? [
+        "Configuración inicial de campaña publicitaria en 1 canal (Meta o Google)",
+        "Segmentación de audiencia inicial y palabras clave",
+        "3 a 5 artes gráficos y copys publicitarios",
+        "Reporte final de resultados de campaña"
+      ] : [
+        "Campaign setup on 1 channel (Meta or Google Ads)",
+        "Initial target audience & keyword segmentation",
+        "3 to 5 ad creatives and copy variations",
+        "Final campaign performance report"
+      ];
+    } else if (tier === "standard") {
+      bullets = isEs ? [
+        "Todo lo del paquete Básico +",
+        "Estrategia multicanal (Meta Ads + Google Ads)",
+        "Instalación de píxel de conversión y seguimiento de eventos",
+        "Pruebas A/B de anuncios y copys (8 a 12 variaciones)",
+        "Optimización semanal de presupuesto para máximo ROI"
+      ] : [
+        "Everything in Basic +",
+        "Multi-channel strategy (Meta Ads + Google Ads)",
+        "Conversion pixel & event tracking setup",
+        "A/B testing for ad creatives and copies (8-12 variations)",
+        "Weekly budget optimization for peak ROI"
+      ];
+    } else if (tier === "advanced") {
+      bullets = isEs ? [
+        "Todo lo del paquete Estándar +",
+        "Embudo de ventas completo (Lead Magnet + Retargeting)",
+        "Diseño de Landing Page orientada a conversión de campaña",
+        "Integración con CRM para seguimiento de leads",
+        "Reportes semanales en vivo y optimización diaria"
+      ] : [
+        "Everything in Standard +",
+        "Full sales funnel architecture (Lead Magnet + Retargeting)",
+        "Dedicated conversion landing page design",
+        "CRM lead capture integration & automated follow-up",
+        "Live weekly analytics dashboards & daily ad tuning"
+      ];
+    } else {
+      bullets = isEs ? [
+        "Todo lo del paquete Avanzado +",
+        "Gestión de campañas de alto presupuesto publicitario",
+        "Modelos de atribución multicanal avanzados y analítica BI",
+        "Estrategia omnicanal con influencers, PR y retargeting masivo",
+        "Equipo de Growth Hacking y Performance dedicado"
+      ] : [
+        "Everything in Advanced +",
+        "High-budget ad spend management & scaling",
+        "Advanced multi-touch attribution modeling & BI analytics",
+        "Omnichannel campaign scaling with influencer & PR synergy",
+        "Dedicated Growth Hacking & Performance team"
+      ];
+    }
+  } else if (serviceSlug === "corporate-website") {
+    if (tier === "basic") {
+      bullets = isEs ? [
+        "Sitio web corporativo de 1 a 5 secciones principales",
+        "Diseño responsivo moderno optimizado para móviles",
+        "Formulario de contacto y mapa interactivo",
+        "SEO Técnico esencial (meta tags, sitemap, robots.txt)"
+      ] : [
+        "1 to 5 core corporate site sections",
+        "Modern responsive design optimized for mobile",
+        "Contact form and interactive map location",
+        "Essential technical SEO (meta tags, sitemap, robots.txt)"
+      ];
+    } else if (tier === "standard") {
+      bullets = isEs ? [
+        "Todo lo del paquete Básico +",
+        "CMS de gestión de contenidos (WordPress o Headless)",
+        "Blog corporativo o centro de noticias",
+        "Animaciones UI interactivas y componentes de marca",
+        "Integración con Google Analytics 4 y Search Console"
+      ] : [
+        "Everything in Basic +",
+        "Content Management System (WordPress or Headless)",
+        "Corporate blog or news section",
+        "Interactive UI animations & branded components",
+        "Google Analytics 4 & Search Console integration"
+      ];
+    } else if (tier === "advanced") {
+      bullets = isEs ? [
+        "Todo lo del paquete Estándar +",
+        "Soporte multi-idioma nativo",
+        "Zona de clientes / Portal con inicio de sesión seguro",
+        "Integración con CRM (HubSpot, Salesforce, Zoho)",
+        "Score de rendimiento web de alto nivel (>90 en Lighthouse)"
+      ] : [
+        "Everything in Standard +",
+        "Native multi-language localization",
+        "Client Portal / Secure user login area",
+        "CRM integration (HubSpot, Salesforce, Zoho)",
+        "Top-tier performance tuning (>90 Lighthouse score)"
+      ];
+    } else {
+      bullets = isEs ? [
+        "Todo lo del paquete Avanzado +",
+        "Integración bidireccional con ERP/CRM corporativo vía API",
+        "Arquitectura multi-región y alta disponibilidad",
+        "Cumplimiento de seguridad, GDPR y auditoría RLS",
+        "Garantía y SLA de soporte corporativo dedicado"
+      ] : [
+        "Everything in Advanced +",
+        "Bi-directional corporate ERP/CRM API integration",
+        "Multi-region high availability architecture",
+        "Enterprise security compliance & RLS audit",
+        "Dedicated SLA support guarantee"
+      ];
+    }
+  } else if (serviceSlug === "ecommerce-store" || serviceSlug === "ecommerce-optimization") {
+    if (tier === "basic") {
+      bullets = isEs ? [
+        "Tienda online básica (hasta 50 productos)",
+        "1 Pasarela de pagos integrada (Stripe, MercadoPago o PayU)",
+        "Checkout responsivo rápido optimizado para móviles",
+        "Configuración inicial de tarifas de envío"
+      ] : [
+        "Basic online store setup (up to 50 products)",
+        "1 Integrated payment gateway (Stripe, MercadoPago, PayU)",
+        "Fast responsive checkout optimized for mobile",
+        "Basic shipping rates configuration"
+      ];
+    } else if (tier === "standard") {
+      bullets = isEs ? [
+        "Todo lo del paquete Básico +",
+        "Catálogo ampliado con variaciones (talla, color, opciones)",
+        "Múltiples métodos de pago (Tarjetas, PSE, Nequi, Daviplata)",
+        "Sistema de cupones de descuento y carrito abandonado",
+        "Integración con píxeles de venta (Meta, Google Shopping)"
+      ] : [
+        "Everything in Basic +",
+        "Expanded catalog with variants (size, color, options)",
+        "Multiple payment methods (Credit cards, local transfers)",
+        "Discount coupons & abandoned cart recovery emails",
+        "Sales pixel integration (Meta, Google Shopping)"
+      ];
+    } else if (tier === "advanced") {
+      bullets = isEs ? [
+        "Todo lo del paquete Estándar +",
+        "Integración con empresas de envío en tiempo real",
+        "Sincronización con sistema contable / inventario externo",
+        "Filtros de búsqueda avanzada de productos (Facet search)",
+        "Dashboard avanzado de rendimiento de ventas"
+      ] : [
+        "Everything in Standard +",
+        "Real-time multi-carrier shipping integration",
+        "External ERP / Inventory / Accounting sync",
+        "Advanced faceted product search and filter system",
+        "Advanced sales & conversion analytics dashboard"
+      ];
+    } else {
+      bullets = isEs ? [
+        "Todo lo del paquete Avanzado +",
+        "Arquitectura Marketplace multi-vendedor o B2B wholesale",
+        "Checkout Headless ultrarrápido preparado para alto tráfico",
+        "Personalización de producto con vista interactiva",
+        "Soporte prioritario 24/7 en campañas de alto pico"
+      ] : [
+        "Everything in Advanced +",
+        "Multi-vendor Marketplace or B2B Wholesale architecture",
+        "Ultra-fast Headless Checkout for flash-sale traffic",
+        "Custom product preview / interactive viewer",
+        "Priority 24/7 support during high-peak campaigns"
+      ];
+    }
+  } else if (serviceSlug === "custom-web-app" || serviceSlug === "data-dashboard" || serviceSlug === "bi-implementation") {
+    if (tier === "basic") {
+      bullets = isEs ? [
+        "MVP Web con 5 a 10 pantallas principales",
+        "Autenticación estándar (Correo y contraseña)",
+        "Panel de control para 1 rol de usuario (Admin)",
+        "Base de datos relacional y APIs REST esenciales"
+      ] : [
+        "Web App MVP with 5 to 10 main screens",
+        "Standard authentication (Email & password)",
+        "Admin control panel for 1 user role",
+        "Relational database & essential REST APIs"
+      ];
+    } else if (tier === "standard") {
+      bullets = isEs ? [
+        "Todo lo del paquete Básico +",
+        "Hasta 3 tipos de usuarios con roles y permisos",
+        "Integración con 1 o 2 APIs externas (Pagos, Notificaciones)",
+        "Tablas avanzadas con filtros y exportación (Excel/PDF)",
+        "Diseño de interfaz a medida con componentes reutilizables"
+      ] : [
+        "Everything in Basic +",
+        "Up to 3 user roles with permission scopes",
+        "Integration with 1 or 2 external APIs (Payments, SMS/Email)",
+        "Advanced tables with filtering, search, and Excel/PDF export",
+        "Custom UI design with reusable component design system"
+      ];
+    } else if (tier === "advanced") {
+      bullets = isEs ? [
+        "Todo lo del paquete Estándar +",
+        "Funcionalidades en tiempo real (WebSockets / Instant updates)",
+        "Autenticación SSO / Social Login (Google, Apple, Microsoft)",
+        "Automatizaciones en segundo plano y tareas programadas",
+        "Reportes y gráficos de analítica personalizados"
+      ] : [
+        "Everything in Standard +",
+        "Real-time features (WebSockets / Instant updates)",
+        "SSO / Social Login authentication (Google, Apple, Microsoft)",
+        "Background task automations & scheduled cron jobs",
+        "Custom analytics charts and performance reporting"
+      ];
+    } else {
+      bullets = isEs ? [
+        "Todo lo del paquete Avanzado +",
+        "Arquitectura multi-tenant para plataforma SaaS comercializable",
+        "Integración de modelos de IA / LLMs o análisis predictivo",
+        "Infraestructura distribuida con alta disponibilidad",
+        "Documentación técnica de API y guías de desarrollador"
+      ] : [
+        "Everything in Advanced +",
+        "Multi-tenant architecture for scalable commercial SaaS",
+        "AI / LLM model integration or predictive analytics engine",
+        "Distributed high-availability server architecture",
+        "Complete technical API documentation and developer portal"
+      ];
+    }
+  } else if (serviceSlug === "mobile-app-development" || serviceSlug === "app-redesign") {
+    if (tier === "basic") {
+      bullets = isEs ? [
+        "App Móvil MVP (iOS o Android) de 5 a 10 pantallas",
+        "Registro e inicio de sesión por correo",
+        "Interfaz intuitiva siguiendo guías de diseño móvil",
+        "Integración con API backend existente"
+      ] : [
+        "Mobile App MVP (iOS or Android) with 5 to 10 screens",
+        "Email registration and login",
+        "Intuitive mobile UI adhering to iOS/Android design guidelines",
+        "Integration with existing backend API"
+      ];
+    } else if (tier === "standard") {
+      bullets = isEs ? [
+        "Todo lo del paquete Básico +",
+        "Desarrollo Multiplataforma (iOS y Android en 1 sola base)",
+        "Sistema de Notificaciones Push nativas",
+        "Integración de pasarela de pagos in-app",
+        "Publicación en App Store y Google Play Store"
+      ] : [
+        "Everything in Basic +",
+        "Cross-platform build (iOS & Android from single codebase)",
+        "Native Push Notifications system",
+        "In-app payment gateway integration",
+        "App Store & Google Play Store publishing guidance"
+      ];
+    } else if (tier === "advanced") {
+      bullets = isEs ? [
+        "Todo lo del paquete Estándar +",
+        "Soporte de modo Offline con sincronización al reconectar",
+        "Geolocalización, mapas y sensores nativos (Cámara, GPS)",
+        "Autenticación biométrica (FaceID / TouchID)",
+        "Analítica en tiempo real de uso del usuario"
+      ] : [
+        "Everything in Standard +",
+        "Offline support with auto-sync on reconnect",
+        "Geolocation, maps, and native hardware sensors (Camera, GPS)",
+        "Biometric authentication (FaceID / TouchID)",
+        "Real-time user engagement analytics tracking"
+      ];
+    } else {
+      bullets = isEs ? [
+        "Todo lo del paquete Avanzado +",
+        "Backend dedicado serverless de alto rendimiento incluido",
+        "Arquitectura modular para crecimiento empresarial",
+        "Pruebas de estrés y seguridad in-app",
+        "Mantenimiento post-lanzamiento dedicado"
+      ] : [
+        "Everything in Advanced +",
+        "High-performance dedicated serverless backend included",
+        "Enterprise scalable modular code architecture",
+        "In-app security & load stress testing",
+        "Dedicated post-launch SLA maintenance"
+      ];
+    }
+  } else {
+    if (tier === "basic") {
+      bullets = isEs ? [
+        "Entregable esencial enfocado en patrones estándar",
+        "Personalización visual limpia adaptada a tu marca",
+        "Formulario o canal de interacción básica",
+        "Entrega rápida y despliegue inicial"
+      ] : [
+        "Essential deliverable focused on standard patterns",
+        "Clean visual styling adapted to your brand identity",
+        "Basic interaction channel or contact form",
+        "Fast delivery and initial setup deployment"
+      ];
+    } else if (tier === "standard") {
+      bullets = isEs ? [
+        "Todo lo del paquete Básico +",
+        "Funcionalidades típicas completas de negocio",
+        "Micro-animaciones UI e interacciones mejoradas",
+        "Integraciones de analítica de tráfico",
+        "Optimización de rendimiento y experiencia"
+      ] : [
+        "Everything in Basic +",
+        "Complete standard business feature set",
+        "Enhanced UI micro-animations & user flows",
+        "Traffic analytics integration",
+        "Performance and UX optimization"
+      ];
+    } else if (tier === "advanced") {
+      bullets = isEs ? [
+        "Todo lo del paquete Estándar +",
+        "Personalización a medida e integraciones API avanzadas",
+        "Funciones automatizadas y paneles de administración",
+        "Soporte bilingüe o configuraciones complejas",
+        "Alto estándar de velocidad y optimización de código"
+      ] : [
+        "Everything in Standard +",
+        "Custom tailoring and advanced API integrations",
+        "Automated workflows & admin control dashboards",
+        "Bilingual or multi-option setup",
+        "Top-tier performance & code optimization standards"
+      ];
+    } else {
+      bullets = isEs ? [
+        "Todo lo del paquete Avanzado +",
+        "Arquitectura completa a la medida de nivel empresarial",
+        "Alta disponibilidad, redundancia y seguridad RLS",
+        "Integración multi-sistema e infraestructura escalable",
+        "SLA y garantía de acompañamiento técnico dedicado"
+      ] : [
+        "Everything in Advanced +",
+        "Full-scale custom enterprise-grade architecture",
+        "High availability, redundancy, and RLS security",
+        "Multi-system API pipeline & scalable cloud setup",
+        "Dedicated SLA support and technical sign-off"
+      ];
+    }
+  }
+
+  return { title, desc, bullets };
+}
+
 export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWizardProps) {
   // Wizard state
   const [step, setStep] = useState(1);
@@ -39,7 +629,7 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
   const [loadingQuestions, setLoadingQuestions] = useState(false);
   const [scopeAnswers, setScopeAnswers] = useState<ScopeAnswers>({});
 
-  const [complexity, setComplexity] = useState<ComplexityLevel>("standard");
+  const [complexity, setComplexity] = useState<ComplexityLevel>("basic");
   const [urgency, setUrgency] = useState<string>("normal");
 
   // Calculated estimate state
@@ -66,9 +656,6 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
     try {
       const data = await getPublicServiceCatalog();
       setCatalog(data);
-      if (data.categories.length > 0) {
-        setSelectedCategory(data.categories[0]);
-      }
     } catch (err) {
       console.error("Failed to load catalog:", err);
       setCatalogError(true);
@@ -116,6 +703,26 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
 
     loadQuestions();
   }, [selectedService]);
+
+  const isScopeStepValid = () => {
+    const visibleRequiredQuestions = scopeQuestions.filter((q) => {
+      if (!q.is_required) return false;
+      if (!q.conditional_on_question_id) return true;
+      const parentVal = scopeAnswers[q.conditional_on_question_id];
+      return String(parentVal) === String(q.conditional_on_value);
+    });
+
+    for (const q of visibleRequiredQuestions) {
+      const val = scopeAnswers[q.id];
+      if (val === undefined || val === null) return false;
+      if (q.question_type === "multi_select") {
+        if (!Array.isArray(val) || val.length === 0) return false;
+      } else {
+        if (String(val).trim() === "") return false;
+      }
+    }
+    return true;
+  };
 
   const availableServices = catalog?.services.filter(
     (s) => s.category_id === selectedCategory?.id
@@ -271,6 +878,107 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
               style={{ width: `${(step / 5) * 100}%` }}
             ></div>
           </div>
+
+          {/* Interactive Breadcrumb Bar (Migas de Pan / Resumen de Selección) */}
+          {step > 1 && (
+            <nav aria-label="Breadcrumb" className="bg-white/80 border border-slate-200/80 backdrop-blur-md rounded-2xl p-3 flex flex-wrap items-center gap-2 text-xs shadow-xs animate-fade-in">
+              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mr-1 flex items-center gap-1">
+                <span className="material-symbols-outlined text-sm" aria-hidden="true">tune</span>
+                {language === "es" ? "Cotizando:" : "Quoting:"}
+              </span>
+
+              {/* Step 1 Selection: Category */}
+              {selectedCategory && (
+                <button
+                  type="button"
+                  onClick={() => setStep(1)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-all shadow-2xs group cursor-pointer focus-visible:ring-2 focus-visible:ring-slate-900 ${
+                    step === 1
+                      ? "bg-slate-900 text-white border-slate-900 font-bold"
+                      : "bg-slate-50 border-slate-200 text-slate-700 font-semibold hover:border-slate-300 hover:bg-slate-100"
+                  }`}
+                  title={language === "es" ? "Cambiar categoría" : "Change category"}
+                >
+                  <span className={`text-[10px] font-bold uppercase tracking-wider ${step === 1 ? "text-slate-300" : "text-slate-400 group-hover:text-slate-600"}`}>
+                    {language === "es" ? "Categoría:" : "Cat:"}
+                  </span>
+                  <span className={step === 1 ? "font-bold text-white" : "font-bold text-slate-900"}>{selectedCategory.name}</span>
+                  {step > 1 && <span className="material-symbols-outlined text-xs text-slate-400 group-hover:text-slate-600" aria-hidden="true">edit</span>}
+                </button>
+              )}
+
+              {/* Separator icon */}
+              {selectedService && <span className="material-symbols-outlined text-slate-300 text-xs" aria-hidden="true">chevron_right</span>}
+
+              {/* Step 2 Selection: Service */}
+              {selectedService && (
+                <button
+                  type="button"
+                  onClick={() => setStep(2)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-all shadow-2xs group cursor-pointer focus-visible:ring-2 focus-visible:ring-slate-900 ${
+                    step === 2
+                      ? "bg-slate-900 text-white border-slate-900 font-bold"
+                      : "bg-slate-50 border-slate-200 text-slate-700 font-semibold hover:border-slate-300 hover:bg-slate-100"
+                  }`}
+                  title={language === "es" ? "Cambiar servicio" : "Change service"}
+                >
+                  <span className={`text-[10px] font-bold uppercase tracking-wider ${step === 2 ? "text-slate-300" : "text-slate-400 group-hover:text-slate-600"}`}>
+                    {language === "es" ? "Servicio:" : "Srv:"}
+                  </span>
+                  <span className={step === 2 ? "font-bold text-white" : "font-bold text-slate-900"}>{selectedService.name}</span>
+                  {step > 2 && <span className="material-symbols-outlined text-xs text-slate-400 group-hover:text-slate-600" aria-hidden="true">edit</span>}
+                </button>
+              )}
+
+              {/* Separator icon */}
+              {step >= 4 && <span className="material-symbols-outlined text-slate-300 text-xs" aria-hidden="true">chevron_right</span>}
+
+              {/* Step 3 Selection: Scope Summary */}
+              {step >= 4 && (
+                <button
+                  type="button"
+                  onClick={() => setStep(3)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-all shadow-2xs group cursor-pointer focus-visible:ring-2 focus-visible:ring-slate-900 ${
+                    step === 3
+                      ? "bg-slate-900 text-white border-slate-900 font-bold"
+                      : "bg-slate-50 border-slate-200 text-slate-700 font-semibold hover:border-slate-300 hover:bg-slate-100"
+                  }`}
+                  title={language === "es" ? "Editar preguntas de alcance" : "Edit scope details"}
+                >
+                  <span className={`text-[10px] font-bold uppercase tracking-wider ${step === 3 ? "text-slate-300" : "text-slate-400 group-hover:text-slate-600"}`}>
+                    {language === "es" ? "Alcance:" : "Scope:"}
+                  </span>
+                  <span className={step === 3 ? "font-bold text-white" : "font-bold text-slate-900"}>
+                    {Object.keys(scopeAnswers).length > 0
+                      ? `${Object.keys(scopeAnswers).length} ${language === "es" ? "detalles" : "details"}`
+                      : (language === "es" ? "Requisitos base" : "Base scope")}
+                  </span>
+                  {step > 3 && <span className="material-symbols-outlined text-xs text-slate-400 group-hover:text-slate-600" aria-hidden="true">edit</span>}
+                </button>
+              )}
+
+              {/* Separator icon */}
+              {step >= 5 && <span className="material-symbols-outlined text-slate-300 text-xs" aria-hidden="true">chevron_right</span>}
+
+              {/* Step 4 Selection: Complexity & Urgency */}
+              {step >= 5 && (
+                <button
+                  type="button"
+                  onClick={() => setStep(4)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 font-semibold hover:border-slate-300 hover:bg-slate-100 transition-all shadow-2xs group cursor-pointer focus-visible:ring-2 focus-visible:ring-slate-900"
+                  title={language === "es" ? "Cambiar complejidad" : "Change complexity"}
+                >
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 group-hover:text-slate-600">
+                    {language === "es" ? "Complejidad:" : "Complexity:"}
+                  </span>
+                  <span className="font-bold text-slate-900 capitalize">
+                    {complexity} ({urgency === "normal" ? (language === "es" ? "Estándar" : "Normal") : urgency})
+                  </span>
+                  <span className="material-symbols-outlined text-xs text-slate-400 group-hover:text-slate-600" aria-hidden="true">edit</span>
+                </button>
+              )}
+            </nav>
+          )}
         </section>
       )}
 
@@ -302,18 +1010,12 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       setSelectedCategory(cat);
-                      const firstService = catalog.services.find(
-                        (s) => s.category_id === cat.id
-                      );
-                      setSelectedService(firstService || null);
+                      setSelectedService(null);
                     }
                   }}
                   onClick={() => {
                     setSelectedCategory(cat);
-                    const firstService = catalog.services.find(
-                      (s) => s.category_id === cat.id
-                    );
-                    setSelectedService(firstService || null);
+                    setSelectedService(null);
                   }}
                   className={`p-6 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 ${
                     isSelected
@@ -360,11 +1062,22 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
             })}
           </div>
 
-          <div className="flex justify-end pt-4">
+          <div className="flex items-center justify-between pt-4">
+            {!selectedCategory ? (
+              <span className="text-xs text-amber-600 font-semibold flex items-center gap-1.5 bg-amber-50 px-3 py-1.5 rounded-xl border border-amber-200">
+                <span className="material-symbols-outlined text-sm" aria-hidden="true">info</span>
+                {language === "es" ? "Selecciona una categoría para continuar" : "Please select a category to proceed"}
+              </span>
+            ) : (
+              <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200">
+                <span className="material-symbols-outlined text-sm" aria-hidden="true">check_circle</span>
+                {language === "es" ? "Categoría seleccionada" : "Category selected"}
+              </span>
+            )}
             <button
               onClick={() => setStep(2)}
               disabled={!selectedCategory}
-              className="px-8 py-3 rounded-2xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-all shadow-md flex items-center gap-2 disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-slate-900"
+              className="px-8 py-3 rounded-2xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-all shadow-md flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-slate-900"
             >
               {language === "en" ? "Next: Select Service" : "Siguiente: Servicio"}
               <span className="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
@@ -443,20 +1156,35 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
             )}
           </div>
 
-          <div className="flex justify-between pt-4">
+          <div className="flex items-center justify-between pt-4">
             <button
               onClick={() => setStep(1)}
               className="px-6 py-3 rounded-2xl bg-slate-100 text-slate-700 font-medium text-xs hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-slate-900"
             >
               {language === "en" ? "Back" : "Atrás"}
             </button>
-            <button
-              onClick={() => setStep(3)}
-              className="px-8 py-3 rounded-2xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-all shadow-md flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-slate-900"
-            >
-              {language === "en" ? "Next: Scope Details" : "Siguiente: Detalles"}
-              <span className="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
-            </button>
+
+            <div className="flex items-center gap-3">
+              {!selectedService ? (
+                <span className="text-xs text-amber-600 font-semibold flex items-center gap-1.5 bg-amber-50 px-3 py-1.5 rounded-xl border border-amber-200">
+                  <span className="material-symbols-outlined text-sm" aria-hidden="true">info</span>
+                  {language === "es" ? "Selecciona un servicio para continuar" : "Please select a service to proceed"}
+                </span>
+              ) : (
+                <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200">
+                  <span className="material-symbols-outlined text-sm" aria-hidden="true">check_circle</span>
+                  {language === "es" ? "Servicio seleccionado" : "Service selected"}
+                </span>
+              )}
+              <button
+                onClick={() => setStep(3)}
+                disabled={!selectedService}
+                className="px-8 py-3 rounded-2xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-all shadow-md flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-slate-900"
+              >
+                {language === "en" ? "Next: Scope Details" : "Siguiente: Detalles"}
+                <span className="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -477,10 +1205,17 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
                 ? "Define Scope & Requirements"
                 : "Define el Alcance y Requisitos"}
             </h2>
+            {selectedService && (
+              <div className="mt-2 inline-flex items-center gap-2 px-3 py-1 bg-slate-900/5 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200/50">
+                <span className="text-slate-400 uppercase tracking-wider text-[10px] font-bold">{selectedCategory?.name}</span>
+                <span className="text-slate-300">•</span>
+                <span className="text-slate-900 font-bold">{selectedService.name}</span>
+              </div>
+            )}
             <p className="text-sm text-slate-500 mt-1">
               {language === "en"
-                ? "Answer a few questions tailored to your selected service."
-                : "Responde algunas preguntas específicas para tu servicio."}
+                ? `Answer a few questions tailored to ${selectedService?.name || "your selected service"}.`
+                : `Responde algunas preguntas específicas para ${selectedService?.name_es || selectedService?.name || "tu servicio"}.`}
             </p>
           </div>
 
@@ -629,20 +1364,35 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
             </div>
           )}
 
-          <div className="flex justify-between pt-4">
+          <div className="flex items-center justify-between pt-4">
             <button
               onClick={() => setStep(2)}
               className="px-6 py-3 rounded-2xl bg-slate-100 text-slate-700 font-medium text-xs hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-slate-900"
             >
               {language === "en" ? "Back" : "Atrás"}
             </button>
-            <button
-              onClick={() => setStep(4)}
-              className="px-8 py-3 rounded-2xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-all shadow-md flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-slate-900"
-            >
-              {language === "en" ? "Next: Complexity & Urgency" : "Siguiente: Complejidad"}
-              <span className="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
-            </button>
+
+            <div className="flex items-center gap-3">
+              {!isScopeStepValid() ? (
+                <span className="text-xs text-amber-600 font-semibold flex items-center gap-1.5 bg-amber-50 px-3 py-1.5 rounded-xl border border-amber-200">
+                  <span className="material-symbols-outlined text-sm" aria-hidden="true">warning</span>
+                  {language === "es" ? "Responde las preguntas obligatorias (*)" : "Please answer all required questions (*)"}
+                </span>
+              ) : (
+                <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200">
+                  <span className="material-symbols-outlined text-sm" aria-hidden="true">check_circle</span>
+                  {language === "es" ? "Alcance definido" : "Scope defined"}
+                </span>
+              )}
+              <button
+                onClick={() => setStep(4)}
+                disabled={!isScopeStepValid()}
+                className="px-8 py-3 rounded-2xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-all shadow-md flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-slate-900"
+              >
+                {language === "en" ? "Next: Complexity & Urgency" : "Siguiente: Complejidad"}
+                <span className="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -663,10 +1413,17 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
                 ? "Complexity & Project Timeline"
                 : "Complejidad y Tiempo de Entrega"}
             </h2>
+            {selectedService && (
+              <div className="mt-2 inline-flex items-center gap-2 px-3 py-1 bg-slate-900/5 rounded-lg text-xs font-semibold text-slate-700 border border-slate-200/50">
+                <span className="text-slate-400 uppercase tracking-wider text-[10px] font-bold">{selectedCategory?.name}</span>
+                <span className="text-slate-300">•</span>
+                <span className="text-slate-900 font-bold">{selectedService.name}</span>
+              </div>
+            )}
             <p className="text-sm text-slate-500 mt-1">
               {language === "en"
-                ? "Select your technical depth and urgency tier."
-                : "Selecciona el nivel técnico y la urgencia del proyecto."}
+                ? `Select your technical depth and urgency tier for ${selectedService?.name || "this project"}.`
+                : `Selecciona el nivel técnico y la urgencia del proyecto para ${selectedService?.name_es || selectedService?.name || "este servicio"}.`}
             </p>
           </div>
 
@@ -676,35 +1433,76 @@ export default function PublicQuoterWizard({ language = "en" }: PublicQuoterWiza
               {language === "en" ? "Technical Complexity" : "Complejidad Técnica"}
             </label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3" role="radiogroup" aria-label="Complexity level">
-              {[
-                { id: "basic", title: "Basic", desc: "Standard patterns, minimal custom logic" },
-                { id: "standard", title: "Standard", desc: "Moderate scope, typical business features" },
-                { id: "advanced", title: "Advanced", desc: "Custom integrations, high performance needs" },
-                { id: "enterprise", title: "Enterprise", desc: "Full-scale custom architecture & multi-system API" },
-              ].map((c) => {
-                const isSelected = complexity === c.id;
+              {(["basic", "standard", "advanced", "enterprise"] as const).map((tierId) => {
+                const isSelected = complexity === tierId;
+                const info = getComplexityTierDetails(tierId, selectedService?.slug, scopeAnswers, language);
+
                 return (
                   <div
-                    key={c.id}
+                    key={tierId}
                     role="radio"
                     aria-checked={isSelected}
                     tabIndex={0}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
-                        setComplexity(c.id as ComplexityLevel);
+                        setComplexity(tierId);
                       }
                     }}
-                    onClick={() => setComplexity(c.id as ComplexityLevel)}
-                    className={`p-4 rounded-xl border transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 ${
+                    onClick={() => setComplexity(tierId)}
+                    className={`p-5 rounded-2xl border transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 flex flex-col justify-between ${
                       isSelected
-                        ? "bg-slate-900 text-white border-slate-900 shadow-sm"
-                        : "bg-white/80 border-slate-200/80 text-slate-900 hover:border-slate-300"
+                        ? "bg-slate-900 text-white border-slate-900 shadow-md ring-2 ring-slate-900/20 scale-[1.01]"
+                        : "bg-white/80 border-slate-200/80 text-slate-900 hover:border-slate-300 hover:bg-white"
                     }`}
                   >
-                    <h3 className="font-bold text-sm mb-1">{c.title}</h3>
-                    <p className={`text-xs ${isSelected ? "text-slate-300" : "text-slate-500"}`}>
-                      {c.desc}
-                    </p>
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-1.5">
+                        <h3 className="font-bold text-base">{info.title}</h3>
+                        <span
+                          className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
+                            isSelected
+                              ? "bg-white/20 text-white"
+                              : tierId === "basic"
+                              ? "bg-emerald-100 text-emerald-800"
+                              : tierId === "standard"
+                              ? "bg-blue-100 text-blue-800"
+                              : tierId === "advanced"
+                              ? "bg-purple-100 text-purple-800"
+                              : "bg-amber-100 text-amber-800"
+                          }`}
+                        >
+                          {tierId === "basic"
+                            ? (language === "es" ? "Económico" : "Starter")
+                            : tierId === "standard"
+                            ? (language === "es" ? "Recomendado" : "Popular")
+                            : tierId === "advanced"
+                            ? (language === "es" ? "Avanzado" : "Advanced")
+                            : (language === "es" ? "Empresarial" : "Enterprise")}
+                        </span>
+                      </div>
+
+                      <p className={`text-xs leading-relaxed ${isSelected ? "text-slate-300" : "text-slate-500"}`}>
+                        {info.desc}
+                      </p>
+
+                      <ul className="mt-4 space-y-2 border-t pt-3 border-slate-200/20 text-xs">
+                        {info.bullets.map((b, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <span
+                              className={`material-symbols-outlined text-sm shrink-0 mt-0.5 ${
+                                isSelected ? "text-emerald-400" : "text-emerald-600"
+                              }`}
+                              aria-hidden="true"
+                            >
+                              check_circle
+                            </span>
+                            <span className={isSelected ? "text-slate-200 font-medium" : "text-slate-700"}>
+                              {b}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 );
               })}

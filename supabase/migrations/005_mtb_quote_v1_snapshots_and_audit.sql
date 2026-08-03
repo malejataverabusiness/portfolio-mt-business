@@ -27,4 +27,4 @@ ALTER TABLE audit_logs ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Admins can view and create audit logs" ON audit_logs;
 CREATE POLICY "Admins can view and create audit logs"
   ON audit_logs FOR ALL
-  USING (true);
+  USING (auth.role() = 'authenticated');

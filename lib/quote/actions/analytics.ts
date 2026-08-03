@@ -8,6 +8,7 @@
 // NEVER automatically alters pricing rates or formulas.
 
 import { createClient } from "../supabase/server";
+import { requireAdminAuth } from "./admin";
 import type {
   ActualCostRecord,
   AnalyticsSummary,
@@ -29,7 +30,7 @@ export async function recordActualCosts(
     notes?: string;
   }
 ) {
-  const supabase = await createClient();
+  const { supabase } = await requireAdminAuth();
 
   const payload = {
     quote_id: quoteId,

@@ -44,9 +44,9 @@ ALTER TABLE proposal_versions ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Admins can manage proposals" ON proposals;
 CREATE POLICY "Admins can manage proposals"
   ON proposals FOR ALL
-  USING (true);
+  USING (auth.role() = 'authenticated');
 
 DROP POLICY IF EXISTS "Admins can manage proposal versions" ON proposal_versions;
 CREATE POLICY "Admins can manage proposal versions"
   ON proposal_versions FOR ALL
-  USING (true);
+  USING (auth.role() = 'authenticated');

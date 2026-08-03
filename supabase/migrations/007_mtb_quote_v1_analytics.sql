@@ -25,4 +25,4 @@ ALTER TABLE actual_costs ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Admins can manage actual costs" ON actual_costs;
 CREATE POLICY "Admins can manage actual costs"
   ON actual_costs FOR ALL
-  USING (true);
+  USING (auth.role() = 'authenticated');

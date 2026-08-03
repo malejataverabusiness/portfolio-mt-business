@@ -22,10 +22,26 @@ import { calculateQuoteV1 } from "../engine/calculator";
 import { generateReferenceNumber } from "../utils";
 
 /**
+ * Helper to enforce admin user authentication for all administrative server actions.
+ */
+export async function requireAdminAuth() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    throw new Error("Unauthorized: Admin authentication required");
+  }
+
+  return { supabase, user };
+}
+
+/**
  * Summary metrics for the Admin Dashboard overview.
  */
 export async function getAdminDashboardMetrics() {
-  const supabase = await createClient();
+  const { supabase } = await requireAdminAuth();
 
   const [quotesRes, recentQuotesRes] = await Promise.all([
     supabase

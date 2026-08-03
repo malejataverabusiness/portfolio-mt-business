@@ -7,6 +7,7 @@
 // editing proposal fields, generating version snapshots, and managing status.
 
 import { createClient } from "../supabase/server";
+import { requireAdminAuth } from "./admin";
 import type { ProposalContent, ProposalRecord, ProposalStatus } from "../types";
 import { formatCopCurrency } from "../utils";
 
@@ -17,7 +18,7 @@ export async function createProposalFromQuote(
   quoteId: string,
   templateId: string = "standard"
 ) {
-  const supabase = await createClient();
+  const { supabase } = await requireAdminAuth();
 
   // 1. Fetch source quote and client info
   const { data: quote, error: quoteErr } = await supabase
